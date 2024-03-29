@@ -1,14 +1,10 @@
-package commands;
+package com.alastairlundy.utils.average.commands;
 
-import com.github.rvesse.airline.SingleCommand;
 import com.github.rvesse.airline.annotations.Arguments;
-import com.github.rvesse.airline.annotations.Cli;
 import com.github.rvesse.airline.annotations.Command;
 import com.github.rvesse.airline.annotations.Option;
 
-@Command(
-        name = "mean", description = "Calculate averages using either arithmetic or geometric mean."
-)
+@Command(name = "mean", description = "Calculate averages using either arithmetic or geometric mean.")
 public class Mean {
 
     @Arguments
