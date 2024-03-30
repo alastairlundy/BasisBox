@@ -23,4 +23,4 @@ A mono-repo for utility programs.
 | sarcasm | a sIllY pRoGrAm tO mAkE sIllY sArCaStIc tExT. |  |
 
 ## Building of Programs
-All of the programs in this repo ,when built, should aim to be compiled Ahead Of Time (AoT) to a single executable file that can be run without the Dart VM or Dark SDK being installed.
+All of the programs in this repo ,when built, should aim to be compiled Ahead Of Time (AoT) to a single executable file that can be run without the relevant Virtual Machine or SDK being installed.
