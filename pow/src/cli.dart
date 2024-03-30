@@ -39,22 +39,26 @@ ArgParser buildParser() {
       abbr: 'h',
       negatable: false,
       help: 'Print this usage information.',
+      defaultsTo: false
     )
     ..addFlag(
       'verbose',
+      abbr: 've',
       negatable: false,
       help: 'Show additional command output.',
+      defaultsTo: false
     )
     ..addFlag(
       'version',
       abbr: 'v',
       negatable: false,
       help: 'Print the tool version.',
+      defaultsTo: false
     );
 }
 
 void printUsage(ArgParser argParser) {
-  print('Usage: dart cli.dart <flags> [arguments]');
+  print('Usage: pow <flags> <options> [arguments]');
   print(argParser.usage);
 }
 
@@ -97,7 +101,7 @@ void main(List<String> arguments) {
         if(mode.contains("cbrt") || mode.contains("cuberoot")){
           numbers = Root.cubeRootOfToList(numbers);
         }
-        if(mode.contains("power") || mode.contains("root")){
+        if(mode.contains("power") || mode.contains("pwr")|| mode.contains("root")){
           double exponent;
 
           if(results.wasParsed('exponent')){
