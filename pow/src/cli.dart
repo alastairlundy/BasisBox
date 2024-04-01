@@ -43,7 +43,7 @@ ArgParser buildParser() {
     )
     ..addFlag(
       'verbose',
-      abbr: 've',
+      abbr: 'vb',
       negatable: false,
       help: 'Show additional command output.',
       defaultsTo: false
@@ -58,7 +58,7 @@ ArgParser buildParser() {
 }
 
 void printUsage(ArgParser argParser) {
-  print('Usage: pow <flags> <options> [arguments]');
+  print('Usage: pow <options> <flags> [arguments]');
   print(argParser.usage);
 }
 
@@ -132,6 +132,7 @@ void main(List<String> arguments) {
       if(results['output'] == true){
         writelnList(numbers);
       }
+      return;
     }
 
     // Process the parsed arguments.

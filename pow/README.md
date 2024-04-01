@@ -9,7 +9,7 @@ Calculates square root, cube root, and any value to a positive or negative power
 | output    | o            | Whether to print the results of the calculations to the Standard Output.     | true                   | Yes          |
 | help      | h            | Print the usage information and arguments and flags that can be used.        | false                  | No           |
 | version   | v            | Prints the program's version to the Standard Output.                         | false                  | No           |
-| verbose   | ve           | Expands upon the command output, particularly when also using the help flag. | false                  | No           |
+| verbose   | vb           | Expands upon the command output, particularly when also using the help flag. | false                  | No           |
 
 
 ### Options
