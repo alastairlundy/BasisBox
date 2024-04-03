@@ -1,7 +1,5 @@
 class SignificantFigures{
 
-  
-
   static int countTotalSignificantFigures(String number){
     int numberOfSignificantFigures = 0;
 
