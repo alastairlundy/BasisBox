@@ -26,7 +26,7 @@ class Rounding{
   }
 
   static List<String> roundListToDecimalPlaces(List<double> numbers, int decimalPlaces){
-    List<String> strings = List.empty();
+    List<String> strings = List.empty(growable: true);
 
     for(int index = 0; index < numbers.length; index++){
       strings.add(roundToDecimalPlaces(numbers[index], decimalPlaces));
@@ -40,7 +40,7 @@ class Rounding{
   }
 
   static List<String> roundListToSignificantFigures(List<double> numbers, int decimalPlaces){
-    List<String> strings = List.empty();
+    List<String> strings = List.empty(growable: true);
 
     for(int index = 0; index < numbers.length; index++){
       strings.add(roundToSignificantFigures(numbers[index], decimalPlaces));
