@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:decimal/decimal.dart';
 
 import 'decimal_places.dart';
@@ -49,6 +51,7 @@ class Rounding{
     return strings;
   }
 
+
   static String roundToSignificantFigures(double number, int significantFigures){
    int existingSignificantFigures = SignificantFigures.countTotalSignificantFigures(number.toString());
  
@@ -56,11 +59,73 @@ class Rounding{
      return finalRoundingChecks(number.toString(), DecimalPlaces.countTotalDecimalPlaces(number.toString()));
    }
    else{
-     var string = number.toString();
+     List<String> numbers = number.toString().split(".");
+     
+     if(numbers.length > 1){
+     List<String> decimals = List.empty(growable: true);
 
-     var numbers = string.split(".");
+       for(int index = numbers[1].length; index > (numbers[1].length - 1); index--){
+         int currentSf = SignificantFigures.countTotalSignificantFigures(number.toString());
 
+         String toBeAdded = "";
 
+         if(currentSf > significantFigures){
+           if(index > numbers[1].length - 1){
+              if(numbers[1][index + 1] != 0.toString()){
+
+                if(double.parse(numbers[1][index + 1]) >= 5){
+                  toBeAdded = (double.parse(numbers[1][index]) + 1).toString();
+                }
+                else{
+                  toBeAdded = 0.toString();
+                }
+
+               decimals[index + 1] = 0.toString();
+              }
+           }
+         }
+
+         decimals.insert(0, toBeAdded);
+       }
+
+       numbers[1] = numbers[1].replaceRange(numbers[1].indexOf("."), numbers[1].length - 1, Formatter.concatenateStrings(decimals));
+
+       numbers.insert(1, ".");
+     }
+
+     List<String> chars = List.empty(growable: true);
+     for(int index = numbers[0].length; index > (numbers[0].length - 1); index--){
+       int currentSf = SignificantFigures.countTotalSignificantFigures(Formatter.concatenateStrings(numbers));
+
+       String toBeAdded = "";
+
+       if(currentSf > significantFigures){
+         if(index > numbers[0].length -1){
+           if(numbers[0][index + 1] != 0.toString()){
+
+             if(double.parse(numbers[1][index + 1]) >= 5){
+               toBeAdded = (double.parse(numbers[1][index]) + 1).toString();
+             }
+             else{
+               toBeAdded = 0.toString();
+             }
+
+             chars[index + 1] = 0.toString();
+           }
+         }
+         chars.insert(0, toBeAdded);
+       }
+     }
+
+     numbers[0] = numbers[0].replaceRange(0, numbers[0].length, Formatter.concatenateStrings(chars));
+     
+     var dp = 0;
+
+     if(numbers.length > 1){
+       dp = DecimalPlaces.countTotalDecimalPlaces(Formatter.concatenateStrings(numbers));
+     }
+
+     return finalRoundingChecks(Formatter.concatenateStrings(numbers), dp);
    }
   }
 }
