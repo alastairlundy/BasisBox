@@ -36,7 +36,7 @@ class Rounding{
   }
   
   static String roundToDecimalPlaces(double number, int decimalPlaces){
-    return finalRoundingChecks(Formatter.formatNum(number).toStringAsFixed(decimalPlaces));
+    return finalRoundingChecks(Formatter.formatNum(number).toStringAsFixed(decimalPlaces), decimalPlaces);
   }
 
   static List<String> roundListToSignificantFigures(List<double> numbers, int decimalPlaces){
