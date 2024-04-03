@@ -13,7 +13,12 @@ class Rounding{
 
      number.replaceRange(number.length - 1, number.length - 1, val.toString());
 
-     return double.parse(number).toStringAsFixed(decimalPlaces - 1);
+      if(decimalPlaces > 0){
+        return double.parse(number).toStringAsFixed(decimalPlaces - 1);
+      }
+      else{
+       return double.parse(number).toStringAsFixed(decimalPlaces);
+      }
     }
     else{
       return number;
