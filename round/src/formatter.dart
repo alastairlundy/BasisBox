@@ -28,4 +28,14 @@ class Formatter{
 
     return strings;
   }
+
+  static String concatenateStrings(List<String> strings){
+    String string = "";
+
+    for(String str in strings){
+      string += str;
+    }
+
+    return string;
+  }
 }
