@@ -97,7 +97,7 @@ void main(List<String> arguments) {
     if(results.wasParsed('mode')){
       var mode = results['mode'].toString().toLowerCase();
       if(mode.contains("significant-figures") || mode.contains("sigfig") || mode.contains("sf")){
-
+        newNumbers = Rounding.roundListToSignificantFigures(numbers, precision);
       }
       else if(mode.contains("decimal-places") || mode.contains("decimal") || mode.contains("dp")){
         newNumbers = Rounding.roundListToDecimalPlaces(numbers, precision);
