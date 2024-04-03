@@ -53,7 +53,9 @@ class Rounding{
    else{
      var string = number.toString();
 
-     string.
+     var numbers = string.split(".");
+
+
    }
   }
 }
