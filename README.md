@@ -19,7 +19,6 @@ A mono-repo for utility programs.
 | Program name | Description | To be Written  In |
 |-|-|-|
 | average | Calculate averages easily (Supports mode, median, arithmetic mean, and geometric mean) |  |
-| imgresize | Easily compress images and/or reduce image sizes. |  |
 | sarcasm | a sIllY pRoGrAm tO mAkE sIllY sArCaStIc tExT. |  |
 | caesar | Re-writes text or a file using Caesar Shift Code, either using  number provided or a random number. |
 | where | Find all files and folders containing the specified parameter string. |
