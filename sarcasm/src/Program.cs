@@ -79,7 +79,7 @@
         
         for(int index = 0; index < textToBeConverted.Length; index++)
         {
-            var wordsInStr = textToBeConverted[index].Split(" ");
+            string[] wordsInStr = textToBeConverted[index].Split(" ");
 
             results[index] = "";
             
