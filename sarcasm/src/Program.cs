@@ -28,6 +28,7 @@
         
         using AlastairLundy.System.Extensions.StringExtensions;
         using CommandLineArgsParser;
+        using Sarcasm;
 
         ArgParser argumentGrammar = new ArgParser();
                 
@@ -44,24 +45,14 @@
         {
             CliHelper.PrintHelpMessages(argumentGrammar);
         }
-
         if (argResults.WasParsed("version"))
         {
             CliHelper.PrintVersion();
             Console.WriteLine();
         }
-
         if (argResults.WasParsed("license"))
         {
-            string[] licenseStrings =
-                File.ReadAllLines(Environment.CurrentDirectory + Path.DirectorySeparatorChar + "LICENSE.txt");
-
-            foreach (string str in licenseStrings)
-            {
-                Console.WriteLine(str);
-            }
-
-            Console.WriteLine();
+            ConsoleHelper.PrintLicenseToConsole();
         }
 
         string[] textToBeConverted;
@@ -75,19 +66,7 @@
             textToBeConverted = argResults.Rest;
         }
 
-        string[] results = new string[textToBeConverted.Length];
-        
-        for(int index = 0; index < textToBeConverted.Length; index++)
-        {
-            string[] wordsInStr = textToBeConverted[index].Split(" ");
-
-            results[index] = "";
-            
-            foreach (string str in wordsInStr)
-            {
-                results[index] += str.ToSarcasmText();
-            }
-        }
+        string[] results = TextProcessor.ToSarcasmText(textToBeConverted);
 
         if (argResults.WasParsed("output"))
         {
@@ -97,10 +76,7 @@
             {
                 if (output.Values.Contains("cli"))
                 {
-                    foreach (string str in results)
-                    {
-                        Console.WriteLine(str);
-                    }
+                    ConsoleHelper.PrintResults(results);
                 }
                 else
                 {
@@ -110,7 +86,7 @@
 
                         if (outputString.EndsWith(".txt") || outputString.EndsWith(".rtf"))
                         {
-                            File.WriteAllLines(outputString, results);
+                            TextProcessor.SaveToFile(outputString, results);
                         }
                     }
                 }
@@ -118,8 +94,5 @@
         }
         else
         {
-            foreach (string str in results)
-            {
-                Console.WriteLine(str);
-            }
+            ConsoleHelper.PrintResults(results);
         }
