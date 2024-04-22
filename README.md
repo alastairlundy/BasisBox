@@ -24,5 +24,5 @@ A mono-repo for utility programs.
 | Program name | Description | To be Written  In |
 |-|-|-|
 | average | Calculate averages easily (Supports mode, median, arithmetic mean, and geometric mean) |  |
-| sortaz | Sorts a list of strings from A to Z or vice versa if required. |
+| alphasort | Sorts a list of strings from A to Z or vice versa if required. |
 | far | Find and Replace any string of text in any file. | C# |
