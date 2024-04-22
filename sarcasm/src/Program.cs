@@ -24,7 +24,6 @@
    */
       // See https://aka.ms/new-console-template for more information
 
-      using System.Globalization;
       using AlastairLundy.System.Extensions.StringArrayExtensions;
         
         using AlastairLundy.System.Extensions.StringExtensions;
