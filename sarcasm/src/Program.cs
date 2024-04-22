@@ -104,9 +104,6 @@
                 }
                 else
                 {
-                    
-                }
-                {
                     if (output.Values.Length == 1)
                     {
                         string outputString = output.Values.ToString()!;
