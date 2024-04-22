@@ -76,20 +76,19 @@
         }
 
         string[] results = new string[textToBeConverted.Length];
-
-
+        
         for(int index = 0; index < textToBeConverted.Length; index++)
         {
             var wordsInStr = textToBeConverted[index].Split(" ");
 
             results[index] = "";
             
-            for(int index2 = 0; index2 < wordsInStr.Length; index2++)
+            foreach (string str in wordsInStr)
             {
-               results[index] += wordsInStr[index2].ToSarcasmText();
+                results[index] += str.ToSarcasmText();
             }
         }
-        
+
         if (argResults.WasParsed("output"))
         {
             Option output = argResults.GetOption("output");
