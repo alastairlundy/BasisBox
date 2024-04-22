@@ -42,7 +42,7 @@
 
         if (argResults.WasParsed("help"))
         {
-            //CliHelper.PrintHelpMessages(argumentGrammar);
+            CliHelper.PrintHelpMessages(argumentGrammar);
         }
 
         if (argResults.WasParsed("version"))
