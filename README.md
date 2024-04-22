@@ -22,6 +22,3 @@ A mono-repo for utility programs.
 | average | Calculate averages easily (Supports mode, median, arithmetic mean, and geometric mean) |  |
 | where | Find all files and folders containing the specified parameter string. |
 | sortaz | Sorts a list of strings from A to Z or vice versa if required. |
-
-## Building of Programs
-All of the programs in this repo ,when built, should aim to be compiled Ahead Of Time (AoT) to a single executable file that can be run without the relevant Virtual Machine or SDK being installed.
