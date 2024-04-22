@@ -14,11 +14,11 @@ A mono-repo for utility programs.
 |-|-|-|
 | round | Round a given number to a specified number of decimal places or significant figures | Dart |
 | caesar | Re-writes text or a file using Caesar Shift Code, either using  number provided or a random number. | C# |
-
+| where | Find all files and folders containing the specified string. | C# |
 
 ### To be created
 | Program name | Description | To be Written  In |
 |-|-|-|
 | average | Calculate averages easily (Supports mode, median, arithmetic mean, and geometric mean) |  |
-| where | Find all files and folders containing the specified parameter string. |
 | sortaz | Sorts a list of strings from A to Z or vice versa if required. |
+| far | Find and Replace any string of text in any file. | C# |
