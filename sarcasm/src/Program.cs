@@ -105,6 +105,9 @@
                 }
                 else
                 {
+                    
+                }
+                {
                     if (output.Values.Length == 1)
                     {
                         string outputString = output.Values.ToString()!;
@@ -115,5 +118,12 @@
                         }
                     }
                 }
+            }
+        }
+        else
+        {
+            foreach (string str in results)
+            {
+                Console.WriteLine(str);
             }
         }
