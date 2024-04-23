@@ -1,98 +1,71 @@
-﻿  /*
-        MIT License
+﻿/*
+      MIT License
 
-        Copyright (c) 2024 Alastair Lundy
+      Copyright (c) 2024 Alastair Lundy
 
-        Permission is hereby granted, free of charge, to any person obtaining a copy
-        of this software and associated documentation files (the "Software"), to deal
-        in the Software without restriction, including without limitation the rights
-        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-        copies of the Software, and to permit persons to whom the Software is
-        furnished to do so, subject to the following conditions:
+      Permission is hereby granted, free of charge, to any person obtaining a copy
+      of this software and associated documentation files (the "Software"), to deal
+      in the Software without restriction, including without limitation the rights
+      to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+      copies of the Software, and to permit persons to whom the Software is
+      furnished to do so, subject to the following conditions:
 
-        The above copyright notice and this permission notice shall be included in all
-        copies or substantial portions of the Software.
+      The above copyright notice and this permission notice shall be included in all
+      copies or substantial portions of the Software.
 
-        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-        SOFTWARE.
+      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+      IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+      FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+      AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+      LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+      SOFTWARE.
 
-   */
-      // See https://aka.ms/new-console-template for more information
+ */
+// See https://aka.ms/new-console-template for more information
 
-      using AlastairLundy.System.Extensions.StringArrayExtensions;
+
+using McMaster.Extensions.CommandLineUtils;
+using Sarcasm;
+
+        CommandLineApplication app = new CommandLineApplication();
+        app.HelpOption("-h|--help");
+        app.VersionOption("-v|--version", app.GetFullNameAndVersion);
         
-        using AlastairLundy.System.Extensions.StringExtensions;
-        using CommandLineArgsParser;
-        using Sarcasm;
+       var license = app.Option("--license", "Displays the project's license", CommandOptionType.NoValue);
+       var output = app.Option("-o|--output", "The path to output results to.", CommandOptionType.SingleOrNoValue);
+       var input = app.Option("-i|--input", "The path to input text files.", CommandOptionType.SingleOrNoValue);
 
-        ArgParser argumentGrammar = new ArgParser();
-                
-        argumentGrammar.AddFlag("help", isMandatory:false, "h", "Displays CLI usage information and help messages", null, null);
-        argumentGrammar.AddFlag("version",isMandatory: false, "v", "Displays the CLI tool name and version", null, null);
-        argumentGrammar.AddFlag("license", isMandatory:false, "w", "Displays the project's license", null, null);
-                
-        argumentGrammar.AddOption("source", isMandatory:false, "s", "The source text to be converted.", null, null, null);
-        argumentGrammar.AddOption("output", isMandatory:false, "o", "Where to output the results to.", "cli", null, null);
 
-        ArgResults argResults = argumentGrammar.Parse(args);
+app.OnExecute(() =>
+{
+    string[] textToBeConverted;
 
-        if (argResults.WasParsed("help"))
+    if (input.HasValue())
+    {
+        textToBeConverted = File.ReadAllLines(input.Value()!);
+    }
+    else
+    {
+        textToBeConverted = app.RemainingArguments.ToArray();
+    }
+    
+    string[] results = TextProcessor.ToSarcasmText(textToBeConverted);
+
+    if (output.HasValue())
+    {
+
+        string outputString = output.Value()!;
+
+        if (outputString.EndsWith(".txt") || outputString.EndsWith(".rtf"))
         {
-            CliHelper.PrintHelpMessages(argumentGrammar);
+            TextProcessor.SaveToFile(outputString, results);
         }
-        if (argResults.WasParsed("version"))
-        {
-            CliHelper.PrintVersion();
-            Console.WriteLine();
-        }
-        if (argResults.WasParsed("license"))
-        {
-            ConsoleHelper.PrintLicenseToConsole();
-        }
+    }
+    else
+    {
+        ConsoleHelper.PrintResults(results);
+    }
+});
 
-        string[] textToBeConverted;
-
-        if (argResults.WasParsed("source") && argResults.GetOption("source").Values != null)
-        {
-            textToBeConverted = argResults.GetOption("source").Values!;
-        }
-        else
-        {
-            textToBeConverted = argResults.Rest;
-        }
-
-        string[] results = TextProcessor.ToSarcasmText(textToBeConverted);
-
-        if (argResults.WasParsed("output"))
-        {
-            Option output = argResults.GetOption("output");
-
-            if (output.Values != null)
-            {
-                if (output.Values.Contains("cli"))
-                {
-                    ConsoleHelper.PrintResults(results);
-                }
-                else
-                {
-                    if (output.Values.Length == 1)
-                    {
-                        string outputString = output.Values.ToString()!;
-
-                        if (outputString.EndsWith(".txt") || outputString.EndsWith(".rtf"))
-                        {
-                            TextProcessor.SaveToFile(outputString, results);
-                        }
-                    }
-                }
-            }
-        }
-        else
-        {
-            ConsoleHelper.PrintResults(results);
-        }
+return app.Execute(args);
