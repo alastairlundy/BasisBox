@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "far", "far.csproj", "{87A09AE5-80D4-49E6-AFDA-B3A8AAB2AD94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "far.library", "far.library\far.library.csproj", "{FD4819E1-8A4F-43AA-80FD-6BCA97A5BC85}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87A09AE5-80D4-49E6-AFDA-B3A8AAB2AD94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87A09AE5-80D4-49E6-AFDA-B3A8AAB2AD94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87A09AE5-80D4-49E6-AFDA-B3A8AAB2AD94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87A09AE5-80D4-49E6-AFDA-B3A8AAB2AD94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD4819E1-8A4F-43AA-80FD-6BCA97A5BC85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD4819E1-8A4F-43AA-80FD-6BCA97A5BC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD4819E1-8A4F-43AA-80FD-6BCA97A5BC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD4819E1-8A4F-43AA-80FD-6BCA97A5BC85}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="far.library\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="far.library\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="far.library\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="far.library\far.library.csproj" />
+    </ItemGroup>
+
+</Project>
