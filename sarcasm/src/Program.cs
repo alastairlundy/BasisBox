@@ -39,6 +39,11 @@ using Sarcasm;
 
 app.OnExecute(() =>
 {
+    if (license.HasValue())
+    {
+        ConsoleHelper.PrintLicenseToConsole();
+    }
+
     string[] textToBeConverted;
 
     if (input.HasValue())
