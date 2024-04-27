@@ -17,9 +17,10 @@ namespace far
 
             for (int index = 0; index < files.Length; index++)
             {
+                var index1 = index;
                 tasks[index] = Task.Run(() =>
                 {
-                    newFiles.Add(files[index], UpdateFile(mode, files[index], find, replace).Value);
+                    newFiles.Add(files[index1], UpdateFile(mode, files[index1], find, replace).Value);
                 });
             }
 
