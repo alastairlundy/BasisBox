@@ -36,9 +36,9 @@ namespace far
 
             foreach (string existingItem in find)
             {
-                if (existingItem.GetType().Equals(typeof(char)))
+                if (char.Parse(existingItem).ToString().Equals(existingItem))
                 {
-                    fileContents = Replacer.ReplaceCharacter(file, existingItem, replace);
+                    fileContents = Replacer.ReplaceCharacter(file, char.Parse(existingItem), replace);
                 }
             }
         }
