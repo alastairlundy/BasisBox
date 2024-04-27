@@ -17,7 +17,7 @@ internal class Program
         app.Command("replace", replaceCommand =>
         {
             var input = replaceCommand.Option("--input|-i:<INPUT_FILE_OR_DIRECTORY>", "The directory or file(s) to be searched.", CommandOptionType.SingleValue).Accepts(config => 
-            config.LegalFilePath().ExistingFileOrDirectory()).IsRequired;
+            config.LegalFilePath().ExistingFileOrDirectory()).IsRequired();
 
             var find = replaceCommand.Argument("<existing_string>", "The string to look for.", false);
             var replace = replaceCommand.Argument("<replacement_string>", "", false);
