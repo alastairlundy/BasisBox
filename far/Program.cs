@@ -20,7 +20,7 @@ internal class Program
             config.LegalFilePath().ExistingFileOrDirectory()).IsRequired();
 
             var find = replaceCommand.Argument("<existing_string>", "The string to look for.", false);
-            var replace = replaceCommand.Argument("<replacement_string>", "", false);
+            var replacementString = replaceCommand.Argument("<replacement_string>", "", false);
 
 
             app.Command("new", newCommand =>
@@ -39,12 +39,22 @@ internal class Program
 
         });
 
+        app.Command("position", positionCommand =>
+        {
+
+        });
+
         app.OnExecute(() =>
         {
             if (help.HasValue())
             {
                 app.ShowHelp();
             }
+            if (version.HasValue())
+            {
+                
+            }
+            
             if (license.HasValue())
             {
                 ConsoleHelper.PrintLicenseToConsole();
