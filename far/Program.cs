@@ -9,18 +9,18 @@ internal class Program
     private static void Main(string[] args)
     {
         CommandLineApplication app = new CommandLineApplication();
-        app.HelpOption("-h | --help");
-        app.VersionOption("-v | --version", app.GetFullNameAndVersion);
+      var help =  app.HelpOption("-h | --help");
+      var version =  app.VersionOption("-v | --version", app.GetFullNameAndVersion);
 
         var license = app.Option("--license", "Displays the project's license", CommandOptionType.NoValue);
 
         app.Command("replace", replaceCommand =>
         {
             var input = replaceCommand.Option("--input|-i:<INPUT_FILE_OR_DIRECTORY>", "The directory or file(s) to be searched.", CommandOptionType.SingleValue).Accepts(config => 
-            config.LegalFilePath().ExistingFileOrDirectory()).IsRequired;
+            config.LegalFilePath().ExistingFileOrDirectory()).IsRequired();
 
             var find = replaceCommand.Argument("<existing_string>", "The string to look for.", false);
-            var replace = replaceCommand.Argument("<replacement_string>", "", false);
+            var replacementString = replaceCommand.Argument("<replacement_string>", "", false);
 
 
             app.Command("new", newCommand =>
@@ -39,8 +39,22 @@ internal class Program
 
         });
 
+        app.Command("position", positionCommand =>
+        {
+
+        });
+
         app.OnExecute(() =>
         {
+            if (help.HasValue())
+            {
+                app.ShowHelp();
+            }
+            if (version.HasValue())
+            {
+                
+            }
+            
             if (license.HasValue())
             {
                 ConsoleHelper.PrintLicenseToConsole();
