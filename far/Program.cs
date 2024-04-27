@@ -9,8 +9,8 @@ internal class Program
     private static void Main(string[] args)
     {
         CommandLineApplication app = new CommandLineApplication();
-        app.HelpOption("-h | --help");
-        app.VersionOption("-v | --version", app.GetFullNameAndVersion);
+      var help =  app.HelpOption("-h | --help");
+      var version =  app.VersionOption("-v | --version", app.GetFullNameAndVersion);
 
         var license = app.Option("--license", "Displays the project's license", CommandOptionType.NoValue);
 
@@ -41,6 +41,10 @@ internal class Program
 
         app.OnExecute(() =>
         {
+            if (help.HasValue())
+            {
+                app.ShowHelp();
+            }
             if (license.HasValue())
             {
                 ConsoleHelper.PrintLicenseToConsole();
