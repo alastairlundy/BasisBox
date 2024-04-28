@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AlastairLundy.System.Extensions" Version="3.0.1" />
+    <PackageReference Include="AlastairLundy.System.Extensions" Version="3.2.0" />
     <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.1.1" />
   </ItemGroup>
 
