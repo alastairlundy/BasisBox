@@ -1,5 +1,5 @@
-﻿using AlastairLundy.System.Extensions.VersionExtensions;
-using AlastairLundy.System.Extensions.VersionExtensions.Enums;
+﻿using AlastairLundy.Extensions.System.VersionExtensions;
+using AlastairLundy.Extensions.System.VersionExtensions.Enums;
 
 using McMaster.Extensions.CommandLineUtils;
 using System.Reflection;
