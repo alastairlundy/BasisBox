@@ -26,22 +26,28 @@ internal class Program
 
         app.Command("mean", meanCommand =>
         {
-            var geometricFlag = meanCommand.Option("--geometric", Resources.Command_GeometricMean_Description, CommandOptionType.SingleOrNoValue);
-            var arithmeticFlag = meanCommand.Option("-arithmetic", Resources.Command_ArithmeticMean_Description, CommandOptionType.SingleOrNoValue);
+            var geometricFlag = meanCommand.Option("--geometric", Resources.Command_GeometricMean_Description, CommandOptionType.NoValue);
+            var arithmeticFlag = meanCommand.Option("-arithmetic", Resources.Command_ArithmeticMean_Description, CommandOptionType.NoValue);
 
             var decimalRounding = meanCommand.Option("-dp | --decimal-places", Resources.Rounding_DecimalPlaces_Description, CommandOptionType.SingleValue).DefaultValue = "2";
 
             var numbers = meanCommand.Argument("<numbers>", Resources.Numbers_Description, true);
 
 
-            if (geometricFlag.HasValue())
+            if(geometricFlag.HasValue() && arithmeticFlag.HasValue())
             {
 
             }
-            else if (arithmeticFlag.HasValue())
+            else if (geometricFlag.HasValue() && !arithmeticFlag.HasValue())
             {
 
             }
+            else if (arithmeticFlag.HasValue() && !geometricFlag.HasValue())
+            {
+
+            }
+
+
 
         });
 
