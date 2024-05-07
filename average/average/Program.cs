@@ -50,21 +50,29 @@ internal class Program
             var numbers = meanCommand.Argument("<numbers>", Resources.Numbers_Description, true);
 
 
-            if(geometricFlag.HasValue() && arithmeticFlag.HasValue())
-            {
+            decimal mean = decimal.MinValue;
 
-            }
-            else if (geometricFlag.HasValue() && !arithmeticFlag.HasValue())
+            if (geometricFlag.HasValue() && !arithmeticFlag.HasValue())
             {
-
+              if(numbers != null && numbers.Values.Count > 1)
+              {
+                  mean = GeometricMeanHelper.GetGeometricMean(numbers.Values.ToArray()!);
+              }
+              else if(numbers != null && numbers.Values.Count == 1)
+              {
+                   
+              }
             }
             else if (arithmeticFlag.HasValue() && !geometricFlag.HasValue())
             {
 
             }
+            else
+            {
 
+            }
 
-
+            
         });
 
         app.Command("median", medianCommand =>
