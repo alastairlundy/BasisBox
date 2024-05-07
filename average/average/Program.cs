@@ -9,7 +9,6 @@ using System.Reflection;
 using AlastairLundy.Extensions.System.AssemblyExtensions;
 using average.localizations;
 using average.Helpers;
-using System.ComponentModel.Design;
 
 namespace average;
 
