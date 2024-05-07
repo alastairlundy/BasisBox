@@ -144,8 +144,20 @@
   <data name="Command.Mode.About" xml:space="preserve">
     <value>The most common value(s) found within a set of numbers</value>
   </data>
+  <data name="Error.Title" xml:space="preserve">
+    <value>Error(s)</value>
+  </data>
+  <data name="Errors.NoInput.Title" xml:space="preserve">
+    <value>No Input Provided</value>
+  </data>
   <data name="Numbers.Description" xml:space="preserve">
     <value>The numbers to get the average of</value>
+  </data>
+  <data name="Output.Pretty.Description" xml:space="preserve">
+    <value>Displays the results with prettier formatting.</value>
+  </data>
+  <data name="Output.Standard.Description" xml:space="preserve">
+    <value>Displays the results without pretty formatting.</value>
   </data>
   <data name="Rounding.DecimalPlaces.Description" xml:space="preserve">
     <value>The number of decimal places to round the result to</value>

@@ -142,11 +142,47 @@ namespace average.localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error(s).
+        /// </summary>
+        internal static string Error_Title {
+            get {
+                return ResourceManager.GetString("Error.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Input Provided.
+        /// </summary>
+        internal static string Errors_NoInput_Title {
+            get {
+                return ResourceManager.GetString("Errors.NoInput.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The numbers to get the average of.
         /// </summary>
         internal static string Numbers_Description {
             get {
                 return ResourceManager.GetString("Numbers.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Displays the results with prettier formatting..
+        /// </summary>
+        internal static string Output_Pretty_Description {
+            get {
+                return ResourceManager.GetString("Output.Pretty.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Displays the results without pretty formatting..
+        /// </summary>
+        internal static string Output_Standard_Description {
+            get {
+                return ResourceManager.GetString("Output.Standard.Description", resourceCulture);
             }
         }
         
