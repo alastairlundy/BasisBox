@@ -38,7 +38,7 @@ internal class Program
 
         var help = app.HelpOption("-h|--help");
         var license = app.Option("-l|--license", Resources.Command_License_Description, CommandOptionType.NoValue);
-        var version = app.Option("-v|--version", "", CommandOptionType.NoValue);
+        var version = app.Option("-v|--version", Resources.Command_Version_Description, CommandOptionType.NoValue);
 
         app.Command("mean", meanCommand =>
         {
