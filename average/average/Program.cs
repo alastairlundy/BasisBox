@@ -85,15 +85,16 @@ internal class Program
 
             modeCommand.OnExecute(() =>
             {
-                decimal[]? modes;
 
-                if (numbers.MultipleValues)
+                decimal[] modes;
+
+                if (numbers.Values.Count > 1)
                 {
                     modes = ModeHelper.GetModes(numbers.Values.ToArray()!);
                 }
                 else
                 {
-                    if (numbers.HasValue)
+                    if (numbers.Values.Count == 1)
                     {
                         string[] array = new string[] { numbers.Value! };
 
