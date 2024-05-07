@@ -62,13 +62,45 @@ internal class Program
 
             modeCommand.Description = Resources.Command_Mode_About;
 
+            var prettyMode = modeCommand.Option("--pretty", Resources.Output_Pretty_Description, CommandOptionType.NoValue);
+
             var numbers = modeCommand.Argument("<numbers>", Resources.Numbers_Description, true);
 
 
             modeCommand.OnExecute(() =>
             {
+                decimal[]? modes;
+
+                if (numbers.MultipleValues)
+                {
+                    modes = ModeHelper.GetModes(numbers.Values.ToArray()!);
+                }
+                else
+                {
+                    if (numbers.HasValue)
+                    {
+                        string[] array = new string[] { numbers.Value! };
+
+                        modes = ModeHelper.GetModes(array);
+                    }
 
 
+                }
+
+                if(prettyMode.HasValue())
+                {
+                    if(modes != null)
+                    {
+                        ModeHelper.PrintPrettyMode(modes);
+                    }
+                }
+                else
+                {
+                   if(modes != null)
+                    {
+                        ConsoleHelper.PrintUnformattedStr(modes);
+                    }
+                }
 
                 if (modeHelp.HasValue())
                 {
