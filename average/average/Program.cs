@@ -85,6 +85,10 @@ internal class Program
 
             modeCommand.OnExecute(() =>
             {
+                if (modeHelp.HasValue())
+                {
+                    modeCommand.ShowHelp();
+                }
 
                 decimal[] modes;
 
@@ -117,11 +121,6 @@ internal class Program
                     {
                         ConsoleHelper.PrintUnformattedDecimalArray(modes);
                     }
-                }
-
-                if (modeHelp.HasValue())
-                {
-                    modeCommand.ShowHelp();
                 }
             });
         });
