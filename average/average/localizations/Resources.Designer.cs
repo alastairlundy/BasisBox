@@ -124,11 +124,20 @@ namespace average.localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prints the License to the Console/Terminal output..
+        ///   Looks up a localized string similar to Prints the License to the Terminal output..
         /// </summary>
         internal static string Command_License_Description {
             get {
                 return ResourceManager.GetString("Command.License.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Returns the middle value in a set of numbers..
+        /// </summary>
+        internal static string Command_Median_Description {
+            get {
+                return ResourceManager.GetString("Command.Median.Description", resourceCulture);
             }
         }
         
@@ -142,11 +151,29 @@ namespace average.localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Prints the program version to the Terminal output..
+        /// </summary>
+        internal static string Command_Version_Description {
+            get {
+                return ResourceManager.GetString("Command.Version.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error(s).
         /// </summary>
         internal static string Error_Title {
             get {
                 return ResourceManager.GetString("Error.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An invalid number of inputs was provided. At least X values were required..
+        /// </summary>
+        internal static string Errors_InvalidInputCount {
+            get {
+                return ResourceManager.GetString("Errors.InvalidInputCount", resourceCulture);
             }
         }
         

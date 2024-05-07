@@ -139,13 +139,22 @@
     <value>Calculate the geometric mean of a set of numbers</value>
   </data>
   <data name="Command.License.Description" xml:space="preserve">
-    <value>Prints the License to the Console/Terminal output.</value>
+    <value>Prints the License to the Terminal output.</value>
+  </data>
+  <data name="Command.Median.Description" xml:space="preserve">
+    <value>Returns the middle value in a set of numbers.</value>
   </data>
   <data name="Command.Mode.About" xml:space="preserve">
     <value>The most common value(s) found within a set of numbers</value>
   </data>
+  <data name="Command.Version.Description" xml:space="preserve">
+    <value>Prints the program version to the Terminal output.</value>
+  </data>
   <data name="Error.Title" xml:space="preserve">
     <value>Error(s)</value>
+  </data>
+  <data name="Errors.InvalidInputCount" xml:space="preserve">
+    <value>An invalid number of inputs was provided. At least X values were required.</value>
   </data>
   <data name="Errors.NoInput.Title" xml:space="preserve">
     <value>No Input Provided</value>
