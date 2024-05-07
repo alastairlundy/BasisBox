@@ -156,8 +156,11 @@ internal class Program
 
                         modes = ModeHelper.GetModes(array);
                     }
-
-
+                    else
+                    {
+                        modes = Array.Empty<decimal>();
+                        modes[0] = decimal.MinValue;
+                    }
                 }
 
                 if(prettyMode.HasValue())
