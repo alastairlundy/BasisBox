@@ -131,7 +131,10 @@ class Program
                     {
                        values = ConsoleHelper.ParseInputs(null, words.Value!.Split(" "));
                     }
-                    throw new ArgumentException(Resources.Exception_Argument_NoWords);
+                    else
+                    {
+                        throw new ArgumentException(Resources.Exception_Argument_NoWords);
+                    }
                 }
             
                 CaesarCipher caesarCipher = new CaesarCipher();
