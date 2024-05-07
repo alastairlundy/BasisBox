@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Reflection;
+
+using AlastairLundy.Extensions.System.AssemblyExtensions;
+using AlastairLundy.Extensions.System.VersionExtensions;
 
 namespace average.Helpers;
 
@@ -15,6 +19,8 @@ internal class ConsoleHelper
 
         return newValues.ToArray();
     }
+    
+
 
     public static void PrintUnformattedStr(string str)
     {
@@ -29,10 +35,12 @@ internal class ConsoleHelper
         }
     }
 
-    public static void PrintVersion()
+    public static void PrintUnformattedVersion()
     {
-
+        Console.WriteLine($"{Assembly.GetExecutingAssembly().GetProjectName()} {Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString()}");
     }
+
+    public
 
     public static void PrintUnformattedLicense()
     {

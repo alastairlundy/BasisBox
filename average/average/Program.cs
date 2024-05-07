@@ -23,7 +23,7 @@ internal class Program
 
         var help = app.HelpOption("-h|--help");
         var license = app.Option("-l|--license", Resources.Command_License_Description, CommandOptionType.NoValue);
-        var version = app.VersionOption("-v|--version", appVersion.GetFriendlyVersionToString(), appVersion.ToString());
+        var version = app.Option("-v|--version", "", CommandOptionType.NoValue);
 
         app.Command("mean", meanCommand =>
         {
@@ -88,7 +88,7 @@ internal class Program
         {
             if(version.HasValue()) 
             {
-                ConsoleHelper.PrintVersion();
+                ConsoleHelper.PrintUnformattedVersion();
             }
 
             if(help.HasValue())
