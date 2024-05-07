@@ -35,19 +35,17 @@ internal class ConsoleHelper
 
         return newValues.ToArray();
     }
-    
 
-
-    public static void PrintUnformattedStr(string str)
+    public static void PrintUnformattedDecimal(decimal str)
     {
         Console.WriteLine(str);
     }
 
-    public static void PrintUnformattedStrArray(string[] array)
+    public static void PrintUnformattedDecimalArray(decimal[] array)
     {
-        foreach (string value in array)
+        foreach (decimal value in array)
         {
-            Console.WriteLine(value);
+            Console.WriteLine(value.ToString());
         }
     }
 
