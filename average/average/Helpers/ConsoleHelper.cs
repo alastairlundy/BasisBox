@@ -54,8 +54,6 @@ internal class ConsoleHelper
         Console.WriteLine($"{Assembly.GetExecutingAssembly().GetProjectName()} {Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString()}");
     }
 
-    public
-
     public static void PrintUnformattedLicense()
     {
 
