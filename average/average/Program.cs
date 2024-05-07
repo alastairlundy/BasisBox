@@ -114,7 +114,7 @@ internal class Program
                 {
                    if(modes != null)
                     {
-                        ConsoleHelper.PrintUnformattedStr(modes);
+                        ConsoleHelper.PrintUnformattedDecimalArray(modes);
                     }
                 }
 
