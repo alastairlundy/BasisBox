@@ -45,7 +45,7 @@ internal class Program
             var geometricFlag = meanCommand.Option("--geometric", Resources.Command_GeometricMean_Description, CommandOptionType.NoValue);
             var arithmeticFlag = meanCommand.Option("-arithmetic", Resources.Command_ArithmeticMean_Description, CommandOptionType.NoValue);
 
-            var decimalRounding = meanCommand.Option("-dp | --decimal-places", Resources.Rounding_DecimalPlaces_Description, CommandOptionType.SingleValue).DefaultValue = "2";
+            var decimalRounding = meanCommand.Option("-dp|--decimal-places", Resources.Rounding_DecimalPlaces_Description, CommandOptionType.SingleValue);
 
             var numbers = meanCommand.Argument("<numbers>", Resources.Numbers_Description, true);
 
