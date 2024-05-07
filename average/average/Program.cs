@@ -77,7 +77,51 @@ internal class Program
 
         app.Command("median", medianCommand =>
         {
+            var medianHelp = medianCommand.HelpOption("-h|--help");
+            medianCommand.Description = Resources.Command_Median_Description;
 
+            var prettyMode = medianCommand.Option("--pretty", Resources.Output_Pretty_Description, CommandOptionType.NoValue);
+
+            var numbers = medianCommand.Argument("<numbers>", Resources.Numbers_Description, true);
+
+           medianCommand.OnExecute(() =>
+            {
+                if (medianHelp.HasValue())
+                {
+                    medianCommand.ShowHelp();
+                }
+
+                decimal median = decimal.MinValue;
+
+                if (numbers.Values.Count > 1)
+                {
+                    median = MedianHelper.GetMedian(numbers.Values.ToArray()!);
+                }
+                else if (numbers.Values.Count == 1)
+                {
+                   median = MedianHelper.GetMedian([numbers.Value!]);
+                }
+                else
+                {
+                   Console.WriteLine($"{Resources.Error_Title}: {Resources.Errors_NoInput_Title}");
+                }
+                
+                if(median.Equals(decimal.MinValue))
+                {
+
+                }
+                else
+                {
+                    if(prettyMode.HasValue())
+                    {
+                        
+                    }
+                    else
+                    {
+                        ConsoleHelper.PrintUnformattedDecimal(median);
+                    }
+                }
+            });
         });
 
         app.Command("mode", modeCommand =>
