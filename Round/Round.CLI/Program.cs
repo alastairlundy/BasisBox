@@ -38,3 +38,5 @@ app.Configure(config =>
 
     //config.
 });
+
+return app.Run(args);
