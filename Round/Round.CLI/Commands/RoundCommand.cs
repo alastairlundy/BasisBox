@@ -32,6 +32,11 @@ internal class RoundCommand : Command<RoundCommand.Settings>
 {
     public override int Execute(CommandContext context, Settings settings)
     {
+        if (settings.Version != null)
+        {
+            ConsoleHelper.PrintVersion();
+        }
+
         bool wasPrecisionProvided;
         decimal roundedValue;
 
