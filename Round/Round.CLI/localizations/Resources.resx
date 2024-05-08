@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Command.Round.Decimal.Description" xml:space="preserve">
+    <value>Round a number to a specified number of decimal places.</value>
+  </data>
+  <data name="Command.Round.SignificantFigure.Description" xml:space="preserve">
+    <value>Round a number to a specified number of Significant Figures.</value>
+  </data>
   <data name="Input.ProvidedValue" xml:space="preserve">
     <value>The value you provided was</value>
   </data>

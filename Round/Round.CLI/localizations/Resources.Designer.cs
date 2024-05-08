@@ -61,6 +61,24 @@ namespace Round.Cli.localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Round a number to a specified number of decimal places..
+        /// </summary>
+        internal static string Command_Round_Decimal_Description {
+            get {
+                return ResourceManager.GetString("Command.Round.Decimal.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round a number to a specified number of Significant Figures..
+        /// </summary>
+        internal static string Command_Round_SignificantFigure_Description {
+            get {
+                return ResourceManager.GetString("Command.Round.SignificantFigure.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value you provided was.
         /// </summary>
         internal static string Input_ProvidedValue {
