@@ -47,13 +47,13 @@ internal class RoundCommand : Command<RoundCommand.Settings>
         if (settings.NumberOfDecimalPlacesToUse == int.MinValue)
         {
             wasPrecisionProvided = false;
-            roundedValue = decimal.Round((decimal)settings.NumberToRound, 2);
+            roundedValue = decimal.Round((decimal)settings.NumberToRound!, 2);
         }
         else
         {
             wasPrecisionProvided = true;
             
-            roundedValue = decimal.Round((decimal)settings.NumberToRound, settings.NumberOfDecimalPlacesToUse);
+            roundedValue = decimal.Round((decimal)settings.NumberToRound!, settings.NumberOfDecimalPlacesToUse);
         }
 
         if (!settings.PrettyMode)
