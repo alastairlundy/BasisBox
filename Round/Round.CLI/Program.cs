@@ -20,4 +20,21 @@
 
 using System;
 
-Console.WriteLine("Hello, World!");
+using Round.Cli.Commands;
+using Round.Cli.localizations;
+
+using Spectre.Console.Cli;
+
+CommandApp app = new CommandApp();
+app.Configure(config =>
+{
+    config.AddCommand<RoundCommand>("")
+        .WithAlias("decimal-places")
+        .WithAlias("dp")
+        .WithDescription(Resources.Command_Round_Decimal_Description)
+        .WithExample("1.6532", "2")
+        .WithExample("3.1495265", "4");
+        
+
+    //config.
+});
