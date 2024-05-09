@@ -18,6 +18,7 @@
 
 using System;
 using System.ComponentModel;
+
 using Round.Cli.Helpers;
 using Round.Cli.localizations;
 using Round.Cli.Settings;
@@ -27,7 +28,7 @@ using Spectre.Console.Cli;
 
 namespace Round.Cli.Commands;
 
-internal class RoundCommand : Command<RoundCommand.Settings>
+internal class RoundDecimalCommand : Command<RoundDecimalCommand.Settings>
 {
     public override int Execute(CommandContext context, Settings settings)
     {

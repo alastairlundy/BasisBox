@@ -28,7 +28,7 @@ using Spectre.Console.Cli;
 CommandApp app = new CommandApp();
 app.Configure(config =>
 {
-    config.AddCommand<RoundCommand>("")
+    config.AddCommand<RoundDecimalCommand>("")
         .WithAlias("decimal-places")
         .WithAlias("dp")
         .WithDescription(Resources.Command_Round_Decimal_Description)
