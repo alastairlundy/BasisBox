@@ -34,7 +34,14 @@ app.Configure(config =>
         .WithDescription(Resources.Command_Round_Decimal_Description)
         .WithExample("1.6532", "2")
         .WithExample("3.1495265", "4");
-        
+
+
+    config.AddCommand<RoundSignificantFiguresCommand>("sf")
+        .WithAlias("significant-figures")
+        .WithAlias("significantfigures")
+        .WithDescription(Resources.Command_Round_SignificantFigure_Description)
+        .WithExample("0.19458", "2")
+        .WithExample("5.44832", "4");
 
     //config.
 });
