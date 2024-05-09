@@ -123,6 +123,9 @@
   <data name="Command.Round.SignificantFigure.Description" xml:space="preserve">
     <value>Round a number to a specified number of Significant Figures.</value>
   </data>
+  <data name="Error.Number.NoInput" xml:space="preserve">
+    <value>No number to be rounded was provided.</value>
+  </data>
   <data name="Input.ProvidedValue" xml:space="preserve">
     <value>The value you provided was</value>
   </data>
@@ -133,12 +136,12 @@
     <value>The number of Decimal Places you wanted was</value>
   </data>
   <data name="Input.Rounding.DecimalPlaces.NotProvided" xml:space="preserve">
-    <value>You didn't tell us the number of Decimal Places you wanted, so we defaulted to</value>
+    <value>You didn't provide the number of Decimal Places you wanted, so we defaulted to</value>
   </data>
   <data name="Input.Rounding.SignificantFigures" xml:space="preserve">
     <value>The number of Significant Figures you wanted was</value>
   </data>
   <data name="Input.Rounding.SignificantFigures.NotProvided" xml:space="preserve">
-    <value>You didn't tell us the number of Significant Figures you wanted, so we defaulted to</value>
+    <value>You didn't provide the number of Significant Figures you wanted, so we defaulted to</value>
   </data>
 </root>

@@ -79,6 +79,15 @@ namespace Round.Cli.localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No number to be rounded was provided..
+        /// </summary>
+        internal static string Error_Number_NoInput {
+            get {
+                return ResourceManager.GetString("Error.Number.NoInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value you provided was.
         /// </summary>
         internal static string Input_ProvidedValue {
@@ -106,7 +115,7 @@ namespace Round.Cli.localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You didn&apos;t tell us the number of Decimal Places you wanted, so we defaulted to.
+        ///   Looks up a localized string similar to You didn&apos;t provide the number of Decimal Places you wanted, so we defaulted to.
         /// </summary>
         internal static string Input_Rounding_DecimalPlaces_NotProvided {
             get {
@@ -124,7 +133,7 @@ namespace Round.Cli.localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You didn&apos;t tell us the number of Significant Figures you wanted, so we defaulted to.
+        ///   Looks up a localized string similar to You didn&apos;t provide the number of Significant Figures you wanted, so we defaulted to.
         /// </summary>
         internal static string Input_Rounding_SignificantFigures_NotProvided {
             get {
