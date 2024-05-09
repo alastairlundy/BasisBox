@@ -18,8 +18,7 @@
 
 using System;
 using System.ComponentModel;
-using System.Net.Http.Headers;
-
+using Round.Cli.Helpers;
 using Round.Cli.localizations;
 using Round.Cli.Settings;
 
