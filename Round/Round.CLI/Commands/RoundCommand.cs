@@ -34,6 +34,7 @@ internal class RoundCommand : Command<RoundCommand.Settings>
         if (settings.Version != null)
         {
             ConsoleHelper.PrintVersion();
+            return 0;
         }
 
         bool wasPrecisionProvided;
@@ -41,6 +42,8 @@ internal class RoundCommand : Command<RoundCommand.Settings>
 
         if (settings.NumberToRound == null)
         {
+            AnsiConsole.WriteException(new NullReferenceException(Resources.Error_Number_NoInput), ExceptionFormats.ShowLinks);
+            return -1;
         }
 
         if (settings.NumberOfDecimalPlacesToUse == int.MinValue)
