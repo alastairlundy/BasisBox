@@ -54,7 +54,6 @@ internal class RoundCommand : Command<RoundCommand.Settings>
         else
         {
             wasPrecisionProvided = true;
-            
             roundedValue = decimal.Round((decimal)settings.NumberToRound!, settings.NumberOfDecimalPlacesToUse);
         }
 
@@ -84,28 +83,8 @@ internal class RoundCommand : Command<RoundCommand.Settings>
             var resultLabel = new Text($"{Resources.Input_RoundedValue}:", new Style(Color.IndianRed)).LeftJustified();
             var resultActual = new Text(roundedValue.ToString(), new Style(Color.Gold1)).Centered();
 
-            var grid = new Grid();
-
-            grid.AddRow(
-                new Padder[]
-                {
-                    new Padder(providedValueLabel).PadBottom(10),
-                    new Padder(providedValueActual).PadBottom(10)
-                });
-
-            grid.AddRow(
-                new Padder[] {
-                    new Padder(providedPrecisionLabel).PadBottom(10),
-                    new Padder(providedPrecisionActual).PadBottom(10)
-            });
-            grid.AddRow(
-                new Padder[]
-                {
-                    new Padder(resultLabel).PadBottom(10),
-                     new Padder(resultActual).PadBottom(10)
-                });
-
-            AnsiConsole.Write(grid);
+            AnsiConsole.Write(ConsoleGridHelper.CreateResultGrid(providedValueLabel, 
+                providedValueActual, providedPrecisionLabel, providedPrecisionActual, resultLabel, resultActual));
             return 0;
         }
     }
