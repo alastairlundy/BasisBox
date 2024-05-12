@@ -26,7 +26,7 @@ app.Configure(config =>
 {
     config.AddCommand<MainCommand>("")
         .WithDescription(Resources.App_Description)
-        .WithExample("path/to/example.txt")
+        .WithExample("/path/to/example.txt")
         .WithExample("-l /path/to/foo.txt")
         .WithExample("/Path/To/foo.txt", "/Path/To/bar.txt");
 });
