@@ -46,4 +46,10 @@
       </Compile>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="NOTICE.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

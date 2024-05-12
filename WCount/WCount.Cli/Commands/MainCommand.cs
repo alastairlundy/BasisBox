@@ -15,6 +15,7 @@
  */
 
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Reflection;
 
 using AlastairLundy.Extensions.System.AssemblyExtensions;
@@ -52,13 +53,18 @@ public class MainCommand : Command<MainCommand.Settings>
         [CommandOption("-v|--version")]
         [DefaultValue(false)]
         public bool Version { get; init; }
+        
+        [CommandOption("--license")]
+        [DefaultValue(false)]
+        public bool ShowLicense { get; init; }
     }
 
     public override int Execute(CommandContext context, Settings settings)
     {
         if (settings.Files == null || settings.Files!.Length < 1)
         {
-            AnsiConsole.WriteLine();
+            AnsiConsole.WriteException(new FileNotFoundException());
+            return -1;
         }
         
         if (settings.Version)
@@ -67,6 +73,17 @@ public class MainCommand : Command<MainCommand.Settings>
             return 0;
         }
 
+        if (settings.ShowLicense)
+        {
+            foreach (string line in File.ReadLines($"{Environment.CurrentDirectory}{Path.DirectorySeparatorChar}NOTICE.txt"))
+            {
+                AnsiConsole.WriteLine(line);
+            }
+            
+            AnsiConsole.WriteLine();
+            return 0;
+        }
+        
         try
         {
             Grid grid = new();
