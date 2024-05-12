@@ -4,9 +4,10 @@ A mono-repo for utility programs.
 ## Status of Programs
 
 ### Stable/Usable programs
-| Program name | Description | Written  In |
-|-|-|-|
-| pow | Calculates square root, cube root, and any value to a positive or negative power. | Dart |
+| Program name | Assembly Name | Description | Written  In |
+|-|-|-|-|
+| pow | pow | Calculates square root, cube root, and any value to a positive or negative power. | Dart |
+| WCount | wcount | Count the number of lines, words, characters, and/or bytes in specified files. | C# |
 
 #### Less Serious Programs
 | Program name | Description | Written  In |
