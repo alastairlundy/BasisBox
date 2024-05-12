@@ -76,5 +76,14 @@ namespace WCount.Cli.localizations {
                 return ResourceManager.GetString("App.Total.Label", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The currently installed version of wcount..
+        /// </summary>
+        internal static string App_Version_Description {
+            get {
+                return ResourceManager.GetString("App.Version.Description", resourceCulture);
+            }
+        }
     }
 }

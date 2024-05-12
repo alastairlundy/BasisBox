@@ -14,25 +14,24 @@
    limitations under the License.
  */
 
-// See https://aka.ms/new-console-template for more information
-
+using System.Reflection;
+using AlastairLundy.Extensions.System.AssemblyExtensions;
+using AlastairLundy.Extensions.System.VersionExtensions;
+using Spectre.Console;
 using Spectre.Console.Cli;
 
-using WCount.Cli.Commands;
-using WCount.Cli.localizations;
+namespace WCount.Cli.Commands;
 
-var app = new CommandApp();
-
-app.Configure(config =>
+public class VersionCommand : Command<VersionCommand.Settings>
 {
-    config.AddCommand<MainCommand>("")
-        .WithDescription(Resources.App_Description)
-        .WithExample("/path/to/example.txt")
-        .WithExample("-l /path/to/foo.txt")
-        .WithExample("/Path/To/foo.txt", "/Path/To/bar.txt");
+    public class Settings : CommandSettings
+    {
+        
+    }
 
-    config.AddCommand<VersionCommand>("version")
-        .WithDescription(Resources.App_Version_Description)
-        .WithAlias("--version")
-        .WithAlias("-v");
-});
+    public override int Execute(CommandContext context, Settings settings)
+    {
+       AnsiConsole.WriteLine($"v{Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString()}");
+       return 0;
+    }
+}

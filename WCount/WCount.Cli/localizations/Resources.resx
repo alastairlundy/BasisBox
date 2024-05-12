@@ -24,4 +24,7 @@
     <data name="App.Description" xml:space="preserve">
         <value>Count the number of lines, words, characters, and/or bytes in specified files.</value>
     </data>
+    <data name="App.Version.Description" xml:space="preserve">
+        <value>The currently installed version of wcount.</value>
+    </data>
 </root>
