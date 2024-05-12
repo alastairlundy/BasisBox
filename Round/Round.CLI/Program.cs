@@ -35,7 +35,6 @@ app.Configure(config =>
         .WithExample("1.6532", "2")
         .WithExample("3.1495265", "4");
 
-
     config.AddCommand<RoundSignificantFiguresCommand>("sf")
         .WithAlias("significant-figures")
         .WithAlias("significantfigures")
