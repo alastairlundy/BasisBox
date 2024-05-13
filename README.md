@@ -1,5 +1,5 @@
 # Utility Programs made by me
-A mono-repo for utility programs.
+A mono-repo for my utility programs.
 
 ## Stable Programs
 
