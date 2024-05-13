@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2024 Alastair Lundy
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,28 +14,25 @@
    limitations under the License.
  */
 
-using System.Reflection;
+using System.Globalization;
 
-using AlastairLundy.Extensions.System.AssemblyExtensions;
-using AlastairLundy.Extensions.System.VersionExtensions;
+using Spectre.Console;
 
 namespace Average.Helpers;
 
-internal class ConsoleHelper
+public static class GridCreator
 {
-    public static void PrintUnformattedVersion()
+    public static Grid CreateGridWithRows(decimal[] values)
     {
-        // ReSharper disable once LocalizableElement
-        Console.WriteLine($"v{Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString()}");
-    }
+        Grid grid = new Grid();
 
-    public static void PrintUnformattedFullLicense()
-    {
-        foreach (string line in File.ReadAllLines($"Environment.CurrentDirectory{Path.DirectorySeparatorChar}LICENSE.txt"))
+        grid.AddColumn();
+
+        foreach (decimal value in values)
         {
-            Console.WriteLine(line);
+            grid.AddRow(new Text(value.ToString(CultureInfo.CurrentCulture)));
         }
 
-        Console.WriteLine();
+        return grid;
     }
 }

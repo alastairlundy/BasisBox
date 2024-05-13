@@ -174,4 +174,10 @@
   <data name="Rounding.SignificantFigures.Description" xml:space="preserve">
     <value>The number of significant figures to round the result to</value>
   </data>
+  <data name="File.Save.Success" xml:space="preserve">
+    <value>The results file was successfully saved to</value>
+  </data>
+  <data name="File.Save.Error" xml:space="preserve">
+    <value>The results file couldn't be saved. Here's why:</value>
+  </data>
 </root>

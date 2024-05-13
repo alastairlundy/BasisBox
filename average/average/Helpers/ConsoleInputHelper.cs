@@ -14,13 +14,11 @@
    limitations under the License.
  */
 
-using System;
+namespace Average.Helpers;
 
-namespace average.Helpers;
-
-internal class ConsoleInputHelper
+public static class ConsoleInputHelper
 {
-    internal static bool IsStringAFileName(string input)
+    public static bool IsStringAFileName(string input)
     {
         if (input.EndsWith(".txt") || input.EndsWith(".csv") || input.EndsWith(".rtf") || input.EndsWith(".xlsx"))
         {
@@ -35,8 +33,8 @@ internal class ConsoleInputHelper
                     return false;
                 }
             }
-
-           return File.Exists(input);
+            
+            return File.Exists(input);
         }
     }
 
