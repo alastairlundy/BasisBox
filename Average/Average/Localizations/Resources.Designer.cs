@@ -115,6 +115,15 @@ namespace Average.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Returns the truncated mean of the interquartile range of a set of values..
+        /// </summary>
+        internal static string Command_InterquartileMean_Description {
+            get {
+                return ResourceManager.GetString("Command.InterquartileMean.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prints the License to the Terminal output..
         /// </summary>
         internal static string Command_License_Description {
@@ -133,11 +142,20 @@ namespace Average.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The most common value(s) found within a set of numbers.
+        ///   Looks up a localized string similar to Returns the arithmetic mean of the smallest and largest values in an array..
         /// </summary>
-        internal static string Command_Mode_About {
+        internal static string Command_MidRange_Description {
             get {
-                return ResourceManager.GetString("Command.Mode.About", resourceCulture);
+                return ResourceManager.GetString("Command.MidRange.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Returns the most common value(s) found within a set of numbers..
+        /// </summary>
+        internal static string Command_Mode_Description {
+            get {
+                return ResourceManager.GetString("Command.Mode.Description", resourceCulture);
             }
         }
         

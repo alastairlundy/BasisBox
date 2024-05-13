@@ -14,5 +14,50 @@
    limitations under the License.
  */
 
-// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+
+
+using Average.Commands;
+using Average.Commands.CalculationCommands;
+using Average.Localizations;
+
+using Spectre.Console.Cli;
+
+CommandApp app = new CommandApp();
+app.Configure(config =>
+{
+    config.AddCommand<MedianCommand>("median")
+        .WithDescription(Resources.Command_Median_Description)
+        .WithExample("1", "2", "3", "4", "5");
+
+    config.AddCommand<ModeCommand>("mode")
+       .WithDescription(Resources.Command_Mode_Description)
+       .WithExample("1", "3", "3", "5", "7");
+
+    config.AddCommand<ArithmeticMeanCommand>("arithmetic-mean")
+       .WithAlias("mean")
+       .WithAlias("arithmetic mean")
+       .WithAlias("arithmetic")
+       .WithDescription(Resources.Command_ArithmeticMean_Description)
+       .WithExample("1", "4", "6", "8", "9", "13");
+
+    config.AddCommand<GeometricMeanCommand>("geometric-mean")
+       .WithAlias("geometric mean")
+       .WithAlias("geometric")
+       .WithAlias("geomean")
+       .WithDescription(Resources.Command_GeometricMean_Description)
+       .WithExample("1", "4", "6", "8", "9", "13");
+
+    config.AddCommand<MidRangeCommand>("midrange")
+       .WithDescription(Resources.Command_MidRange_Description)
+       .WithExample("1", "3", "6", "9");
+
+    config.AddCommand<InterquartileMeanCommand>("interquartertile-mean")
+       .WithAlias("iqr-mean")
+       .WithDescription(Resources.Command_InterquartileMean_Description)
+       .WithExample("1", "2", "3", "4", "5", "6");
+
+    config.AddCommand<VersionCommand>("version")
+        .WithAlias("--version")
+        .WithAlias("-v")
+        .WithDescription(Resources.Command_Version_Description);
+});

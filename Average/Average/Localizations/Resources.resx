@@ -135,14 +135,20 @@
   <data name="Command.GeometricMean.Description" xml:space="preserve">
     <value>Calculate the geometric mean of a set of numbers</value>
   </data>
+  <data name="Command.InterquartileMean.Description" xml:space="preserve">
+    <value>Returns the truncated mean of the interquartile range of a set of values.</value>
+  </data>
   <data name="Command.License.Description" xml:space="preserve">
     <value>Prints the License to the Terminal output.</value>
   </data>
   <data name="Command.Median.Description" xml:space="preserve">
     <value>Returns the middle value in a set of numbers.</value>
   </data>
-  <data name="Command.Mode.About" xml:space="preserve">
-    <value>The most common value(s) found within a set of numbers</value>
+  <data name="Command.MidRange.Description" xml:space="preserve">
+    <value>Returns the arithmetic mean of the smallest and largest values in an array.</value>
+  </data>
+  <data name="Command.Mode.Description" xml:space="preserve">
+    <value>Returns the most common value(s) found within a set of numbers.</value>
   </data>
   <data name="Command.Version.Description" xml:space="preserve">
     <value>Prints the program version to the Terminal output.</value>
