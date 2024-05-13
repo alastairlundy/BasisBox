@@ -14,7 +14,6 @@
    limitations under the License.
  */
 
-using System;
 using System.Reflection;
 
 using AlastairLundy.Extensions.System.AssemblyExtensions;
@@ -24,31 +23,6 @@ namespace average.Helpers;
 
 internal class ConsoleHelper
 {
-    internal static decimal[] ConvertInputToDecimal(string[] values)
-    {
-        List<decimal> newValues = new List<decimal>();
-
-        foreach (string value in values)
-        {
-            newValues.Add(decimal.Parse(value));
-        }
-
-        return newValues.ToArray();
-    }
-
-    public static void PrintUnformattedDecimal(decimal str)
-    {
-        Console.WriteLine(str);
-    }
-
-    public static void PrintUnformattedDecimalArray(decimal[] array)
-    {
-        foreach (decimal value in array)
-        {
-            Console.WriteLine(value.ToString());
-        }
-    }
-
     public static void PrintUnformattedVersion()
     {
         Console.WriteLine($"{Assembly.GetExecutingAssembly().GetProjectName()} {Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString()}");
@@ -56,8 +30,6 @@ internal class ConsoleHelper
 
     public static void PrintUnformattedLicense()
     {
-
-
         foreach (string line in File.ReadAllLines($"Environment.CurrentDirectory{Path.DirectorySeparatorChar}LICENSE.txt"))
         {
             Console.WriteLine(line);
