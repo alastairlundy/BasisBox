@@ -14,19 +14,13 @@
    limitations under the License.
  */
 
-using AlastairLundy.Extensions.System.VersionExtensions;
-using AlastairLundy.Extensions.System.VersionExtensions.Enums;
-
-using AlastairLundy.Extensions.System;
-
-using McMaster.Extensions.CommandLineUtils;
 using System.Reflection;
-
 using AlastairLundy.Extensions.System.AssemblyExtensions;
-using average.localizations;
-using average.Helpers;
+using AlastairLundy.Extensions.System.Maths.Averages;
+using Average.Helpers;
+using Average.Helpers.AverageHelpers;
 
-namespace average;
+namespace Average;
 
 internal class Program
 {
@@ -146,7 +140,7 @@ internal class Program
 
                 if (numbers.Values.Count > 1)
                 {
-                    modes = ModeHelper.GetModes(numbers.Values.ToArray()!);
+                    modes = Mode.OfDecimals(numbers.Values.ToArray()!);
                 }
                 else
                 {
@@ -205,7 +199,7 @@ internal class Program
             }
             if (license.HasValue())
             {
-                ConsoleHelper.PrintUnformattedLicense();
+                ConsoleHelper.PrintUnformattedFullLicense();
             }
         });
 
