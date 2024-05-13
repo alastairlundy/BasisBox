@@ -18,6 +18,7 @@ using AlastairLundy.Extensions.System.Maths.Averages;
 
 using Average.Helpers;
 using Average.Library;
+
 using Average.Localizations;
 
 using Spectre.Console;

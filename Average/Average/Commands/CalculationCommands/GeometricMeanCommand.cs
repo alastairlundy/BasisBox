@@ -15,9 +15,13 @@
  */
 
 using System.Globalization;
+
 using AlastairLundy.Extensions.System.Maths.Averages;
+
 using Average.Helpers;
+
 using Average.Localizations;
+
 using Spectre.Console;
 using Spectre.Console.Cli;
 
