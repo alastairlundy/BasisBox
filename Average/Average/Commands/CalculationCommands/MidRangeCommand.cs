@@ -14,20 +14,53 @@
    limitations under the License.
  */
 
+using AlastairLundy.Extensions.System.Maths.Averages;
+using Average.Helpers;
+using Average.Library;
+using Average.Localizations;
+
+using Spectre.Console;
 using Spectre.Console.Cli;
 
 namespace Average.Commands.CalculationCommands;
 
 public class MidRangeCommand : Command<MidRangeCommand.Settings>
 {
-    public class Settings : CommandSettings
+    public class Settings : BaseSettings
     {
         
     }
 
-
     public override int Execute(CommandContext context, Settings settings)
     {
-        throw new NotImplementedException();
+        if (settings.Inputs == null)
+        {
+            AnsiConsole.WriteException(new NullReferenceException());
+        }
+
+        decimal midRange = MidRange.OfDecimals(settings.Inputs);
+
+        if (settings.FileOutput != null)
+        {
+            try
+            {
+                File.WriteAllLines(settings.FileOutput!, new string[] { midRange.ToString() });
+                AnsiConsole.WriteLine($"{Resources.File_Save_Success} {settings.FileOutput}");
+
+                return 0;
+            }
+            catch (Exception exception)
+            {
+                AnsiConsole.WriteLine($"{Resources.File_Save_Error}");
+                AnsiConsole.WriteException(exception);
+                return -1;
+            }
+        }
+        // ReSharper disable once RedundantIfElseBlock
+        else
+        {
+            AnsiConsole.Write(GridCreator.CreateGridWithRows(new decimal[] { midRange }));
+            return 0;
+        }
     }
 }
