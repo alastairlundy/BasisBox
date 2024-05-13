@@ -18,9 +18,9 @@
 
 using System;
 using System.ComponentModel;
-
+using System.Globalization;
 using Round.Cli.Helpers;
-using Round.Cli.localizations;
+using Round.Cli.Localizations;
 using Round.Cli.Settings;
 
 using Spectre.Console;
@@ -60,7 +60,7 @@ internal class RoundDecimalCommand : Command<RoundDecimalCommand.Settings>
 
         if (!settings.PrettyMode)
         {
-            AnsiConsole.WriteLine(roundedValue.ToString());
+            AnsiConsole.WriteLine(roundedValue.ToString(CultureInfo.CurrentCulture));
             return 0;
         }
         else
@@ -82,7 +82,7 @@ internal class RoundDecimalCommand : Command<RoundDecimalCommand.Settings>
             var providedPrecisionActual = new Text(settings.NumberOfDecimalPlacesToUse.ToString(), new Style(Color.DarkSeaGreen)).Centered();
 
             var resultLabel = new Text($"{Resources.Input_RoundedValue}:", new Style(Color.IndianRed)).LeftJustified();
-            var resultActual = new Text(roundedValue.ToString(), new Style(Color.Gold1)).Centered();
+            var resultActual = new Text(roundedValue.ToString(CultureInfo.CurrentCulture), new Style(Color.Gold1)).Centered();
 
             AnsiConsole.Write(ConsoleGridHelper.CreateResultGrid(providedValueLabel, 
                 providedValueActual, providedPrecisionLabel, providedPrecisionActual, resultLabel, resultActual));

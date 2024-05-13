@@ -21,8 +21,7 @@
 using System;
 
 using Round.Cli.Commands;
-using Round.Cli.localizations;
-
+using Round.Cli.Localizations;
 using Spectre.Console.Cli;
 
 CommandApp app = new CommandApp();

@@ -22,7 +22,7 @@ using System.ComponentModel;
 using AlastairLundy.Extensions.System.DecimalExtensions;
 
 using Round.Cli.Helpers;
-using Round.Cli.localizations;
+using Round.Cli.Localizations;
 using Round.Cli.Settings;
 
 using Spectre.Console;
