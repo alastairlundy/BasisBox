@@ -19,5 +19,6 @@ A mono-repo for my utility programs.
 ## Programs being developed
 | Program name | Description | Written  In |
 |-|-|-|
+| ConCat | | C# |
 | where | Find all files and folders containing the specified string. | C# |
 | far | Find and Replace any string of text in any file. | C# |
