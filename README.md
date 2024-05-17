@@ -7,6 +7,8 @@ A mono-repo for my utility programs.
 | Project name | Assembly Name | Alternative To | Description | Written  In |
 |-|-|-|-|-|
 | WCount | wcount | wc | Count the number of lines, words, characters, and/or bytes in specified files. | C# |
+| NLine | nline | nl | Add numbers to lines either from a file or standard input and sent to standard output. | C# |
+
 
 ### Other Programs
 | Project name | Assembly Name | Description | Written  In |
