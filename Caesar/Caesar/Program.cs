@@ -14,6 +14,11 @@
    limitations under the License.
  */
 
+using System.Reflection;
+
+using AlastairLundy.Extensions.System.AssemblyExtensions;
+using AlastairLundy.Extensions.System.VersionExtensions;
+
 using Caesar.Commands;
 using Caesar.localizations;
 
@@ -39,15 +44,12 @@ app.Configure(config =>
         add.AddCommand<DecodeFileCommand>("file");
     });
 
-    config.AddCommand<VersionCommand>("version")
-        .WithAlias("-v")
-        .WithAlias("--version")
-        .WithDescription(Resources.Version_Description);
-
     config.AddCommand<LicenseCommand>("license")
         .WithAlias("--license")
         .WithAlias("-l")
         .WithDescription(Resources.Command_License);
+    
+    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString());
 });
 
 return app.Run(args);
