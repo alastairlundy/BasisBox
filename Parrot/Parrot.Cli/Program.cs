@@ -1,5 +1,26 @@
-﻿// See https://aka.ms/new-console-template for more information
-
+﻿
 using System;
+using System.Reflection;
 
-Console.WriteLine("Hello, World!");
+using AlastairLundy.Extensions.System.AssemblyExtensions;
+using AlastairLundy.Extensions.System.VersionExtensions;
+
+using Parrot.Cli.Commands;
+
+using Spectre.Console.Cli;
+
+CommandApp app = new();
+
+app.Configure(config =>
+{
+    config.UseAssemblyInformationalVersion();
+    
+    config.AddCommand<ParrotCommand>("")
+    .WithAlias("echo");
+
+    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString());
+});
+
+app.SetDefaultCommand<ParrotCommand>();
+
+return app.Run(args);
