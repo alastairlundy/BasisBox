@@ -14,16 +14,17 @@
    limitations under the License.
  */
 
+// ReSharper disable UseIndexFromEndExpression
 namespace NLine.Library;
 
-public class FileFinder
+public static class FileFinder
 {
     /// <summary>
-    /// 
+    /// A method to return any file names found within a specified string array.
     /// </summary>
-    /// <param name="arguments"></param>
-    /// <returns>the file if one was provided in the list of arguments; returns null otherwise.</returns>
-    public static string? FindFileName(string[] arguments)
+    /// <param name="arguments">The string array to be checked.</param>
+    /// <returns>the file(s) if one was provided in the list of arguments; returns null otherwise.</returns>
+    public static string[]? FindFileNames(string[] arguments)
     {
         if (FoundAFileInArgs(arguments))
         {
@@ -51,6 +52,11 @@ public class FileFinder
         return null;
     }
 
+    /// <summary>
+    /// A method to determine if a file name is contained within a string array.
+    /// </summary>
+    /// <param name="arguments">The string array to be searched.</param>
+    /// <returns>true if a file is found within the specified string array; returns false otherwise.</returns>
     public static bool FoundAFileInArgs(string[] arguments)
     {
         foreach (string arg in arguments)
