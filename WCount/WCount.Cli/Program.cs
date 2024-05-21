@@ -21,7 +21,7 @@ using Spectre.Console.Cli;
 using WCount.Cli.Commands;
 using WCount.Cli.localizations;
 
-var app = new CommandApp();
+CommandApp app = new CommandApp();
 
 app.Configure(config =>
 {
