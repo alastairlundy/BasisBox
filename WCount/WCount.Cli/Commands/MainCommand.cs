@@ -22,7 +22,8 @@ using AlastairLundy.Extensions.System.AssemblyExtensions;
 
 using Spectre.Console;
 using Spectre.Console.Cli;
-using WCount.Cli.localizations;
+
+using WCount.Cli.Localizations;
 using WCount.Library;
 
 namespace WCount.Cli.Commands;
