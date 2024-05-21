@@ -25,12 +25,27 @@ public class FileFinder
     /// <returns>the file if one was provided in the list of arguments; returns null otherwise.</returns>
     public static string? FindFileName(string[] arguments)
     {
-        foreach (string arg in arguments)
+        if (FoundAFileInArgs(arguments))
         {
-            if (arg.EndsWith(".txt") ||  arg.EndsWith(".rtf") || arg[arg.Length - 3].Equals('.'))
+            List<string> list = new();
+            
+            foreach (string arg in arguments)
             {
-                return arg;
+                if (arg.Length > 3)
+                {
+                    if (arg[arg.Length - 3].Equals('.') || arg[arg.Length - 2].Equals('.'))
+                    {
+                        list.Add(arg);
+                    }
+                }
+                
+                if (arg.EndsWith(".txt") || arg.EndsWith(".rtf"))
+                {
+                    list.Add(arg);
+                }
             }
+
+            return list.ToArray();
         }
 
         return null;
@@ -40,7 +55,15 @@ public class FileFinder
     {
         foreach (string arg in arguments)
         {
-            if (arg.EndsWith(".txt") || arg.EndsWith(".rtf") || arg[arg.Length - 3].Equals('.'))
+            if (arg.Length > 3)
+            {
+                    if (arg[arg.Length - 3].Equals('.') || arg[arg.Length - 2].Equals('.'))
+                    {
+                        return true;
+                    }
+            }
+            
+            if (arg.EndsWith(".txt") || arg.EndsWith(".rtf"))
             {
                 return true;
             }
