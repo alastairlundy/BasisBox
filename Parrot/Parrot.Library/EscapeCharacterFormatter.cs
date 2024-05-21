@@ -4,7 +4,7 @@ using AlastairLundy.Extensions.System.StringExtensions;
 
 namespace Parrot.Cli.Helpers;
 
-public class StringFormatter
+public class EscapeCharacterFormatter
 {
     /// <summary>
     /// 

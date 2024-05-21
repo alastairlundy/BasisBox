@@ -40,12 +40,7 @@ public class ParrotCommand : Command<ParrotCommand.Settings>
         {
              for(int index = 0; index < settings.LinesToPrint!.Length; index++)
             {
-                settings.LinesToPrint[index] = StringFormatter.RemoveEscapeChars(settings.LinesToPrint[index]);
             }
         }
-        
-        
-        
-        throw new NotImplementedException();
     }
 }
