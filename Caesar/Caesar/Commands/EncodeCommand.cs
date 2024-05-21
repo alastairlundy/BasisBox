@@ -14,6 +14,8 @@
    limitations under the License.
  */
 
+using System;
+
 using Caesar.Library;
 
 using Spectre.Console;

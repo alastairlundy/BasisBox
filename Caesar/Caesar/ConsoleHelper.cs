@@ -14,6 +14,9 @@
    limitations under the License.
  */
 
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
 
 using Spectre.Console;
@@ -36,8 +39,7 @@ public static class ConsoleHelper
 
     public static int ShiftHandler(int? shiftAmount)
     {
-        int shift = 0;
-        
+        int shift;
         if (shiftAmount == null)
         {
             shift = RandomNumberGenerator.GetInt32(1, 26);
