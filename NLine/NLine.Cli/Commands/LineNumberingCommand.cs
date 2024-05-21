@@ -74,7 +74,7 @@ public class LineNumberingCommand : Command<LineNumberingCommand.Settings>
             {
                 assignEmptyLinesNumbers = true;
             }
-            else if (settings.BodyLinesOption.Contains("p"))
+            else if (settings.BodyLinesOption.Contains('p'))
             {
                 searchString = settings.BodyLinesOption.Remove(0);
             }
