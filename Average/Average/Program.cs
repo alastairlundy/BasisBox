@@ -61,3 +61,5 @@ app.Configure(config =>
         .WithAlias("-v")
         .WithDescription(Resources.Command_Version_Description);
 });
+
+return app.Run(args);

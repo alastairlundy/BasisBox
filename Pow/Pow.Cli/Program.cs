@@ -38,3 +38,5 @@ app.Configure(config =>
     config.AddCommand<PowerCommand>("power")
         .WithAlias("pwr");
 });
+
+return app.Run(args);

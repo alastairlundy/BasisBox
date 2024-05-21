@@ -36,3 +36,7 @@ app.Configure(config =>
         .WithAlias("--version")
         .WithAlias("-v");
 });
+
+app.SetDefaultCommand<MainCommand>();
+
+return app.Run(args);
