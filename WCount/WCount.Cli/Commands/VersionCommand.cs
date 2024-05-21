@@ -15,8 +15,10 @@
  */
 
 using System.Reflection;
+
 using AlastairLundy.Extensions.System.AssemblyExtensions;
 using AlastairLundy.Extensions.System.VersionExtensions;
+
 using Spectre.Console;
 using Spectre.Console.Cli;
 
