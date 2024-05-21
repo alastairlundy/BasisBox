@@ -19,7 +19,7 @@
 using Spectre.Console.Cli;
 
 using WCount.Cli.Commands;
-using WCount.Cli.localizations;
+using WCount.Cli.Localizations;
 
 CommandApp app = new CommandApp();
 
