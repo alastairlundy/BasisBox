@@ -8,7 +8,7 @@ using ConCat.Cli.Commands;
 
 using Spectre.Console.Cli;
 
-CommandApp app = new CommandApp();
+CommandApp app = new();
 
 app.Configure(config =>
 {
