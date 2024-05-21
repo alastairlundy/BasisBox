@@ -14,7 +14,10 @@
    limitations under the License.
  */
 
-// See https://aka.ms/new-console-template for more information
+using System.Reflection;
+
+using AlastairLundy.Extensions.System.AssemblyExtensions;
+using AlastairLundy.Extensions.System.VersionExtensions;
 
 using Spectre.Console.Cli;
 
@@ -30,11 +33,8 @@ app.Configure(config =>
         .WithExample("/path/to/example.txt")
         .WithExample("-l /path/to/foo.txt")
         .WithExample("/Path/To/foo.txt", "/Path/To/bar.txt");
-
-    config.AddCommand<VersionCommand>("version")
-        .WithDescription(Resources.App_Version_Description)
-        .WithAlias("--version")
-        .WithAlias("-v");
+    
+    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString());
 });
 
 app.SetDefaultCommand<MainCommand>();
