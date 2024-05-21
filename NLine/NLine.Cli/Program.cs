@@ -30,3 +30,5 @@ commandApp.Configure(config =>
         .WithExample("-w 5");
 
 });
+
+return commandApp.Run(args);
