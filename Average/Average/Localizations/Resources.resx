@@ -150,9 +150,6 @@
   <data name="Command.Mode.Description" xml:space="preserve">
     <value>Returns the most common value(s) found within a set of numbers.</value>
   </data>
-  <data name="Command.Version.Description" xml:space="preserve">
-    <value>Prints the program version to the Terminal output.</value>
-  </data>
   <data name="Error.Title" xml:space="preserve">
     <value>Error(s)</value>
   </data>
