@@ -14,6 +14,11 @@
    limitations under the License.
  */
 
+using System.Reflection;
+
+using AlastairLundy.Extensions.System.AssemblyExtensions;
+using AlastairLundy.Extensions.System.VersionExtensions;
+
 using NLine.Cli.Commands;
 using NLine.Cli.Localizations;
 
@@ -28,6 +33,8 @@ commandApp.Configure(config =>
         .WithDescription(Resources.App_Description)
         .WithExample("-v 0")
         .WithExample("-w 5");
+
+    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString());
 
 });
 
