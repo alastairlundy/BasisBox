@@ -60,10 +60,6 @@ public class ConcatenateCommand : Command<ConcatenateCommand.Settings>
         {
 
         }
-
-
-
-
         
         
         throw new NotImplementedException();
