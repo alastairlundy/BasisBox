@@ -9,7 +9,6 @@ A mono-repo for my utility programs.
 | WCount | wcount | wc | Count the number of lines, words, characters, and/or bytes in specified files. | C# |
 | NLine | nline | nl | Add numbers to lines either from a file or standard input and sent to standard output. | C# |
 
-
 ### Other Programs
 | Project name | Assembly Name | Description | Written  In |
 |-|-|-|-|
@@ -21,6 +20,7 @@ A mono-repo for my utility programs.
 ## Programs being developed
 | Program name | Description | Written  In |
 |-|-|-|
+| Parrot | | C# |
 | ConCat | | C# |
 | where | Find all files and folders containing the specified string. | C# |
 | far | Find and Replace any string of text in any file. | C# |
