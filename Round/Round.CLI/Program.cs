@@ -22,6 +22,7 @@ using System;
 
 using Round.Cli.Commands;
 using Round.Cli.Localizations;
+
 using Spectre.Console.Cli;
 
 CommandApp app = new CommandApp();
@@ -43,5 +44,7 @@ app.Configure(config =>
 
     //config.
 });
+
+app.SetDefaultCommand<RoundDecimalCommand>();
 
 return app.Run(args);
