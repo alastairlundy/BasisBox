@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 
+using Parrot.Cli.Helpers;
+
 using Spectre.Console.Cli;
 
 namespace Parrot.Cli.Commands;
@@ -36,7 +38,10 @@ public class ParrotCommand : Command<ParrotCommand.Settings>
         if (settings.DisableInterpretationOfBackslashEscapeChars &&
             settings.EnableParsingOfBackslashEscapeChars == false)
         {
-             
+             for(int index = 0; index < settings.LinesToPrint!.Length; index++)
+            {
+                settings.LinesToPrint[index] = StringFormatter.RemoveEscapeChars(settings.LinesToPrint[index]);
+            }
         }
         
         
