@@ -15,12 +15,12 @@ app.Configure(config =>
 {
     config.UseAssemblyInformationalVersion();
     
-    config.AddCommand<ParrotCommand>("")
+    config.AddCommand<EchoCommand>("")
     .WithAlias("echo");
 
     config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString());
 });
 
-app.SetDefaultCommand<ParrotCommand>();
+app.SetDefaultCommand<EchoCommand>();
 
 return app.Run(args);

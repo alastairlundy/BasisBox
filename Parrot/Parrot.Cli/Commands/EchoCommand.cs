@@ -11,7 +11,7 @@ using Spectre.Console.Cli;
 
 namespace Parrot.Cli.Commands;
 
-public class ParrotCommand : Command<ParrotCommand.Settings>
+public class EchoCommand : Command<EchoCommand.Settings>
 {
     public class Settings : CommandSettings
     {
@@ -32,9 +32,6 @@ public class ParrotCommand : Command<ParrotCommand.Settings>
 
         [CommandOption("--output")]
         public string? OutputFile { get; init; }
-
-        [CommandOption("--override-output")]
-        public bool? OverrideIfOutputExists { get; init; }
     }
 
 
