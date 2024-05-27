@@ -34,12 +34,6 @@ internal class RoundSignificantFiguresCommand : Command<RoundSignificantFiguresC
 {
     public override int Execute(CommandContext context, Settings settings)
     {
-        if(settings.Version != null)
-        {
-            ConsoleHelper.PrintVersion();
-            return 0;
-        }
-
         if (settings.NumberToRound == null)
         {
             AnsiConsole.WriteException(new NullReferenceException(Resources.Error_Number_NoInput), ExceptionFormats.ShowLinks);
