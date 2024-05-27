@@ -20,15 +20,14 @@ using AlastairLundy.Extensions.System.BoolArrayExtensions;
 
 namespace NLine.Library;
 
-public class LineNumberHelper
+public static class LineNumberer
 {
-
-    protected static int CalculateLineNumber(int currentIndex, int lineIncrementor, int initialLineNumber)
+    internal static int CalculateLineNumber(int currentIndex, int lineIncrementor, int initialLineNumber)
     {
         return currentIndex == 0 ? initialLineNumber : initialLineNumber * ((currentIndex + 1) * lineIncrementor);
     }
 
-    protected static string AddColumns(int columnNumber)
+    internal static string AddColumns(int columnNumber)
     {
         StringBuilder stringBuilder = new StringBuilder();
         
@@ -48,7 +47,7 @@ public class LineNumberHelper
         }
     }
 
-    protected static string AddLeadingZeroes(int lineNumberDigits)
+    internal static string AddLeadingZeroes(int lineNumberDigits)
     {
         StringBuilder stringBuilder = new StringBuilder();
         
@@ -67,7 +66,7 @@ public class LineNumberHelper
         return string.Empty;
     }
 
-    protected static bool NextXLinesIsEmpty(int numberOfLines, int currentIndex, string[] lines)
+    internal static bool NextXLinesIsEmpty(int numberOfLines, int currentIndex, string[] lines)
     {
         if (lines[currentIndex].Equals(string.Empty))
         {
@@ -97,7 +96,7 @@ public class LineNumberHelper
         return false;
     }
 
-    protected static string AddTabSpacesIfNeeded(bool addTabSpaces, string line)
+    internal static string AddTabSpacesIfNeeded(bool addTabSpaces, string line)
     {
         if (addTabSpaces)
         {
@@ -109,7 +108,7 @@ public class LineNumberHelper
         }
     }
 
-    protected static string ConstructLine(int lineNumber, int columnNumber, string line, string lineNumberAppendedText, bool addTabSpaces, bool addLeadingZeroes)
+    internal static string ConstructLine(int lineNumber, int columnNumber, string line, string lineNumberAppendedText, bool addTabSpaces, bool addLeadingZeroes)
     {
         StringBuilder stringBuilder = new StringBuilder();
         
@@ -128,6 +127,20 @@ public class LineNumberHelper
         return stringBuilder.ToString();
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="lines">The string array of lines to number.</param>
+    /// <param name="lineIncrementor">The amount to increase each line number by.</param>
+    /// <param name="initialLineNumber">The initial number to use as a line number.</param>
+    /// <param name="lineNumberAppendedText"></param>
+    /// <param name="assignEmptyLinesANumber">Whether to assign a line number to empty lines.</param>
+    /// <param name="numberOfEmptyLinesToGroupTogether">The number of consecutive empty lines to be given a line number.</param>
+    /// <param name="columnNumber">The column to use for the line number.</param>
+    /// <param name="tabSpaceAfterLineNumber">The amount of tab spaces after the line number and before the line contents.</param>
+    /// <param name="addLeadingZeroes">Whether to add leading zeroes to the line number.</param>
+    /// <param name="listNumbersWithString"></param>
+    /// <returns></returns>
     public static string[] AddLineNumbers(string[] lines, int lineIncrementor, int initialLineNumber, string lineNumberAppendedText, bool assignEmptyLinesANumber, int numberOfEmptyLinesToGroupTogether, int columnNumber, bool tabSpaceAfterLineNumber, bool addLeadingZeroes, string? listNumbersWithString = null)
     {
         List<string> list = new List<string>();
