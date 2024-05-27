@@ -15,6 +15,7 @@
  */
 
 using System;
+
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -138,7 +139,7 @@ public class LineNumberingCommand : Command<LineNumberingCommand.Settings>
             stringAppender = settings.AppendLineNumber;
         }
         
-        string[] results = LineNumberHelper.AddLineNumbers(input, settings.LineIncrementor, settings.LineStartingNumber,
+        string[] results = LineNumberer.AddLineNumbers(input, settings.LineIncrementor, settings.LineStartingNumber,
             stringAppender, assignEmptyLinesNumbers, settings.GroupOfEmptyLinesCountedAsOne, columnNumbers, tabSpaceAfterLineNumber, addLeadingZeroes, searchString);
 
         if (settings.OutputFile != null)
