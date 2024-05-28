@@ -1,8 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
-
-using Parrot.Cli.Helpers;
 using Parrot.Cli.Localizations;
 using Parrot.Library;
 
@@ -40,7 +38,6 @@ public class EchoCommand : Command<EchoCommand.Settings>
         if (settings.LinesToPrint == null)
         {
             
-
           //  if(context.Remaining.Parsed)
         }
         
