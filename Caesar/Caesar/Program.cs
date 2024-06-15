@@ -49,7 +49,7 @@ app.Configure(config =>
         .WithAlias("-l")
         .WithDescription(Resources.Command_License);
     
-    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString());
+    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().ToFriendlyVersionString());
 });
 
 return app.Run(args);
