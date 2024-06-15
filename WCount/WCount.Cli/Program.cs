@@ -34,7 +34,7 @@ app.Configure(config =>
         .WithExample("-l /path/to/foo.txt")
         .WithExample("/Path/To/foo.txt", "/Path/To/bar.txt");
     
-    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString());
+    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().ToFriendlyVersionString());
 });
 
 app.SetDefaultCommand<MainCommand>();
