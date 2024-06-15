@@ -21,8 +21,7 @@ using System.Collections.Generic;
 using System.IO;
 
 using AlastairLundy.Extensions.System.DecimalArrayExtensions;
-using AlastairLundy.Extensions.System.DecimalExtensions;
-
+using AlastairLundy.Extensions.System.Maths;
 using Pow.Cli.Localizations;
 
 using Spectre.Console;

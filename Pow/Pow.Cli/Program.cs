@@ -43,7 +43,7 @@ app.Configure(config =>
     config.AddCommand<PowerCommand>("power")
         .WithAlias("pwr");
     
-    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString());
+    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().ToFriendlyVersionString());
 });
 
 return app.Run(args);

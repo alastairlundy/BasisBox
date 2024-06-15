@@ -22,7 +22,7 @@ using System.IO;
 
 using AlastairLundy.Extensions.System.DecimalArrayExtensions;
 using AlastairLundy.Extensions.System.DecimalExtensions;
-
+using AlastairLundy.Extensions.System.Maths;
 using Pow.Cli.Localizations;
 
 using Spectre.Console;
@@ -44,7 +44,7 @@ public class SquareRootCommand : Command<SquareRootCommand.Settings>
 
         foreach (decimal input in settings.Inputs)
         {
-            decimal squareRoot = input.Sqrt();
+            decimal squareRoot = input.SquareRoot();
             
             results.Add(squareRoot);
         }

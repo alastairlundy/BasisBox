@@ -22,7 +22,7 @@ using System.IO;
 
 using AlastairLundy.Extensions.System.DecimalArrayExtensions;
 using AlastairLundy.Extensions.System.DecimalExtensions;
-
+using AlastairLundy.Extensions.System.Maths;
 using Pow.Cli.Localizations;
 
 using Spectre.Console;
@@ -49,7 +49,7 @@ public class CubeRootCommand : Command<CubeRootCommand.Settings>
 
         foreach (decimal input in settings.Inputs)
         {
-            decimal cubeRoot = input.Cbrt();
+            decimal cubeRoot = input.CubeRoot();
             
             results.Add(cubeRoot);
         }
