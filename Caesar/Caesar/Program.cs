@@ -44,10 +44,6 @@ app.Configure(config =>
         add.AddCommand<DecodeFileCommand>("file");
     });
 
-    config.AddCommand<LicenseCommand>("license")
-        .WithAlias("--license")
-        .WithAlias("-l")
-        .WithDescription(Resources.Command_License);
     
     config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().ToFriendlyVersionString());
 });
