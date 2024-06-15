@@ -19,7 +19,7 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-
+using CliUtilsLib;
 using NLine.Cli.Localizations;
 using NLine.Library;
 
@@ -32,7 +32,7 @@ public class LineNumberingCommand : Command<LineNumberingCommand.Settings>
 {
     public class Settings : CommandSettings
     {
-        [CommandArgument(0, "<Files>")]
+        [CommandArgument(0, "<File>")]
         public string? File { get; init; }
         
         [CommandOption("-b")]
@@ -83,21 +83,21 @@ public class LineNumberingCommand : Command<LineNumberingCommand.Settings>
 
         string[]? input = null;
         
-        if (settings.File == null && !FileFinder.FoundAFileInArgs(context.Remaining.Raw.ToArray()))
+        if (settings.File == null && !FileArgumentFinder.FoundAFileInArgs(context.Remaining.Raw.ToArray()))
         {
             input = Console.OpenStandardInput().ToString()?.Split(Environment.NewLine) ?? null;
         }
-        else if (settings.File == null && FileFinder.FoundAFileInArgs(context.Remaining.Raw.ToArray()))
+        else if (settings.File == null && FileArgumentFinder.FoundAFileInArgs(context.Remaining.Raw.ToArray()))
         {
-            string? file = FileFinder.FindFileName(context.Remaining.Raw.ToArray());
+            string[]? files = FileArgumentFinder.FindFileNamesInArgs(context.Remaining.Raw.ToArray());
 
-            if (file == null)
+            if (files == null)
             {
                 input = Console.OpenStandardInput().ToString()?.Split(Environment.NewLine) ?? null;
             }
             else
             {
-                input = File.ReadAllLines(file);
+                input = File.ReadAllLines(files.First());
             }
 
         }
