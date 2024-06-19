@@ -16,7 +16,6 @@
 
 using System.Reflection;
 
-using AlastairLundy.Extensions.System.AssemblyExtensions;
 using AlastairLundy.Extensions.System.VersionExtensions;
 
 using NLine.Cli.Commands;
@@ -34,7 +33,7 @@ commandApp.Configure(config =>
         .WithExample("-v 0")
         .WithExample("-w 5");
 
-    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString());
+    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetName().Version.ToFriendlyVersionString());
 
 });
 
