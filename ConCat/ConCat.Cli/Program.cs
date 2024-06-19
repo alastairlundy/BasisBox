@@ -18,7 +18,6 @@
 
 using System.Reflection;
 
-using AlastairLundy.Extensions.System.AssemblyExtensions;
 using AlastairLundy.Extensions.System.VersionExtensions;
 
 using ConCat.Cli.Commands;
@@ -33,5 +32,5 @@ app.Configure(config =>
     config.AddCommand<ConcatenateCommand>("")
         .WithAlias("cat");
     
-    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString());
+    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetName().Version!.ToFriendlyVersionString());
 });
