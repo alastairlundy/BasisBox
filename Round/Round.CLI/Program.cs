@@ -19,9 +19,14 @@
 // See https://aka.ms/new-console-template for more information
 
 using System;
+using System.Reflection;
+
+using AlastairLundy.Extensions.System.AssemblyExtensions;
+using AlastairLundy.Extensions.System.VersionExtensions;
 
 using Round.Cli.Commands;
 using Round.Cli.Localizations;
+
 using Spectre.Console.Cli;
 
 CommandApp app = new CommandApp();
@@ -41,7 +46,9 @@ app.Configure(config =>
         .WithExample("0.19458", "2")
         .WithExample("5.44832", "4");
 
-    //config.
+    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString());
 });
+
+app.SetDefaultCommand<RoundDecimalCommand>();
 
 return app.Run(args);

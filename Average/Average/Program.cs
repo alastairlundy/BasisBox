@@ -56,8 +56,7 @@ app.Configure(config =>
        .WithDescription(Resources.Command_InterquartileMean_Description)
        .WithExample("1", "2", "3", "4", "5", "6");
 
-    config.AddCommand<VersionCommand>("version")
-        .WithAlias("--version")
-        .WithAlias("-v")
-        .WithDescription(Resources.Command_Version_Description);
+    config.UseAssemblyInformationalVersion();
 });
+
+return app.Run(args);
