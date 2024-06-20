@@ -123,4 +123,25 @@
   <data name="Exceptions.NoFileProvided" xml:space="preserve">
     <value>No File was provided as an argument to be concatenated or manipulated.</value>
   </data>
+  <data name="Command.NewFile.Success" xml:space="preserve">
+    <value>The file {x} was successfully saved.</value>
+  </data>
+  <data name="Command.UpdateFile.Success" xml:space="preserve">
+    <value>The file {x} was sucessfully updated.</value>
+  </data>
+  <data name="Exception.Permissions.Invalid" xml:space="preserve">
+    <value>Your Operating System DENIED access to the file {x}. You may need to re-run the program with Administrator privileges to perform this operation.</value>
+  </data>
+  <data name="Exceptions.Generic" xml:space="preserve">
+    <value>There was an exception. Here are the details: {x}</value>
+  </data>
+  <data name="Exceptions.BugReport.Request" xml:space="preserve">
+    <value>If this was unintended or unexpected, it would really help us out if you could file a Bug Report.</value>
+  </data>
+  <data name="Exceptions.BugReport.File" xml:space="preserve">
+    <value>You can file a Bug Report at {x}</value>
+  </data>
+  <data name="Exception.FileNotFound" xml:space="preserve">
+    <value>The program was unable to find the specified file. If the file exists, consider checking your input for typos or mistakes.</value>
+  </data>
 </root>
