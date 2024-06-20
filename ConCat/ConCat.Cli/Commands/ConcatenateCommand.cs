@@ -20,10 +20,11 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-
+using AlastairLundy.Extensions.System.Collections;
+using CliUtilsLib;
 using ConCat.Cli.Helpers;
 using ConCat.Cli.Localizations;
-
+using ConCat.Cli.SubCommands;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
@@ -39,6 +40,10 @@ public class ConcatenateCommand : Command<ConcatenateCommand.Settings>
         [CommandOption("-n")]
         [DefaultValue(false)]
         public bool AppendLineNumbers { get; init; }
+        
+        [CommandOption("--verbose|--debug")]
+        [DefaultValue(false)]
+        public bool ShowErrors { get; init; }
     }
 
     public override int Execute(CommandContext context, Settings settings)
@@ -53,7 +58,10 @@ public class ConcatenateCommand : Command<ConcatenateCommand.Settings>
         {
             if (settings.Files[0].StartsWith('>'))
             {
-                string[] strings = AnsiConsole.Prompt(new TextPrompt<string[]>(Resources.Command_NewFile_Prompt).AllowEmpty().)
+                string[] strings =
+                    AnsiConsole.Prompt(new TextPrompt<string[]>(Resources.Command_NewFile_Prompt).AllowEmpty());
+
+                
             }
             else
             {
@@ -64,7 +72,7 @@ public class ConcatenateCommand : Command<ConcatenateCommand.Settings>
                 }
                 catch(Exception exception) 
                 {
-                    AnsiConsole.WriteException(exception);
+                    AnsiConsole.WriteException(exception, ExceptionFormats.NoStackTrace);
                     return -1;
                 }
             }
@@ -72,11 +80,24 @@ public class ConcatenateCommand : Command<ConcatenateCommand.Settings>
 
         if (context.Arguments.Contains(">>"))
         {
+            if (settings.Files.Length > 1)
+            {
+                (string[] existingFiles, string[] newFiles)? files = FileArgumentFinder.GetFilesBeforeAndAfterSeparator(settings.Files, ">");
 
+                string[] newFileContents = []; 
+            }
+            
         }
         else if(context.Arguments.Contains(">"))
         {
-
+            if (settings.Files.Length > 1)
+            {
+                return AppendingSubCommand.AppendFiles(settings.Files, settings.ShowErrors);
+            }
+            else
+            {
+                return CopyingSubCommands.CopySingleFile(settings.Files, settings.ShowErrors);
+            }
         }
         
         
