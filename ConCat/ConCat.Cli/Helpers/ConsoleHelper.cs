@@ -16,12 +16,26 @@
  
  */
 
+using System;
+using ConCat.Cli.Localizations;
 using Spectre.Console;
 
 namespace ConCat.Cli.Helpers;
 
 internal class ConsoleHelper
 {
+    internal static string[] AddLineNumbering(string[] lines)
+    {
+        string[] newLines = new string[lines.Length];
+
+        for (int index = 0; index < lines.Length; index++)
+        {
+            newLines[index] = $"{index}: {lines[index]}";
+        }
+
+        return newLines;
+    }
+
     internal static void PrintLines(string[] lines, bool includeLineNumber)
     {
         for (int index = 0; index < lines.Length; index++)
@@ -35,6 +49,31 @@ internal class ConsoleHelper
                 AnsiConsole.WriteLine(lines[index]);
             }
         }
+    }
+    
+    internal static int HandleException(Exception ex, string message, bool debuggingMode)
+    {
+        if (debuggingMode)
+        {
+            AnsiConsole.WriteException(ex);
+        }
+        else
+        {
+            AnsiConsole.WriteException(ex, ExceptionFormats.NoStackTrace);
+        }
+        
+        AnsiConsole.WriteLine();
+        AnsiConsole.WriteLine(message);
+        
+        PrintBugReportRequest();
+        return -1;
+    }
+    
+    internal static void PrintBugReportRequest()
+    {
+        AnsiConsole.WriteLine();
+        AnsiConsole.WriteLine(Resources.Exceptions_BugReport_Request);
+        AnsiConsole.WriteLine(Resources.Exceptions_BugReport_File.Replace("{x}", Constants.GitHubIssuesUrl));
     }
 
 }
