@@ -17,8 +17,7 @@
  */
 
 using System.Reflection;
-
-using AlastairLundy.Extensions.System.VersionExtensions;
+using AlastairLundy.Extensions.System;
 
 using ConCat.Cli.Commands;
 
@@ -34,3 +33,7 @@ app.Configure(config =>
     
     config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetName().Version!.ToFriendlyVersionString());
 });
+
+app.SetDefaultCommand<ConcatenateCommand>();
+
+app.Run(args);
