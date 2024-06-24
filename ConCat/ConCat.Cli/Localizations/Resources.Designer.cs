@@ -123,6 +123,15 @@ namespace ConCat.Cli.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot copy more than one existing file into a file. Please use a file appending parameter instead..
+        /// </summary>
+        internal static string Exceptions_Copying_InvalidExistingArgs {
+            get {
+                return ResourceManager.GetString("Exceptions.Copying.InvalidExistingArgs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There was an exception. Here are the details: {x}.
         /// </summary>
         internal static string Exceptions_Generic {

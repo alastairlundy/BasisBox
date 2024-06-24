@@ -144,4 +144,7 @@
   <data name="Exception.FileNotFound" xml:space="preserve">
     <value>The program was unable to find the specified file. If the file exists, consider checking your input for typos or mistakes.</value>
   </data>
+  <data name="Exceptions.Copying.InvalidExistingArgs" xml:space="preserve">
+    <value>You cannot copy more than one existing file into a file. Please use a file appending parameter instead.</value>
+  </data>
 </root>
