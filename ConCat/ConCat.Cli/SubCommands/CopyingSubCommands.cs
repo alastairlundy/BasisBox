@@ -53,14 +53,7 @@ internal class CopyingSubCommands
         }
         else
         {
-            return ConsoleHelper.HandleException(new ArgumentException())
+            return ConsoleHelper.HandleException(new ArgumentException(Resources.Exceptions_Copying_InvalidExistingArgs, nameof(files)), Resources.Exceptions_Copying_InvalidExistingArgs, useDebugging);
         }
-    }
-
-    internal static int CopyFiles(string[] fileArguments, bool useDebugging)
-    {
-        (string[] existingFiles, string[] newFiles)? files = FileArgumentFinder.GetFilesBeforeAndAfterSeparator(fileArguments, ">>");
-
-        
     }
 }
