@@ -92,11 +92,11 @@ public class ConcatenateCommand : Command<ConcatenateCommand.Settings>
         {
             if (settings.Files.Length > 1)
             {
-                return AppendingSubCommand.AppendFiles(settings.Files, settings.ShowErrors);
+                return AppendingSubCommand.AppendFiles(settings.Files, settings.ShowErrors, settings.AppendLineNumbers);
             }
             else
             {
-                return CopyingSubCommands.CopySingleFile(settings.Files, settings.ShowErrors);
+                return CopyingSubCommands.CopySingleFile(settings.Files, settings.ShowErrors, settings.AppendLineNumbers);
             }
         }
         
