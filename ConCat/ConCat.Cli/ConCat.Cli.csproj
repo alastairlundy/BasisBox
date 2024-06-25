@@ -32,4 +32,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ConCat.Library\ConCat.Library.csproj" />
+  </ItemGroup>
+
 </Project>
