@@ -1,15 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-
-using AlastairLundy.Extensions.System.Collections;
 
 using CliUtilsLib;
 
 using ConCat.Cli.Helpers;
 using ConCat.Cli.Localizations;
-
-using Spectre.Console;
+using ConCat.Library;
 
 namespace ConCat.Cli.SubCommands;
 
@@ -19,63 +15,43 @@ internal static class AppendingSubCommand
     {
         (string[] existingFiles, string[] newFiles)? files = FileArgumentFinder.GetFilesBeforeAndAfterSeparator(fileArguments, ">");
 
-            string[] newFileContents = [];  
+        FileAppender fileAppender = new FileAppender();
             
           foreach (string file in files!.Value.existingFiles)
           {
-              if (FileFinder.IsAFile(file) && File.Exists(file))
+              try
               {
-                  try
+                  if (useLineNumbering)
                   {
-                      string[] fileContents = File.ReadAllLines(file);
-
-                      newFileContents = newFileContents.Combine(fileContents).ToArray();
+                      fileAppender.AppendFileContents(ConsoleHelper.AddLineNumbering(File.ReadAllLines(file)));
                   }
-                  catch(UnauthorizedAccessException exception)
+                  else
                   {
-                      return ConsoleHelper.HandleException(exception, Resources.Exception_Permissions_Invalid.Replace("{x}", file),
-                          useDebugging);
+                      fileAppender.AppendFileContents(file);
                   }
               }
-              else if(!File.Exists(file))
+              catch (UnauthorizedAccessException exception)
               {
-                  return ConsoleHelper.HandleException(new FileNotFoundException(Resources.Exception_FileNotFound, file),
-                      string.Empty, useDebugging);
+                  return ConsoleHelper.HandleException(exception,
+                      Resources.Exception_Permissions_Invalid.Replace("{x}", exception.Source), useDebugging);
+              }
+              catch (FileNotFoundException exception)
+              {
+                  return ConsoleHelper.HandleException(exception,
+                      Resources.Exception_FileNotFound.Replace("{x}", exception.Source), useDebugging);
+              }
+              catch(Exception exception)
+              {
+                  return ConsoleHelper.HandleException(exception,
+                      Resources.Exceptions_Generic.Replace("{x}", exception.Source), useDebugging);
               }
           }
 
-          if (useLineNumbering)
+          foreach (string newFile in files.Value.newFiles)
           {
-              newFileContents = ConsoleHelper.AddLineNumbering(newFileContents);
+              fileAppender.WriteToFile(newFile);
           }
-          
-          foreach (string file in files!.Value.newFiles)
-          {
-              if (FileFinder.IsAFile(file))
-              {
-                  try
-                  {
-                      if (File.Exists(file))
-                      {
-                          File.Delete(file);
-                      }
-                      
-                      File.WriteAllLines(file, newFileContents);
-                      
-                      AnsiConsole.WriteLine(Resources.Command_NewFile_Success.Replace("{x}", file));
-                  }
-                  catch (UnauthorizedAccessException exception)
-                  {
-                      return ConsoleHelper.HandleException(exception, Resources.Exception_Permissions_Invalid.Replace("{x}", file),
-                          useDebugging);
-                  }
-                  catch (Exception exception)
-                  {
-                      return ConsoleHelper.HandleException(exception, Resources.Exceptions_Generic.Replace("{x}", exception.Message), useDebugging);
-                  }
-              }
-          }
-
+        
           return 1;
     }
 }
