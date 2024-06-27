@@ -126,6 +126,17 @@ public static class LineNumberer
 
         return stringBuilder.ToString();
     }
+
+    /// <summary>
+    /// The simple line numbering method which uses default settings to add line numbers to an IEnumerable of type String.
+    /// </summary>
+    /// <param name="lines">The lines to be numbered.</param>
+    /// <param name="lineNumberAppendedText">The string to follow the line number. If you want nothing to be appended use string.Empty</param>
+    /// <returns>a new IEnumerable containing the contents of the provided IEnumerable with line numbering added to it.</returns>
+    public static IEnumerable<string> AddLineNumbers(IEnumerable<string> lines, string lineNumberAppendedText)
+    {
+        return AddLineNumbers(lines, 1, 1, lineNumberAppendedText, true, 0, 4, false, false, null);
+    }
     
     /// <summary>
     /// The advanced line numbering method with many customization options.
