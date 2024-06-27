@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using CliUtilsLib;
 using ConCat.Cli.Helpers;
 using ConCat.Cli.Localizations;
+using NLine.Library;
 
 namespace ConCat.Cli.SubCommands;
 
@@ -30,7 +32,7 @@ internal class CopyingSubCommands
                 
                 if (useLineNumbering)
                 {
-                    newFileContents = ConsoleHelper.AddLineNumbering(newFileContents);
+                    newFileContents = LineNumberer.AddLineNumbers(newFileContents, ") ").ToArray();
                      
                      File.WriteAllLines(files.Value.newFiles[0], newFileContents);
                 }
