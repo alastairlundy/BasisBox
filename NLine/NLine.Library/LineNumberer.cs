@@ -128,26 +128,28 @@ public static class LineNumberer
     }
     
     /// <summary>
-    /// 
+    /// The advanced line numbering method with many customization options.
     /// </summary>
-    /// <param name="lines">The string array of lines to number.</param>
+    /// <param name="lines">The lines to be numbered.</param>
     /// <param name="lineIncrementor">The amount to increase each line number by.</param>
     /// <param name="initialLineNumber">The initial number to use as a line number.</param>
-    /// <param name="lineNumberAppendedText"></param>
+    /// <param name="lineNumberAppendedText">The text to append to the line number. If you want nothing to be appended use string.Empty</param>
     /// <param name="assignEmptyLinesANumber">Whether to assign a line number to empty lines.</param>
     /// <param name="numberOfEmptyLinesToGroupTogether">The number of consecutive empty lines to be given a line number.</param>
     /// <param name="columnNumber">The column to use for the line number.</param>
     /// <param name="tabSpaceAfterLineNumber">The amount of tab spaces after the line number and before the line contents.</param>
     /// <param name="addLeadingZeroes">Whether to add leading zeroes to the line number.</param>
-    /// <param name="listNumbersWithString"></param>
+    /// <param name="listNumbersWithString">An optional parameter to allow for only numbering lines with a specified string.</param>
     /// <returns></returns>
-    public static string[] AddLineNumbers(string[] lines, int lineIncrementor, int initialLineNumber, string lineNumberAppendedText, bool assignEmptyLinesANumber, int numberOfEmptyLinesToGroupTogether, int columnNumber, bool tabSpaceAfterLineNumber, bool addLeadingZeroes, string? listNumbersWithString = null)
+    public static IEnumerable<string> AddLineNumbers(IEnumerable<string> lines, int lineIncrementor, int initialLineNumber, string lineNumberAppendedText, bool assignEmptyLinesANumber, int numberOfEmptyLinesToGroupTogether, int columnNumber, bool tabSpaceAfterLineNumber, bool addLeadingZeroes, string? listNumbersWithString = null)
     {
         List<string> list = new List<string>();
         
-        for(int index = 0; index < lines.Length; index++)
+        string[] enumerable = lines as string[] ?? lines.ToArray();
+        
+        for(int index = 0; index < enumerable.Count(); index++)
         {
-            string line = lines[index];
+            string line = enumerable[index];
 
             int lineNumber = CalculateLineNumber(index, lineIncrementor, initialLineNumber);
             
@@ -155,7 +157,7 @@ public static class LineNumberer
                 (listNumbersWithString != null && line.Contains(listNumbersWithString)) ||
                 (assignEmptyLinesANumber && line.Equals(string.Empty)))
             {
-                if (line.Equals(string.Empty) && NextXLinesIsEmpty(numberOfEmptyLinesToGroupTogether, index, lines) && assignEmptyLinesANumber)
+                if (line.Equals(string.Empty) && NextXLinesIsEmpty(numberOfEmptyLinesToGroupTogether, index, enumerable) && assignEmptyLinesANumber)
                 {
                     if (numberOfEmptyLinesToGroupTogether > 1)
                     {
