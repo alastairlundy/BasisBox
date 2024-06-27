@@ -37,4 +37,6 @@ commandApp.Configure(config =>
 
 });
 
+commandApp.SetDefaultCommand<LineNumberingCommand>();
+
 return commandApp.Run(args);
