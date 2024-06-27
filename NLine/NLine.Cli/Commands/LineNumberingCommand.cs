@@ -140,7 +140,7 @@ public class LineNumberingCommand : Command<LineNumberingCommand.Settings>
         }
         
         string[] results = LineNumberer.AddLineNumbers(input, settings.LineIncrementor, settings.LineStartingNumber,
-            stringAppender, assignEmptyLinesNumbers, settings.GroupOfEmptyLinesCountedAsOne, columnNumbers, tabSpaceAfterLineNumber, addLeadingZeroes, searchString);
+            stringAppender, assignEmptyLinesNumbers, settings.GroupOfEmptyLinesCountedAsOne, columnNumbers, tabSpaceAfterLineNumber, addLeadingZeroes, searchString).ToArray();
 
         if (settings.OutputFile != null)
         {
