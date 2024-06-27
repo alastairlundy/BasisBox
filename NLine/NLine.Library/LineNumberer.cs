@@ -158,7 +158,7 @@ public static class LineNumberer
         
         string[] enumerable = lines as string[] ?? lines.ToArray();
         
-        for(int index = 0; index < enumerable.Count(); index++)
+        for(int index = 0; index < enumerable.Length; index++)
         {
             string line = enumerable[index];
 
