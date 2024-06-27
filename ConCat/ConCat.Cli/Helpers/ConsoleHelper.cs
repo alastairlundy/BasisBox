@@ -24,18 +24,6 @@ namespace ConCat.Cli.Helpers;
 
 internal class ConsoleHelper
 {
-    internal static string[] AddLineNumbering(string[] lines)
-    {
-        string[] newLines = new string[lines.Length];
-
-        for (int index = 0; index < lines.Length; index++)
-        {
-            newLines[index] = $"{index}: {lines[index]}";
-        }
-
-        return newLines;
-    }
-
     internal static void PrintLines(string[] lines, bool includeLineNumber)
     {
         for (int index = 0; index < lines.Length; index++)

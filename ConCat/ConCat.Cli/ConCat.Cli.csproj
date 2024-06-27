@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ConCat.Library\ConCat.Library.csproj" />
+    <ProjectReference Include="..\ConCat.Logic.Library\ConCat.Logic.Library.csproj" />
   </ItemGroup>
 
 </Project>
