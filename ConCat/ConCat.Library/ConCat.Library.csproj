@@ -8,7 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="CliUtilsLib" Version="1.1.0" />
+      <PackageReference Include="CliUtilsLib" Version="1.*" />
+      <PackageReference Include="NLine.Library" Version="1.*" />
     </ItemGroup>
 
     <ItemGroup>
