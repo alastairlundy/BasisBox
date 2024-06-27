@@ -26,6 +26,8 @@ using AlastairLundy.Extensions.System.IEnumerableExtensions;
 using CliUtilsLib;
 
 using ConCat.Library.Localizations;
+using NLine.Library;
+
 // ReSharper disable RedundantIfElseBlock
 
 namespace ConCat.Library;
@@ -37,9 +39,22 @@ public class FileAppender
 {
     protected List<string> AppendedFileContents;
     
+    public bool AddLineNumbers { get; protected set; }
+    
     public FileAppender()
     {
         AppendedFileContents = new List<string>();
+        AddLineNumbers = false;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="addLineNumbers">Adds line numbers to the appended file contents.</param>
+    public FileAppender(bool addLineNumbers)
+    {
+        AppendedFileContents = new List<string>();
+        AddLineNumbers = addLineNumbers;
     }
     
     /// <summary>
@@ -47,11 +62,11 @@ public class FileAppender
     /// </summary>
     /// <param name="fileToBeAppended">The file to have its contents appended to the existing file contents. If no existing file contents exists, this will become the contents appended to in the future.</param>
     /// <returns>true if the files where successfully appended; returns false otherwise.</returns>
-    public bool TryAppendFileContents(string fileToBeAppended)
+    public bool TryAppendFile(string fileToBeAppended)
     {
         try
         {
-            AppendFileContents(fileToBeAppended);
+            AppendFile(fileToBeAppended);
 
             return true;
         }
@@ -67,7 +82,7 @@ public class FileAppender
     /// <param name="fileToBeAppended"></param>
     /// <exception cref="Exception"></exception>
     /// <exception cref="FileNotFoundException"></exception>
-    public void AppendFileContents(string fileToBeAppended)
+    public void AppendFile(string fileToBeAppended)
     {
         if (FileFinder.IsAFile(fileToBeAppended) || File.Exists(fileToBeAppended))
         {
@@ -75,7 +90,7 @@ public class FileAppender
             {
                 string[] fileContents = File.ReadAllLines(fileToBeAppended);
 
-                AppendedFileContents = AppendedFileContents.Combine(fileContents).ToList();
+                AppendFileContents(fileContents);
             }
             catch (UnauthorizedAccessException exception)
             {
@@ -95,13 +110,41 @@ public class FileAppender
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="filesToBeAppended"></param>
+    public void AppendFiles(IOrderedEnumerable<string> filesToBeAppended)
+    {
+        AppendFiles(filesToBeAppended.ToArray());
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="filesToBeAppended"></param>
+    public void AppendFiles(IEnumerable<string> filesToBeAppended)
+    {
+        foreach (string file in filesToBeAppended)
+        {
+            AppendFile(file);
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="fileContents"></param>
     /// <exception cref="Exception"></exception>
-    public void AppendFileContents(string[] fileContents)
+    public void AppendFileContents(IEnumerable<string> fileContents)
     {
         try
         {
-            AppendedFileContents = AppendedFileContents.Combine(fileContents).ToList();
+            if (AddLineNumbers)
+            {
+                AppendedFileContents = AppendedFileContents.Combine(LineNumberer.AddLineNumbers(fileContents, ". ")).ToList();
+            }
+            else
+            {
+                AppendedFileContents = AppendedFileContents.Combine(fileContents).ToList();
+            }
         }
         catch (Exception exception)
         {
