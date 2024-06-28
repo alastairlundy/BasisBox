@@ -10,7 +10,7 @@ namespace ConCat.Cli.SubCommands;
 
 internal class CopyingSubCommands
 {
-    internal static int CopySingleFile(string[] fileArguments, bool useDebugging, bool useLineNumbering)
+    internal static int CopySingleFile(string[] fileArguments, bool useDebugging, bool addLineNumbering)
     {
         (string[] existingFiles, string[] newFiles)? files = FileArgumentFinder.GetFilesBeforeAndAfterSeparator(fileArguments, ">>");
 

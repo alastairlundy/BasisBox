@@ -6,11 +6,11 @@ namespace ConCat.Logic.Library;
 
 public static class ConCatAppender
 {
-    public static void AppendFiles(string[] existingFiles, string[] newFiles, bool useLineNumbering)
+    public static void AppendFiles(IEnumerable<string> existingFiles, IEnumerable<string> newFiles, bool addLineNumbering)
     {
               try
               {
-                  FileAppender fileAppender = new FileAppender(useLineNumbering);
+                  FileAppender fileAppender = new FileAppender(addLineNumbering);
                   
                   fileAppender.AppendFiles(existingFiles);
                   
