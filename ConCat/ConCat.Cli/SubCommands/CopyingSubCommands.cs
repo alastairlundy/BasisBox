@@ -4,6 +4,7 @@ using System.Linq;
 using CliUtilsLib;
 using ConCat.Cli.Helpers;
 using ConCat.Cli.Localizations;
+using ConCat.Logic.Library;
 using NLine.Library;
 
 namespace ConCat.Cli.SubCommands;
@@ -23,23 +24,7 @@ internal class CopyingSubCommands
         {
             try
             {
-                string[] newFileContents = File.ReadAllLines(files.Value.existingFiles[0]);
-                
-                if (File.Exists(files.Value.newFiles[0]))
-                {
-                    File.Delete(files.Value.newFiles[0]);
-                }
-                
-                if (useLineNumbering)
-                {
-                    newFileContents = LineNumberer.AddLineNumbers(newFileContents, ") ").ToArray();
-                     
-                     File.WriteAllLines(files.Value.newFiles[0], newFileContents);
-                }
-                else
-                {
-                    File.Copy(files.Value.existingFiles[0], files.Value.newFiles[0]);
-                }
+                ConCatCopying.CopyFile(files!.Value.existingFiles[0], files!.Value.newFiles[0], addLineNumbering);
 
                 return 0;
             }
