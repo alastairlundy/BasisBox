@@ -5,6 +5,10 @@ namespace Parrot.Cli;
 public class ColourFormatParsing
 {
 
+    public static Spectre.Console.Color GetColour(string line)
+    {
+        Spectre.Console.Color color;
+    }
     
     public static Grid Format(string[] lines)
     {
