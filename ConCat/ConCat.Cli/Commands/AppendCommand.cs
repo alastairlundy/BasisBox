@@ -19,6 +19,7 @@
 using System;
 using System.IO;
 using System.Linq;
+
 using CliUtilsLib;
 
 using ConCat.Cli.Helpers;
@@ -26,6 +27,7 @@ using ConCat.Cli.Localizations;
 using ConCat.Cli.Settings;
 
 using ConCat.Library.Logic;
+
 using Spectre.Console;
 using Spectre.Console.Cli;
 
