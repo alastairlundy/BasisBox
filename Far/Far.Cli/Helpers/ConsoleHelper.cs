@@ -1,5 +1,5 @@
-﻿namespace Far.Cli.Helpers
-{
+﻿namespace Far.Cli.Helpers;
+
     internal class ConsoleHelper
     {
         /// <summary>
@@ -18,4 +18,3 @@
             Console.WriteLine();
         }
     }
-}
