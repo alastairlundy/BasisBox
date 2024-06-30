@@ -1,6 +1,9 @@
-﻿using NLine.Library;
+﻿using System;
+using System.IO;
+using System.Linq;
+using NLine.Library;
 
-namespace ConCat.Logic.Library;
+namespace ConCat.Library.Logic;
 
 public static class ConCatCopying
 {
