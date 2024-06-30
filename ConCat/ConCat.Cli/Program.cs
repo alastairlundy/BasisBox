@@ -16,9 +16,11 @@
  
  */
 
+using System.Linq;
 using System.Reflection;
-using AlastairLundy.Extensions.System;
 
+using AlastairLundy.Extensions.System;
+using CliUtilsLib;
 using ConCat.Cli.Commands;
 
 using Spectre.Console.Cli;
@@ -27,13 +29,35 @@ CommandApp app = new();
 
 app.Configure(config =>
 {
-
-    config.AddCommand<ConcatenateCommand>("")
+    config.AddCommand<AppendCommand>("append");
+    
+    config.AddCommand<DisplayCommand>("display")
         .WithAlias("cat");
+
+    config.AddCommand<CopyCommand>("copy");
     
     config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetName().Version!.ToFriendlyVersionString());
 });
 
-app.SetDefaultCommand<ConcatenateCommand>();
+if (args.Contains(">>"))
+{
+    app.SetDefaultCommand<AppendCommand>();
+}
+else if (args.Contains(">"))
+{
+    if (FileArgumentFinder.GetNumberOfFilesFoundInArgs(args) == 2)
+    {
+        app.SetDefaultCommand<CopyCommand>();
+    }
+    else
+    {
+        app.SetDefaultCommand<ConcatenateCommand>();
+    }
+}
+else if (!args.Contains(">>") && !args.Contains(">"))
+{
+    app.SetDefaultCommand<DisplayCommand>();
+}
 
-app.Run(args);
+
+return app.Run(args);
