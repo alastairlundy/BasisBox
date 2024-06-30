@@ -147,4 +147,7 @@
   <data name="Exceptions.Copying.InvalidExistingArgs" xml:space="preserve">
     <value>You cannot copy more than one existing file into a file. Please use a file appending parameter instead.</value>
   </data>
+  <data name="Command.Copy.Success" xml:space="preserve">
+    <value>The contents of file {x} was successfully copied to file {y}.</value>
+  </data>
 </root>

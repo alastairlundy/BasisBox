@@ -60,6 +60,15 @@ namespace ConCat.Cli.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The contents of file {x} was successfully copied to file {y}..
+        /// </summary>
+        internal static string Command_Copy_Success {
+            get {
+                return ResourceManager.GetString("Command.Copy.Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter the strings you want this file to contain!.
         /// </summary>
         internal static string Command_NewFile_Prompt {
