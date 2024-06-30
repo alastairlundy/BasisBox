@@ -1,5 +1,4 @@
 ﻿using ConCat.Cli.Localizations;
-using Spectre.Console;
 
 namespace ConCat.Cli;
 
