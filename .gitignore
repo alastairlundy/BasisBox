@@ -14,3 +14,8 @@
 /Today/.idea
 /Today/Today.Cli/obj
 /Today/Today.Library/obj
+/LoginName/.idea
+*.cache
+/LoginName/LoginName.Cli/obj
+/NewDir/.idea
+LoginName/LoginName.sln.DotSettings.user
