@@ -14,6 +14,7 @@
 |-|-|-|
 | Parrot | | C# |
 | ConCat | | C# |
+| Today | Get or set the current Date or Timezone information | C# |
 
 ### License
 All programs in Basis Box are licensed under Apache 2.0 License.
