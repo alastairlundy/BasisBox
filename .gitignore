@@ -19,3 +19,6 @@
 /LoginName/LoginName.Cli/obj
 /NewDir/.idea
 LoginName/LoginName.sln.DotSettings.user
+/NewDir/NewDir.Cli/obj
+/NewDir/NewDir.Library/obj
+*.user
