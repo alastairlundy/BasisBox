@@ -69,7 +69,7 @@ namespace NewDir.Cli.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The directory to be created was not specified. If this was not intentional, ensure that you are passing a directory as an argument..
         /// </summary>
         internal static string Exceptions_DirectoryNotSpecified {
             get {

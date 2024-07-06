@@ -22,6 +22,6 @@
         <value>Creates a new specified directory with specified parameters.</value>
     </data>
     <data name="Exceptions.DirectoryNotSpecified" xml:space="preserve">
-        <value />
+        <value>The directory to be created was not specified. If this was not intentional, ensure that you are passing a directory as an argument.</value>
     </data>
 </root>
