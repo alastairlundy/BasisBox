@@ -46,7 +46,7 @@ public class NewDirCommand : Command<NewDirCommand.Settings>
 
             if (settings.Mode == null)
             {
-                fileMode = UnixFileMode.UserWrite;
+                fileMode = UnixFileMode.UserWrite & UnixFileMode.UserRead;
             }
             else
             {
