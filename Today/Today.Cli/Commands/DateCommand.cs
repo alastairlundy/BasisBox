@@ -76,8 +76,8 @@ public class DateCommand : Command<DateCommand.Settings>
             AnsiConsole.WriteLine("");
             
             AnsiConsole.WriteException(exception, formats);
+
+            return -1;
         }
-        
-        throw new NotImplementedException();
     }
 }
