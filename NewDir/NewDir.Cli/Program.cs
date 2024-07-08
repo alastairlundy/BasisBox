@@ -15,6 +15,7 @@
  */
 
 using System.Reflection;
+
 using NewDir.Cli.Commands;
 using NewDir.Cli.Localizations;
 

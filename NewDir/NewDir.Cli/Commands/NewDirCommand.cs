@@ -17,7 +17,9 @@
 using System.ComponentModel;
 
 using NewDir.Cli.Localizations;
+
 using NewDir.Library;
+
 using Spectre.Console;
 using Spectre.Console.Cli;
 
