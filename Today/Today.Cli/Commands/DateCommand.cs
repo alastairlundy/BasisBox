@@ -14,7 +14,10 @@
    limitations under the License.
  */
 
+using System.ComponentModel;
+using Spectre.Console;
 using Spectre.Console.Cli;
+using Today.Library.Extensions;
 
 namespace Today.Cli.Commands;
 
@@ -23,10 +26,58 @@ public class DateCommand : Command<DateCommand.Settings>
     public class Settings : CommandSettings
     {
         
+        [CommandOption("-d|--date")]
+        [DefaultValue(null)]
+        public string? DateToOperateOn { get; init; }
+        
+        [CommandOption("--debug|--debugging|--show-errros")]
+        [DefaultValue(false)]
+        public bool ShowErrors { get; init; }
     }
 
+    internal string GetDateToOperateOn(string? input)
+    {
+        if (input == null || DateTime.TryParse(input, out DateTime dateTime) == false)
+        {
+            return DateTime.UtcNow.LongToday();
+        }
+        else if(DateTime.TryParse(input, out dateTime) == true)
+        {
+            return DateTime.Parse(input).LongToday();
+        }
+        else
+        {
+            throw new ArgumentException();
+        }
+    }
+    
     public override int Execute(CommandContext context, Settings settings)
     {
+        ExceptionFormats formats;
+
+        if (settings.ShowErrors)
+        {
+            formats = ExceptionFormats.Default;
+        }
+        else
+        {
+            formats = ExceptionFormats.NoStackTrace;
+        }
+        
+        try
+        {
+            string dateToOperateOn = GetDateToOperateOn(settings.DateToOperateOn);
+            AnsiConsole.WriteLine(dateToOperateOn);
+
+            return 0;
+        }
+        catch (Exception exception)
+        {
+            AnsiConsole.WriteLine("");
+            
+            AnsiConsole.WriteException(exception, formats);
+        }
+        
         throw new NotImplementedException();
     }
 }
