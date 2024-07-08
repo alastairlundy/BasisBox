@@ -29,7 +29,7 @@ app.Configure(config =>
     {
         configurator.AddCommand<DateCommand>("").WithAlias("date");
         
-        configurator.AddCommand<DisplayDateCommand>("display");
+//        configurator.AddCommand<DisplayDateCommand>("display");
         configurator.AddCommand<SetDateCommand>("set");
 
     });
