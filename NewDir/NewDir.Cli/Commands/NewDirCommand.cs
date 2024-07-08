@@ -94,10 +94,29 @@ public class NewDirCommand : Command<NewDirCommand.Settings>
                     fileMode = UnixFileMode.UserRead & UnixFileMode.UserWrite;
                 }
             }
-            
-            NewDirectory.Create(settings.DirectoryName, fileMode, settings.ParentDirectories);
+
+            NewDirectory.Create(settings.DirectoryName, fileMode, settings.CreateParentDirectories);
+            return 0;
         }
-        
-        throw new NotImplementedException();
+        catch (UnauthorizedAccessException exception)
+        {
+            AnsiConsole.WriteException(exception, exceptionFormat);
+            return -1;
+        }
+        catch (PathTooLongException pathTooLongException)
+        {
+            AnsiConsole.WriteException(pathTooLongException, exceptionFormat);
+            return -1;
+        }
+        catch (IOException exception)
+        {
+            AnsiConsole.WriteException(exception, exceptionFormat);
+            return -1;
+        }
+        catch (Exception exception)
+        {
+            AnsiConsole.WriteException(exception, exceptionFormat);
+            return -1;
+        }
     }
 }
