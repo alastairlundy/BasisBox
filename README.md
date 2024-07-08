@@ -13,6 +13,7 @@
 ### Programs being developed
 | Program name | Description | Written  In |
 |-|-|-|
+| NewDir | Create new directories with or without parent directories. | C# |
 | Parrot | | C# |
 | ConCat | | C# |
 | Today | Get or set the current Date or Timezone information | C# |
