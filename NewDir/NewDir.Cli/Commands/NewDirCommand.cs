@@ -15,7 +15,7 @@ public class NewDirCommand : Command<NewDirCommand.Settings>
         
         [CommandOption("-p|--parents")]
         [DefaultValue(false)]
-        public bool ParentDirectories { get; init; }
+        public bool CreateParentDirectories { get; init; }
         
         [CommandOption("-m|--mode")]
         public string? Mode { get; init; }
