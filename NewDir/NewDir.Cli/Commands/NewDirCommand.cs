@@ -61,7 +61,21 @@ public class NewDirCommand : Command<NewDirCommand.Settings>
             }
             else
             {
-                fileMode = UnixFilePermissionTranslator.Parse(settings.Mode);
+                bool isNumericNotation = UnixFilePermissionConverter.IsNumericNotation(settings.Mode);
+                bool isSymbolicNotation = UnixFilePermissionConverter.IsSymbolicNotation(settings.Mode);
+                
+                if (isNumericNotation && !isSymbolicNotation)
+                {
+                    fileMode = UnixFilePermissionConverter.ParseNumericValue(settings.Mode);
+                }
+                else if (isSymbolicNotation && !isNumericNotation)
+                {
+                    fileMode = UnixFilePermissionConverter.ParseSymbolicValue(settings.Mode);
+                }
+                else
+                {
+                    fileMode = UnixFileMode.UserRead & UnixFileMode.UserWrite;
+                }
             }
             
             NewDirectory.Create(settings.DirectoryName, fileMode, settings.ParentDirectories);
