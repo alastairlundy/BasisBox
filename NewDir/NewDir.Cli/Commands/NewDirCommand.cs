@@ -39,7 +39,7 @@ public class NewDirCommand : Command<NewDirCommand.Settings>
         [CommandOption("-m|--mode")]
         public string? Mode { get; init; }
         
-        [CommandOption("--debug|--debugging")]
+        [CommandOption("--debug|--debugging|--verbose")]
         [DefaultValue(false)]
         public bool UseDebugging { get; init; }
     }
