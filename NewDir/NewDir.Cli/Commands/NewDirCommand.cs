@@ -40,6 +40,17 @@ public class NewDirCommand : Command<NewDirCommand.Settings>
             return -1;
         }
 
+        ExceptionFormats exceptionFormat;
+        
+        if (settings.UseDebugging)
+        {
+            exceptionFormat = ExceptionFormats.Default;
+        }
+        else
+        {
+            exceptionFormat = ExceptionFormats.NoStackTrace;
+        }
+        
         try
         {
             UnixFileMode fileMode;
