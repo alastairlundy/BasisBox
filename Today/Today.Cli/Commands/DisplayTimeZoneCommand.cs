@@ -14,6 +14,7 @@
    limitations under the License.
  */
 
+using System;
 using Spectre.Console.Cli;
 
 namespace Today.Cli.Commands;

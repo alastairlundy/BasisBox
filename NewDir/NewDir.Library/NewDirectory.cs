@@ -14,6 +14,9 @@
    limitations under the License.
  */
 
+using System;
+using System.IO;
+
 namespace NewDir.Library;
 
 public static class NewDirectory

@@ -14,6 +14,9 @@
    limitations under the License.
  */
 
+using System;
+using System.IO;
+
 using NewDir.Library.Localizations;
 
 namespace NewDir.Library;

@@ -14,6 +14,7 @@
    limitations under the License.
  */
 
+using System;
 using System.ComponentModel;
 using Spectre.Console;
 using Spectre.Console.Cli;

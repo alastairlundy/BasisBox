@@ -14,7 +14,9 @@
    limitations under the License.
  */
 
+using System;
 using System.ComponentModel;
+using System.IO;
 
 using NewDir.Cli.Localizations;
 
@@ -37,6 +39,7 @@ public class NewDirCommand : Command<NewDirCommand.Settings>
         public bool CreateParentDirectories { get; init; }
         
         [CommandOption("-m|--mode")]
+        [DefaultValue(null)]
         public string? Mode { get; init; }
         
         [CommandOption("--debug|--debugging|--verbose")]
