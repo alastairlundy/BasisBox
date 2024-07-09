@@ -15,11 +15,10 @@
  */
 
 using System;
-using System.ComponentModel;
 using System.IO;
 
 using NewDir.Cli.Localizations;
-
+using NewDir.Cli.Settings;
 using NewDir.Library;
 
 using Spectre.Console;
@@ -27,41 +26,10 @@ using Spectre.Console.Cli;
 
 namespace NewDir.Cli.Commands;
 
-public class NewDirCommand : Command<NewDirCommand.Settings>
+public partial class NewDirCommand : Command<NewDirCommandSettings>
 {
-    public class Settings : CommandSettings
+    public override int Execute(CommandContext context, NewDirCommandSettings settings)
     {
-        [CommandArgument(0, "<directory_name>")]
-        public string? DirectoryName { get; init; }
-        
-        [CommandOption("-p|--parents")]
-        [DefaultValue(false)]
-        public bool CreateParentDirectories { get; init; }
-        
-        [CommandOption("-m|--mode")]
-        [DefaultValue(null)]
-        public string? Mode { get; init; }
-        
-        [CommandOption("--debug|--debugging|--verbose")]
-        [DefaultValue(false)]
-        public bool UseDebugging { get; init; }
-    }
-
-    public override int Execute(CommandContext context, Settings settings)
-    {
-        if (settings.DirectoryName == null)
-        {
-            if (settings.UseDebugging)
-            {
-                AnsiConsole.WriteException(new NullReferenceException(Resources.Exceptions_DirectoryNotSpecified));
-            }
-            else
-            {
-                AnsiConsole.WriteException(new NullReferenceException(Resources.Exceptions_DirectoryNotSpecified), ExceptionFormats.NoStackTrace);
-            }
-            return -1;
-        }
-
         ExceptionFormats exceptionFormat;
         
         if (settings.UseDebugging)
@@ -73,50 +41,31 @@ public class NewDirCommand : Command<NewDirCommand.Settings>
             exceptionFormat = ExceptionFormats.NoStackTrace;
         }
         
+        if (settings.DirectoryName == null)
+        {
+            AnsiConsole.WriteException(new ArgumentNullException(Resources.Exceptions_DirectoryNotSpecified), exceptionFormat);
+            return -1;
+        }
+        
         try
         {
-            UnixFileMode fileMode;
+            UnixFileMode? fileMode = PermissionHelper.GetUnixFileMode(settings.Mode);
 
-            if (settings.Mode == null)
+            if (settings.DirectoryName.Split(' ').Length > 0)
             {
-                fileMode = UnixFileMode.UserWrite & UnixFileMode.UserRead;
+                foreach (string directory in settings.DirectoryName.Split(' '))
+                {
+                    NewDirectory.Create(directory, (UnixFileMode)fileMode!, settings.CreateParentDirectories);
+                }
+                return 0;
             }
             else
             {
-                bool isNumericNotation = UnixFilePermissionConverter.IsNumericNotation(settings.Mode);
-                bool isSymbolicNotation = UnixFilePermissionConverter.IsSymbolicNotation(settings.Mode);
-                
-                if (isNumericNotation && !isSymbolicNotation)
-                {
-                    fileMode = UnixFilePermissionConverter.ParseNumericValue(settings.Mode);
-                }
-                else if (isSymbolicNotation && !isNumericNotation)
-                {
-                    fileMode = UnixFilePermissionConverter.ParseSymbolicValue(settings.Mode);
-                }
-                else
-                {
-                    fileMode = UnixFileMode.UserRead & UnixFileMode.UserWrite;
-                }
+                NewDirectory.Create(settings.DirectoryName, (UnixFileMode)fileMode!, settings.CreateParentDirectories);
+                return 0;
             }
-
-            NewDirectory.Create(settings.DirectoryName, fileMode, settings.CreateParentDirectories);
-            return 0;
-        }
-        catch (UnauthorizedAccessException exception)
-        {
-            AnsiConsole.WriteException(exception, exceptionFormat);
-            return -1;
-        }
-        catch (PathTooLongException pathTooLongException)
-        {
-            AnsiConsole.WriteException(pathTooLongException, exceptionFormat);
-            return -1;
-        }
-        catch (IOException exception)
-        {
-            AnsiConsole.WriteException(exception, exceptionFormat);
-            return -1;
+            
+            
         }
         catch (Exception exception)
         {
