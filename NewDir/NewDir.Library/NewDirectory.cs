@@ -21,6 +21,32 @@ namespace NewDir.Library;
 
 public static class NewDirectory
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="directoryPath"></param>
+    /// <param name="unixFileMode"></param>
+    /// <param name="createParentPaths"></param>
+    /// <returns></returns>
+    public static bool TryCreate(string directoryPath, UnixFileMode unixFileMode, bool createParentPaths)
+    {
+        try
+        {
+            Create(directoryPath, unixFileMode, createParentPaths);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="directoryPath"></param>
+    /// <param name="unixCreateMode"></param>
+    /// <param name="createParentPaths"></param>
     public static void Create(string directoryPath, UnixFileMode unixCreateMode, bool createParentPaths)
     {
         if (createParentPaths)
