@@ -14,33 +14,54 @@
    limitations under the License.
  */
 
-using System.ComponentModel;
+using System;
+using System.IO;
 
+using NewDir.Cli.Localizations;
+using NewDir.Cli.Settings;
+using NewDir.Library;
+
+using Spectre.Console;
 using Spectre.Console.Cli;
 
 namespace NewDir.Cli.Commands;
 
-public class MultipleNewDirCommand : Command<MultipleNewDirCommand.Settings>
+public partial class MultipleNewDirCommand : Command<MultipleNewDirCommandSettings>
 {
-    public class Settings : CommandSettings
+    public override int Execute(CommandContext context, MultipleNewDirCommandSettings settings)
     {
-        [CommandArgument(0, "<directory_names>")]
-        public string[]? DirectoryNames { get; init; }
+        ExceptionFormats exceptionFormat;
         
-        [CommandOption("-p|--parents")]
-        [DefaultValue(false)]
-        public bool CreateParentDirectories { get; init; }
+        if (settings.UseDebugging)
+        {
+            exceptionFormat = ExceptionFormats.Default;
+        }
+        else
+        {
+            exceptionFormat = ExceptionFormats.NoStackTrace;
+        }
         
-        [CommandOption("-m|--mode")]
-        public string? Mode { get; init; }
-        
-        [CommandOption("--debug|--debugging|--verbose")]
-        [DefaultValue(false)]
-        public bool UseDebugging { get; init; }
-    }
+        if (settings.DirectoryNames == null)
+        {
+            AnsiConsole.WriteException(new ArgumentNullException(nameof(settings.DirectoryNames), Resources.Exceptions_DirectoryNotSpecified_Plural), exceptionFormat);
+            return -1;
+        }
 
-    public override int Execute(CommandContext context, Settings settings)
-    {
-        
+        try
+        {
+            UnixFileMode? fileMode = PermissionHelper.GetUnixFileMode(settings.Mode);
+
+            foreach (string directory in settings.DirectoryNames)
+            {
+                NewDirectory.Create(directory, (UnixFileMode)fileMode!, settings.CreateParentDirectories);
+            }
+            
+            return 0;
+        }
+        catch (Exception exception)
+        {
+            AnsiConsole.WriteException(exception, exceptionFormat);
+            return -1;
+        }
     }
 }

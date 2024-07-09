@@ -238,4 +238,40 @@ public static class UnixFilePermissionConverter
             return false;
         }
     }
+
+    /// <summary>
+    /// Attempts to parse a Unix file permission in either Numeric or Symbolic notation to a UnixFileMode enum. 
+    /// </summary>
+    /// 
+    /// <param name="permissionNotation">The Unix file permission symbolic notation to be parsed.</param>
+    /// <param name="fileMode">The unix file mode if a valid permission notation was parsed; null otherwise.</param>
+    /// <returns>true if the file mode notation was parsed successfully; returns false otherwise.</returns>
+    public static bool TryParse(string permissionNotation, out UnixFileMode? fileMode)
+    {
+        bool isNumericNotation = IsNumericNotation(permissionNotation);
+        bool isSymbolicNotation = IsSymbolicNotation(permissionNotation);
+
+        try
+        {
+            if (isNumericNotation && !isSymbolicNotation)
+            {
+                fileMode = ParseNumericValue(permissionNotation);
+            }
+            else if (isSymbolicNotation && !isNumericNotation)
+            {
+                fileMode = ParseSymbolicValue(permissionNotation);
+            }
+            else
+            {
+                fileMode = UnixFileMode.UserRead & UnixFileMode.UserWrite;
+            }
+
+            return true;
+        }
+        catch
+        {
+            fileMode = null;
+            return false;
+        }
+    }
 }

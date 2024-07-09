@@ -14,6 +14,7 @@
    limitations under the License.
  */
 
+using System.Linq;
 using System.Reflection;
 
 using NewDir.Cli.Commands;
@@ -28,10 +29,22 @@ app.Configure(config =>
     config.AddCommand<NewDirCommand>("")
         .WithDescription(Resources.Commands_NewDir_Description);
 
+    config.AddCommand<MultipleNewDirCommand>("many")
+        .WithAlias("multiple")
+        .WithAlias("multi")
+        .WithDescription(Resources.Commands_ManyNewDir_Description);
+    
     config.SetApplicationName(Assembly.GetExecutingAssembly().GetName().Name!);
     config.UseAssemblyInformationalVersion();
 });
 
-app.SetDefaultCommand<NewDirCommand>();
+if (args.Length > 1 && !args.Contains("-"))
+{
+    app.SetDefaultCommand<MultipleNewDirCommand>();
+}
+else
+{
+    app.SetDefaultCommand<NewDirCommand>();
+}
 
 return app.Run(args);
