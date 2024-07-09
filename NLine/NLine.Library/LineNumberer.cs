@@ -16,7 +16,7 @@
 
 using System.Text;
 
-using AlastairLundy.Extensions.System.BoolArrayExtensions;
+using AlastairLundy.Extensions.System;
 
 namespace NLine.Library;
 

@@ -16,7 +16,7 @@
 
 using System.Reflection;
 
-using AlastairLundy.Extensions.System.VersionExtensions;
+using AlastairLundy.Extensions.System;
 
 using NLine.Cli.Commands;
 using NLine.Cli.Localizations;

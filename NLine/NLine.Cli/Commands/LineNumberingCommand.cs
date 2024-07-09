@@ -15,11 +15,13 @@
  */
 
 using System;
-
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+
 using CliUtilsLib;
+
 using NLine.Cli.Localizations;
 using NLine.Library;
 
@@ -89,7 +91,7 @@ public class LineNumberingCommand : Command<LineNumberingCommand.Settings>
         }
         else if (settings.File == null && FileArgumentFinder.FoundAFileInArgs(context.Remaining.Raw.ToArray()))
         {
-            string[]? files = FileArgumentFinder.FindFileNamesInArgs(context.Remaining.Raw.ToArray());
+            IEnumerable<string>? files = FileArgumentFinder.FindFileNamesInArgs(context.Remaining.Raw.ToArray());
 
             if (files == null)
             {
