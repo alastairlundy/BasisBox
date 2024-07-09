@@ -16,9 +16,10 @@
 
 using System.Reflection;
 
-using AlastairLundy.Extensions.System.VersionExtensions;
+using AlastairLundy.Extensions.System;
 
 using Spectre.Console.Cli;
+
 using Today.Cli.Commands;
 
 CommandApp app = new CommandApp();

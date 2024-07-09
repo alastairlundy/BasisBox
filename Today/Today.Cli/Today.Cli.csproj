@@ -3,7 +3,7 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
+        <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>today</AssemblyName>
         <IsPackable>false</IsPackable>
@@ -13,7 +13,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="AlastairLundy.Extensions.System" Version="4.5.0" />
+      <PackageReference Include="AlastairLundy.Extensions.System" Version="5.*" />
       <PackageReference Include="CliUtilsLib" Version="1.2.0" />
       <PackageReference Include="Spectre.Console.Cli" Version="0.49.1" />
     </ItemGroup>
