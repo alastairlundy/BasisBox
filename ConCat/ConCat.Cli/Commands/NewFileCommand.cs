@@ -18,6 +18,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 
@@ -39,7 +40,7 @@ public class NewFileCommand : Command<NewFileCommand.Settings>
 
     public override int Execute(CommandContext context, Settings settings)
     {
-        if (settings.Files == null || settings.Files.Length == 0)
+        if (settings.Files == null || settings.Files.Any())
         {
             AnsiConsole.WriteException(new NullReferenceException(Resources.Exceptions_NoFileProvided));
             return -1;
@@ -76,13 +77,13 @@ public class NewFileCommand : Command<NewFileCommand.Settings>
 
             } while (keyInfo.Key != ConsoleKey.D && (keyInfo.Modifiers != ConsoleModifiers.Control));
 
-            string fileName = settings.Files[0].Replace(">", string.Empty);
+            string fileName = settings.Files.First().Replace(">", string.Empty);
 
             string[] fileContents = stringBuilder.ToString().Split(Environment.NewLine);
             
             File.WriteAllLines(fileName, fileContents);
                 
-            AnsiConsole.WriteLine(Resources.Command_NewFile_Success.Replace("{x}", settings.Files[0]));
+            AnsiConsole.WriteLine(Resources.Command_NewFile_Success.Replace("{x}", settings.Files.First()));
 
             return 1;
         }

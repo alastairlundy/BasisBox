@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using Spectre.Console.Cli;
 
 namespace ConCat.Cli.Settings;
@@ -6,7 +7,7 @@ namespace ConCat.Cli.Settings;
 public class BasicConCatSettings : CommandSettings
 {
     [CommandArgument(0, "<File(s)>")]
-    public string[]? Files { get; init; }
+    public IEnumerable<string>? Files { get; init; }
 
     [CommandOption("-n")]
     [DefaultValue(false)]

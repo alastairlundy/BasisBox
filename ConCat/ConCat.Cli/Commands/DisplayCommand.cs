@@ -18,7 +18,7 @@
 
 using System;
 using System.IO;
-
+using System.Linq;
 using ConCat.Cli.Helpers;
 using ConCat.Cli.Localizations;
 using ConCat.Cli.Settings;
@@ -39,7 +39,7 @@ public class DisplayCommand : Command<DisplayCommand.Settings>
 
     public override int Execute(CommandContext context, Settings settings)
     {
-        if (settings.Files == null || settings.Files.Length == 0)
+        if (settings.Files == null || settings.Files.Any())
         {
             AnsiConsole.WriteException(new NullReferenceException(Resources.Exceptions_NoFileProvided));
             return -1;

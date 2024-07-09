@@ -17,7 +17,9 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using CliUtilsLib;
 
 using ConCat.Cli.Helpers;
@@ -38,19 +40,19 @@ public class CopyCommand : Command<CopyCommand.Settings>
    
    public override int Execute(CommandContext context, Settings settings)
    {
-      if (settings.Files == null || settings.Files.Length == 0)
+      if (settings.Files == null || settings.Files.Any())
       {
          AnsiConsole.WriteException(new NullReferenceException(Resources.Exceptions_NoFileProvided));
          return -1;
       }
         
-      (string[] existingFiles, string[] newFiles)? files = FileArgumentFinder.GetFilesBeforeAndAfterSeparator(settings.Files, ">");
+      (IEnumerable<string> existingFiles, IEnumerable<string> newFiles)? files = FileArgumentFinder.GetFilesBeforeAndAfterSeparator(settings.Files, ">");
 
       try
       {
-         ConCatCopying.CopyFile(files!.Value.existingFiles[0], files!.Value.newFiles[0], settings.AppendLineNumbers);
+         ConCatCopying.CopyFile(files!.Value.existingFiles.First(), files!.Value.newFiles.First(), settings.AppendLineNumbers);
 
-         AnsiConsole.WriteLine(Resources.Command_Copy_Success.Replace("{x}", files.Value.existingFiles[0]).Replace("{y}", files.Value.newFiles[0]));
+         AnsiConsole.WriteLine(Resources.Command_Copy_Success.Replace("{x}", files.Value.existingFiles.First()).Replace("{y}", files.Value.newFiles.First()));
 
          return 1;
       }

@@ -17,6 +17,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -42,13 +43,13 @@ public class AppendCommand : Command<AppendCommand.Settings>
 
     public override int Execute(CommandContext context, Settings settings)
     {
-        if (settings.Files == null || settings.Files.Length == 0)
+        if (settings.Files == null || settings.Files.Count() == 0)
         {
             AnsiConsole.WriteException(new NullReferenceException(Resources.Exceptions_NoFileProvided));
             return -1;
         }
         
-        (string[] existingFiles, string[] newFiles)? files = FileArgumentFinder.GetFilesBeforeAndAfterSeparator(settings.Files, ">>");
+        (IEnumerable<string> existingFiles, IEnumerable<string> newFiles)? files = FileArgumentFinder.GetFilesBeforeAndAfterSeparator(settings.Files, ">>");
         
         try
         {
