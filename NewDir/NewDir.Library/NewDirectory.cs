@@ -22,12 +22,12 @@ namespace NewDir.Library;
 public static class NewDirectory
 {
     /// <summary>
-    /// 
+    /// Attempts to create a new directory with the specified parameters.
     /// </summary>
-    /// <param name="directoryPath"></param>
-    /// <param name="unixFileMode"></param>
-    /// <param name="createParentPaths"></param>
-    /// <returns></returns>
+    /// <param name="directoryPath">The path of the directory to be created.</param>
+    /// <param name="unixFileMode">The file mode to use to create the directory. Only used on Unix based systems.</param>
+    /// <param name="createParentPaths">Whether to create parent directory paths, if required, when creating the new directory.</param>
+    /// <returns>true if the directory was successfully created; returns false otherwise.</returns>
     public static bool TryCreate(string directoryPath, UnixFileMode unixFileMode, bool createParentPaths)
     {
         try
@@ -42,12 +42,12 @@ public static class NewDirectory
     }
     
     /// <summary>
-    /// 
+    /// Creates a new directory with the specified paramaters.
     /// </summary>
-    /// <param name="directoryPath"></param>
-    /// <param name="unixCreateMode"></param>
-    /// <param name="createParentPaths"></param>
-    public static void Create(string directoryPath, UnixFileMode unixCreateMode, bool createParentPaths)
+    /// <param name="directoryPath">The path of the directory to be created.</param>
+    /// <param name="unixFileMode">The file mode to use to create the directory. Only used on Unix based systems.</param>
+    /// <param name="createParentPaths">Whether to create parent directory paths, if required, when creating the new directory.</param>
+    public static void Create(string directoryPath, UnixFileMode unixFileMode, bool createParentPaths)
     {
         if (createParentPaths)
         {
@@ -63,7 +63,7 @@ public static class NewDirectory
                     }
                     else
                     {
-                        Directory.CreateDirectory(directory, unixCreateMode);
+                        Directory.CreateDirectory(directory, unixFileMode);
                     }
                 }
             }
@@ -76,7 +76,7 @@ public static class NewDirectory
             }
             else
             {
-                Directory.CreateDirectory(directoryPath, unixCreateMode);
+                Directory.CreateDirectory(directoryPath, unixFileMode);
             }
         }
     }
