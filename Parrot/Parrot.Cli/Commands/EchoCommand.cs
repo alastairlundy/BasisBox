@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
+using AlastairLundy.Extensions.System.EscapeCharacters;
 using Parrot.Cli.Localizations;
 using Parrot.Library;
 
@@ -14,7 +17,7 @@ public class EchoCommand : Command<EchoCommand.Settings>
     public class Settings : CommandSettings
     {
         [CommandArgument(0, "<Lines To Print>")]
-        public string[]? LinesToPrint { get; init; }
+        public IEnumerable<string>? LinesToPrint { get; init; }
             
         [CommandOption("-n")]
         [DefaultValue(false)]
@@ -35,18 +38,25 @@ public class EchoCommand : Command<EchoCommand.Settings>
 
     public override int Execute(CommandContext context, Settings settings)
     {
+        string[] linesToPrint;
+        
         if (settings.LinesToPrint == null)
         {
-            
-          //  if(context.Remaining.Parsed)
+            AnsiConsole.WriteException(new ArgumentException());
+            return -1;
+            //  if(context.Remaining.Parsed)
+        }
+        else
+        {
+            linesToPrint = settings.LinesToPrint.ToArray();
         }
         
         if (settings.DisableInterpretationOfBackslashEscapeChars &&
             settings.EnableParsingOfBackslashEscapeChars == false)
         {
-             for(int index = 0; index < settings.LinesToPrint!.Length; index++)
+             for(int index = 0; index < settings.LinesToPrint!.Count(); index++)
              {
-                settings.LinesToPrint[index] = EscapeCharacterFormatter.RemoveEscapeChars(settings.LinesToPrint[index]);
+                 linesToPrint[index] = linesToPrint[index].RemoveEscapeCharacters();
              }
         }
 

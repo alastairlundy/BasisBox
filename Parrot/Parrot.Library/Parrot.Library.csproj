@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AlastairLundy.Extensions.System" Version="4.*" />
+    <PackageReference Include="AlastairLundy.Extensions.Collections" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

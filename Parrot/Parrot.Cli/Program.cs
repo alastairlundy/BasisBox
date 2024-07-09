@@ -1,9 +1,7 @@
 ﻿
-using System;
 using System.Reflection;
 
-using AlastairLundy.Extensions.System.AssemblyExtensions;
-using AlastairLundy.Extensions.System.VersionExtensions;
+using AlastairLundy.Extensions.System;
 
 using Parrot.Cli.Commands;
 
@@ -18,7 +16,7 @@ app.Configure(config =>
     config.AddCommand<EchoCommand>("")
     .WithAlias("echo");
 
-    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().GetFriendlyVersionToString());
+    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetName().Version.ToFriendlyVersionString());
 });
 
 app.SetDefaultCommand<EchoCommand>();
