@@ -22,6 +22,15 @@
         <value>Creates a new specified directory with specified parameters.</value>
     </data>
     <data name="Exceptions.DirectoryNotSpecified" xml:space="preserve">
-        <value>The directory to be created was not specified. If this was not intentional, ensure that you are passing a directory as an argument.</value>
+        <value>The directory to be created was not specified. If this was not intentional, ensure that you are passing a valid directory as an argument.</value>
+    </data>
+    <data name="Exceptions.InvalidArgument" xml:space="preserve">
+        <value>An invalid argument value was passed to the application. The invalid argument value was {x}.</value>
+    </data>
+    <data name="Exceptions.DirectoryNotSpecified.Plural" xml:space="preserve">
+        <value>One of the directories to be created was not specified. If this was not intentional, ensure that you are passing valid directories as an argument.</value>
+    </data>
+    <data name="Commands.ManyNewDir.Description" xml:space="preserve">
+        <value>Creates new specified directories with specified parameters.</value>
     </data>
 </root>

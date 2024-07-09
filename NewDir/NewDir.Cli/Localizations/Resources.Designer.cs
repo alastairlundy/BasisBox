@@ -60,6 +60,15 @@ namespace NewDir.Cli.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Creates new specified directories with specified parameters..
+        /// </summary>
+        internal static string Commands_ManyNewDir_Description {
+            get {
+                return ResourceManager.GetString("Commands.ManyNewDir.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Creates a new specified directory with specified parameters..
         /// </summary>
         internal static string Commands_NewDir_Description {
@@ -69,11 +78,29 @@ namespace NewDir.Cli.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The directory to be created was not specified. If this was not intentional, ensure that you are passing a directory as an argument..
+        ///   Looks up a localized string similar to The directory to be created was not specified. If this was not intentional, ensure that you are passing a valid directory as an argument..
         /// </summary>
         internal static string Exceptions_DirectoryNotSpecified {
             get {
                 return ResourceManager.GetString("Exceptions.DirectoryNotSpecified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One of the directories to be created was not specified. If this was not intentional, ensure that you are passing valid directories as an argument..
+        /// </summary>
+        internal static string Exceptions_DirectoryNotSpecified_Plural {
+            get {
+                return ResourceManager.GetString("Exceptions.DirectoryNotSpecified.Plural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An invalid argument value was passed to the application. The invalid argument value was {x}..
+        /// </summary>
+        internal static string Exceptions_InvalidArgument {
+            get {
+                return ResourceManager.GetString("Exceptions.InvalidArgument", resourceCulture);
             }
         }
     }
