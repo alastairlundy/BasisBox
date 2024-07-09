@@ -8,14 +8,14 @@
         <AssemblyName>wcount</AssemblyName>
         <Authors>AlastairLundy</Authors>
         <Copyright>Copyright (c) 2024 Alastair Lundy</Copyright>
-        <RepositoryUrl>https://github.com/alastairlundy/utils/</RepositoryUrl>
+        <RepositoryUrl>https://github.com/alastairlundy/BasisBox/</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PublishSingleFile>true</PublishSingleFile>
         <SelfContained>false</SelfContained>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="AlastairLundy.Extensions.System" Version="4.5.0" />
+      <PackageReference Include="AlastairLundy.Extensions.System" Version="5.*" />
       <PackageReference Include="Spectre.Console" Version="0.49.1" />
       <PackageReference Include="Spectre.Console.Cli" Version="0.49.1" />
     </ItemGroup>

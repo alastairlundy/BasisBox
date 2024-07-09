@@ -16,8 +16,7 @@
 
 using System.Reflection;
 
-using AlastairLundy.Extensions.System.AssemblyExtensions;
-using AlastairLundy.Extensions.System.VersionExtensions;
+using AlastairLundy.Extensions.System;
 
 using Spectre.Console.Cli;
 
@@ -34,7 +33,7 @@ app.Configure(config =>
         .WithExample("-l /path/to/foo.txt")
         .WithExample("/Path/To/foo.txt", "/Path/To/bar.txt");
     
-    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetProjectVersion().ToFriendlyVersionString());
+    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetName().Version.ToFriendlyVersionString());
 });
 
 app.SetDefaultCommand<MainCommand>();

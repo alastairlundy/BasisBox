@@ -18,7 +18,7 @@ using System.ComponentModel;
 
 using System.Reflection;
 
-using AlastairLundy.Extensions.System.AssemblyExtensions;
+using AlastairLundy.Extensions.System;
 
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -70,7 +70,7 @@ public class MainCommand : Command<MainCommand.Settings>
         
         if (settings.Version)
         {
-            AnsiConsole.WriteLine($"v{Assembly.GetExecutingAssembly().GetProjectVersion()}");
+            AnsiConsole.WriteLine($"v{Assembly.GetExecutingAssembly().GetName().Version.ToFriendlyVersionString()}");
             return 0;
         }
 
