@@ -16,7 +16,9 @@
 
 using System;
 using System.IO;
+
 using NewDir.Cli.Localizations;
+
 using NewDir.Library;
 
 namespace NewDir.Cli;
