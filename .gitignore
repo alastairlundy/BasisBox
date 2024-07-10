@@ -22,3 +22,6 @@ LoginName/LoginName.sln.DotSettings.user
 /NewDir/NewDir.Cli/obj
 /NewDir/NewDir.Library/obj
 *.user
+/Moment/.idea
+/Moment/Moment.Cli/obj
+/Moment/Moment.Library/obj
