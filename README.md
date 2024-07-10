@@ -16,6 +16,7 @@
 |-|-|-|
 | Parrot | | C# |
 | ConCat | | C# |
+| Moment | | C# |
 | Today | Get or set the current Date or Timezone information | C# |
 
 ### License
