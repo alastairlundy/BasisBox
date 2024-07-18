@@ -14,6 +14,7 @@
    limitations under the License.
  */
 
+using CliUtilsLib;
 using Del.Cli.Commands;
 using Del.Cli.Localizations;
 
@@ -26,10 +27,21 @@ app.Configure(config =>
     config.AddCommand<DeleteCommand>("")
         .WithAlias("delete")
         .WithDescription(Resources.Command_Delete_Single_Description);
+
+    config.AddCommand<DeleteManyCommand>("many")
+        .WithAlias("delete-many")
+        .WithDescription(Resources.Command_Delete_Many_Description);
     
     config.UseAssemblyInformationalVersion();
 });
 
-app.SetDefaultCommand<DeleteCommand>();
+if (FileArgumentFinder.GetNumberOfFilesFoundInArgs(args) == 1 || args.Length == 1)
+{
+    app.SetDefaultCommand<DeleteCommand>();
+}
+else
+{
+    app.SetDefaultCommand<DeleteManyCommand>();
+}
 
 return app.Run(args);
