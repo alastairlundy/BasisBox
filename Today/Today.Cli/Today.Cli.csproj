@@ -6,15 +6,16 @@
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>today</AssemblyName>
-        <IsPackable>false</IsPackable>
-        <Authors />
-        <Company />
         <Product>today</Product>
+        <IsPackable>false</IsPackable>
+        <Authors>AlastairLundy</Authors>
+        <PublishSingleFile>true</PublishSingleFile>
+        <SelfContained>false</SelfContained>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="AlastairLundy.Extensions.System" Version="5.*" />
-      <PackageReference Include="CliUtilsLib" Version="1.2.0" />
+      <PackageReference Include="CliUtilsLib" Version="1.*" />
       <PackageReference Include="Spectre.Console.Cli" Version="0.49.1" />
     </ItemGroup>
 
