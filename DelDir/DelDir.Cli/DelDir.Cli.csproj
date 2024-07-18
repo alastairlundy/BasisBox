@@ -7,7 +7,8 @@
         <Nullable>enable</Nullable>
         <AssemblyName>deldir</AssemblyName>
         <IsPackable>false</IsPackable>
-        
+        <PublishSingleFile>true</PublishSingleFile>
+        <SelfContained>false</SelfContained>
     </PropertyGroup>
 
     <ItemGroup>
