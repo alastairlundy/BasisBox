@@ -17,8 +17,12 @@
 using System;
 using System.ComponentModel;
 using System.IO;
+
 using CliUtilsLib;
+
+using Del.Cli.Helpers;
 using Del.Cli.Localizations;
+
 using Del.Library;
 using Del.Library.Extensions;
 
@@ -60,7 +64,8 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
     {
         if (settings.FileOrDirectoryToBeDeleted == null)
         {
-            
+            AnsiConsole.WriteException(new ArgumentNullException(nameof(settings.FileOrDirectoryToBeDeleted),  Resources.Exceptions_NoArgumentsProvided));
+            return -1;
         }
 
         ExceptionFormats exceptionFormats;
@@ -74,6 +79,29 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
             exceptionFormats = ExceptionFormats.NoStackTrace;
         }
 
+        DirectoryEliminator directoryEliminator = new DirectoryEliminator();
+        
+        directoryEliminator.FileDeleted += DirectoryEliminatorOnFileDeleted;
+        directoryEliminator.DirectoryDeleted += DirectoryEliminatorOnDirectoryDeleted;
+
+        void DirectoryEliminatorOnDirectoryDeleted(object? sender, string e)
+        {
+            if (settings.Verbose)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        void DirectoryEliminatorOnFileDeleted(object? sender, string e)
+        {
+            if (settings.Verbose)
+            {
+                Console.WriteLine(e);
+            }
+        }
+        
+        
+
         try
         {
             foreach (string fileOrDirectory in settings.FileOrDirectoryToBeDeleted!)
@@ -84,18 +112,43 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
                     {
                         if (settings.DeleteEmptyDirectory)
                         {
-                            Directory.Delete(fileOrDirectory);
+                            bool deleteDirectory = true;
+                            if (settings.Interactive && !settings.Force)
+                            {
+                                deleteDirectory = ConsoleInteractivityHelper.DeleteDirectory(fileOrDirectory);
+                            }
+
+                            if (deleteDirectory)
+                            {
+                                Directory.Delete(fileOrDirectory);
+                                
+                                if (settings.Verbose)
+                                {
+                                    AnsiConsole.WriteLine(Resources.EmptyDirectory_Deleted.Replace("{x}", fileOrDirectory));   
+                                }
+                            }
                         }
                     }
                     else
                     {
                         if (settings.RecursivelyDeleteDirectories)
                         {
-                            DirectoryEliminator.DeleteRecursively(fileOrDirectory, settings.DeleteEmptyDirectory);
+                            directoryEliminator.DeleteRecursively(fileOrDirectory, settings.DeleteEmptyDirectory);
                         }
                         else
                         {
-                            Directory.Delete(fileOrDirectory);
+                            bool deleteItem = true;
+
+                            if (settings.Interactive && !settings.Force)
+                            {
+                                deleteItem = ConsoleInteractivityHelper.DeleteFile(fileOrDirectory);
+                            }
+
+                            if (deleteItem)
+                            {
+                                Directory.Delete(fileOrDirectory);
+                                AnsiConsole.WriteLine(Resources.Item_Deleted.Replace("{x}", fileOrDirectory));   
+                            }
                         }
                     }
                 }
