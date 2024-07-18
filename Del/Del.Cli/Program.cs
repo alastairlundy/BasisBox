@@ -23,9 +23,13 @@ CommandApp app = new CommandApp();
 
 app.Configure(config =>
 {
-
+    config.AddCommand<DeleteCommand>("")
+        .WithAlias("delete")
+        .WithDescription(Resources.Command_Delete_Description);
     
     config.UseAssemblyInformationalVersion();
 });
+
+app.SetDefaultCommand<DeleteCommand>();
 
 return app.Run(args);
