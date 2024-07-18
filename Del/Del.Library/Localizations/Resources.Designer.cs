@@ -60,11 +60,38 @@ namespace Del.Library.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Directory {x} was deleted..
+        /// </summary>
+        internal static string Directory_Deleted {
+            get {
+                return ResourceManager.GetString("Directory.Deleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Directory {x}, which was empty, was deleted..
+        /// </summary>
+        internal static string EmptyDirectory_Deleted {
+            get {
+                return ResourceManager.GetString("EmptyDirectory.Deleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {x} is not a valid directory. If the directory previously existed it may have been moved or deleted..
         /// </summary>
         internal static string Exceptions_DirectoryNotFound {
             get {
                 return ResourceManager.GetString("Exceptions.DirectoryNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File {x} was deleted..
+        /// </summary>
+        internal static string File_Deleted {
+            get {
+                return ResourceManager.GetString("File.Deleted", resourceCulture);
             }
         }
     }

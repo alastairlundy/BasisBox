@@ -24,4 +24,34 @@
     <data name="Exceptions.DirectoryNotFound" xml:space="preserve">
         <value>Unable to locate directory {x}. If this directory previously existed it may have been moved or deleted.</value>
     </data>
+    <data name="Item.Deleted" xml:space="preserve">
+        <value>{x} was deleted.</value>
+    </data>
+    <data name="EmptyDirectory.Deleted" xml:space="preserve">
+        <value>{x}, which was an Empty Directory, was deleted.</value>
+    </data>
+    <data name="Exceptions.NoArgumentsProvided" xml:space="preserve">
+        <value>No files or directories were provided.</value>
+    </data>
+    <data name="Command.Delete.Description" xml:space="preserve">
+        <value>Delete one or more files or one or more directories.</value>
+    </data>
+    <data name="DeleteConfrmation.File" xml:space="preserve">
+        <value>Do you want file {x} to be deleted?</value>
+    </data>
+    <data name="DeleteConfirmation.Directory" xml:space="preserve">
+        <value>Do you want directory {x} to be deleted?</value>
+    </data>
+    <data name="DeleteConfirmation.YesOrNo" xml:space="preserve">
+        <value>Enter Y for yes OR N for no.</value>
+    </data>
+    <data name="Exceptions.InvalidDeleteConfirmation" xml:space="preserve">
+        <value>An invalid value was provided. Please try again.</value>
+    </data>
+    <data name="Input.Yes" xml:space="preserve">
+        <value>yes</value>
+    </data>
+    <data name="Input.No" xml:space="preserve">
+        <value>no</value>
+    </data>
 </root>

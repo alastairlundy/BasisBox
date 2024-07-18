@@ -60,6 +60,51 @@ namespace Del.Cli.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete one or more files or one or more directories..
+        /// </summary>
+        internal static string Command_Delete_Description {
+            get {
+                return ResourceManager.GetString("Command.Delete.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want directory {x} to be deleted?.
+        /// </summary>
+        internal static string DeleteConfirmation_Directory {
+            get {
+                return ResourceManager.GetString("DeleteConfirmation.Directory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Y for yes OR N for no..
+        /// </summary>
+        internal static string DeleteConfirmation_YesOrNo {
+            get {
+                return ResourceManager.GetString("DeleteConfirmation.YesOrNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want file {x} to be deleted?.
+        /// </summary>
+        internal static string DeleteConfrmation_File {
+            get {
+                return ResourceManager.GetString("DeleteConfrmation.File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {x}, which was an Empty Directory, was deleted..
+        /// </summary>
+        internal static string EmptyDirectory_Deleted {
+            get {
+                return ResourceManager.GetString("EmptyDirectory.Deleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unable to locate directory {x}. If this directory previously existed it may have been moved or deleted..
         /// </summary>
         internal static string Exceptions_DirectoryNotFound {
@@ -74,6 +119,51 @@ namespace Del.Cli.Localizations {
         internal static string Exceptions_FileNotFound {
             get {
                 return ResourceManager.GetString("Exceptions.FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An invalid value was provided. Please try again..
+        /// </summary>
+        internal static string Exceptions_InvalidDeleteConfirmation {
+            get {
+                return ResourceManager.GetString("Exceptions.InvalidDeleteConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No files or directories were provided..
+        /// </summary>
+        internal static string Exceptions_NoArgumentsProvided {
+            get {
+                return ResourceManager.GetString("Exceptions.NoArgumentsProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to no.
+        /// </summary>
+        internal static string Input_No {
+            get {
+                return ResourceManager.GetString("Input.No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to yes.
+        /// </summary>
+        internal static string Input_Yes {
+            get {
+                return ResourceManager.GetString("Input.Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {x} was deleted..
+        /// </summary>
+        internal static string Item_Deleted {
+            get {
+                return ResourceManager.GetString("Item.Deleted", resourceCulture);
             }
         }
     }

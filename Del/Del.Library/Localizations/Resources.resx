@@ -21,4 +21,13 @@
     <data name="Exceptions.DirectoryNotFound" xml:space="preserve">
         <value>{x} is not a valid directory. If the directory previously existed it may have been moved or deleted.</value>
     </data>
+    <data name="File.Deleted" xml:space="preserve">
+        <value>File {x} was deleted.</value>
+    </data>
+    <data name="Directory.Deleted" xml:space="preserve">
+        <value>Directory {x} was deleted.</value>
+    </data>
+    <data name="EmptyDirectory.Deleted" xml:space="preserve">
+        <value>Directory {x}, which was empty, was deleted.</value>
+    </data>
 </root>
