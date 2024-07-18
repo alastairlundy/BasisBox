@@ -14,6 +14,7 @@
 ### Programs being developed
 | Program name | Description | Written  In |
 |-|-|-|
+| Del | Delete a file or directory, either recursively or non-recursively. | C# |
 | DelDir | Delete a directory, either recursively or non-recursively. | C# |
 | Parrot | | C# |
 | ConCat | | C# |
