@@ -23,13 +23,16 @@ namespace Del.Library;
 
 public class DirectoryEliminator
 {
+    public event EventHandler<string> DirectoryDeleted; 
+    public event EventHandler<string> FileDeleted; 
+    
     /// <summary>
     /// 
     /// </summary>
     /// <param name="directory"></param>
     /// <param name="deleteEmptyDirectory"></param>
     /// <exception cref="DirectoryNotFoundException"></exception>
-    public static void DeleteRecursively(string directory, bool deleteEmptyDirectory)
+    public void DeleteRecursively(string directory, bool deleteEmptyDirectory)
     {
         if (Directory.Exists(directory))
         {
@@ -42,6 +45,7 @@ public class DirectoryEliminator
                         foreach (string file in Directory.GetFiles(subDirectory))
                         {
                             File.Delete(file);
+                            FileDeleted?.Invoke(this, Resources.File_Deleted.Replace("{x}", file));
                         }
                     }
 
@@ -50,6 +54,15 @@ public class DirectoryEliminator
                     if (deleteEmptyDirectory == true && numberOfFiles == 0 || numberOfFiles > 0)
                     {
                         Directory.Delete(subDirectory);
+
+                        if (deleteEmptyDirectory == true && numberOfFiles == 0)
+                        {
+                            DirectoryDeleted?.Invoke(this, Resources.EmptyDirectory_Deleted.Replace("{x}", subDirectory));
+                        }
+                        else
+                        {
+                            DirectoryDeleted?.Invoke(this, Resources.Directory_Deleted.Replace("{x}", subDirectory));
+                        }
                     }
                 }
             }
@@ -58,6 +71,7 @@ public class DirectoryEliminator
                 if (deleteEmptyDirectory)
                 {
                     Directory.Delete(directory);
+                    DirectoryDeleted?.Invoke(this, Resources.Directory_Deleted.Replace("{x}", directory));
                 }
             }
         }
@@ -71,7 +85,7 @@ public class DirectoryEliminator
     /// <param name="directory"></param>
     /// <param name="deleteEmptyDirectories"></param>
     /// <returns></returns>
-    public static bool TryDeleteRecursively(string directory, bool deleteEmptyDirectories)
+    public bool TryDeleteRecursively(string directory, bool deleteEmptyDirectories)
     {
         try
         {
