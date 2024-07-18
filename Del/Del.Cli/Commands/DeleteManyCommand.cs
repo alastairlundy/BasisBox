@@ -40,7 +40,7 @@ public class DeleteManyCommand : Command<DeleteManyCommand.Settings>
     public class Settings : CommandSettings
     {
         [CommandArgument(0, "<File(s) Or Directories To Be Deleted>")]
-        public string[]? FileOrDirectoryToBeDeleted { get; init; }
+        public string[]? FilesOrDirectoriesToBeDeleted { get; init; }
         
         [CommandOption("-r|--recursive")]
         [DefaultValue(false)]
@@ -77,9 +77,15 @@ public class DeleteManyCommand : Command<DeleteManyCommand.Settings>
             exceptionFormats = ExceptionFormats.NoStackTrace;
         }
         
-        if (settings.FileOrDirectoryToBeDeleted == null)
+        if (settings.FilesOrDirectoriesToBeDeleted == null)
         {
-            AnsiConsole.WriteException(new ArgumentNullException(nameof(settings.FileOrDirectoryToBeDeleted),  Resources.Exceptions_NoArgumentsProvided), exceptionFormats);
+            AnsiConsole.WriteException(new ArgumentNullException(nameof(settings.FilesOrDirectoriesToBeDeleted),  Resources.Exceptions_NoArgumentsProvided), exceptionFormats);
+            return -1;
+        }
+        
+        if (settings.FilesOrDirectoriesToBeDeleted.Contains("/"))
+        {
+            AnsiConsole.WriteException(new ArgumentException(Resources.Exceptions_InvalidSlashArgument), exceptionFormats);
             return -1;
         }
 
@@ -108,9 +114,33 @@ public class DeleteManyCommand : Command<DeleteManyCommand.Settings>
         
         try
         {
-            foreach (string fileOrDirectory in settings.FileOrDirectoryToBeDeleted!)
+            foreach (string fileOrDirectory in settings.FilesOrDirectoriesToBeDeleted!)
             {
-                if (Directory.Exists(fileOrDirectory))
+                if (fileOrDirectory.Equals("*"))
+                {
+                    if (settings.Interactive && !settings.Force)
+                    {
+                        (IEnumerable<string> files, IEnumerable<string> directories, IEnumerable<string> emptyDirectories) 
+                            = RecursiveDirectoryExplorer.GetDirectoryContents(Environment.CurrentDirectory, settings.DeleteEmptyDirectory);
+
+                        List<string> filesToBeDeleted = InteractiveRecursiveDeletionHelper.GetFilesToBeDeleted(files).ToList();
+                        List<string> directoriesToBeDeleted = InteractiveRecursiveDeletionHelper.GetDirectoriesToBeDeleted(directories).ToList();
+
+                        string[] emptyDirectoryEnumerable = emptyDirectories as string[] ?? emptyDirectories.ToArray();
+                        if (emptyDirectoryEnumerable.Any())
+                        {
+                            directoriesToBeDeleted = directoriesToBeDeleted.Combine(InteractiveRecursiveDeletionHelper.GetDirectoriesToBeDeleted(emptyDirectoryEnumerable)).ToList();
+                        }
+                        
+                        fileRemover.DeleteFiles(filesToBeDeleted);
+                        directoryRemover.DeleteDirectories(directoriesToBeDeleted, settings.DeleteEmptyDirectory);
+                    }
+                    else
+                    {
+                        directoryRemover.DeleteRecursively(Environment.CurrentDirectory, settings.DeleteEmptyDirectory);
+                    }
+                }
+                else if (Directory.Exists(fileOrDirectory))
                 {
                     if (fileOrDirectory.IsDirectoryEmpty())
                     {

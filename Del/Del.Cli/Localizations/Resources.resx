@@ -57,4 +57,10 @@
     <data name="Command.Delete.Many.Description" xml:space="preserve">
         <value>Delete files or directories either recursively or non-recursively.</value>
     </data>
+    <data name="Exceptions.InvalidArgumentsProvided" xml:space="preserve">
+        <value>An invalid file or directory was passed as an argument.</value>
+    </data>
+    <data name="Exceptions.InvalidSlashArgument" xml:space="preserve">
+        <value>The directory argument passed is not allowed in this program for the safety of your system.</value>
+    </data>
 </root>

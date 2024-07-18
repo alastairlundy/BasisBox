@@ -81,6 +81,12 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
             return -1;
         }
 
+        if (settings.FileOrDirectoryToBeDeleted.Equals("/"))
+        {
+            AnsiConsole.WriteException(new ArgumentException(Resources.Exceptions_InvalidSlashArgument), exceptionFormats);
+            return -1;
+        }
+        
         try
         {
             if (FileFinder.IsAFile(settings.FileOrDirectoryToBeDeleted))
@@ -111,6 +117,47 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
             }
             else
             {
+                if (settings.FileOrDirectoryToBeDeleted.Equals("*"))
+                {
+                    DirectoryRemover directoryRemover = new DirectoryRemover();
+                    directoryRemover.DirectoryDeleted += RemoverOnDeleted;
+                    directoryRemover.FileDeleted += RemoverOnDeleted;
+
+                    FileRemover fileRemover = new FileRemover();
+                    fileRemover.FileDeleted += RemoverOnDeleted;
+
+                    void RemoverOnDeleted(object? sender, string e)
+                    {
+                        if (settings.Verbose)
+                        {
+                            AnsiConsole.WriteLine(e);
+                        }
+                    }
+
+                    if (settings.Interactive && !settings.Force)
+                    {
+                        (IEnumerable<string> files, IEnumerable<string> directories, IEnumerable<string> emptyDirectories) 
+                            = RecursiveDirectoryExplorer.GetDirectoryContents(Environment.CurrentDirectory, settings.DeleteEmptyDirectory);
+
+                        List<string> filesToBeDeleted = InteractiveRecursiveDeletionHelper.GetFilesToBeDeleted(files).ToList();
+                        List<string> directoriesToBeDeleted = InteractiveRecursiveDeletionHelper.GetDirectoriesToBeDeleted(directories).ToList();
+
+                        string[] emptyDirectoryEnumerable = emptyDirectories as string[] ?? emptyDirectories.ToArray();
+                        if (emptyDirectoryEnumerable.Any())
+                        {
+                            directoriesToBeDeleted = directoriesToBeDeleted.Combine(InteractiveRecursiveDeletionHelper.GetDirectoriesToBeDeleted(emptyDirectoryEnumerable)).ToList();
+                        }
+                        
+                        fileRemover.DeleteFiles(filesToBeDeleted);
+                        directoryRemover.DeleteDirectories(directoriesToBeDeleted, settings.DeleteEmptyDirectory);
+                    }
+                    else
+                    {
+                        directoryRemover.DeleteRecursively(Environment.CurrentDirectory, settings.DeleteEmptyDirectory);
+                    }
+
+                    return 0;
+                }
                 if (Directory.Exists(settings.FileOrDirectoryToBeDeleted))
                 {
                     DirectoryRemover directoryRemover = new DirectoryRemover();
@@ -177,9 +224,15 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
                             directoryRemover.DeleteDirectory(settings.FileOrDirectoryToBeDeleted, settings.DeleteEmptyDirectory);
                         }
                     }
+                    
+                    return 0;
+                }
+                else
+                {
+                    throw new DirectoryNotFoundException(Resources.Exceptions_DirectoryNotFound.Replace("{x}", settings.FileOrDirectoryToBeDeleted));
                 }
             }
-            
+
             return 0;
         }
         catch(Exception exception)
