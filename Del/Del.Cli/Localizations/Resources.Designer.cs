@@ -60,11 +60,20 @@ namespace Del.Cli.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete one or more files or one or more directories..
+        ///   Looks up a localized string similar to Delete files or directories either recursively or non-recursively..
         /// </summary>
-        internal static string Command_Delete_Description {
+        internal static string Command_Delete_Many_Description {
             get {
-                return ResourceManager.GetString("Command.Delete.Description", resourceCulture);
+                return ResourceManager.GetString("Command.Delete.Many.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete a file or director either recursively or non-recursively..
+        /// </summary>
+        internal static string Command_Delete_Single_Description {
+            get {
+                return ResourceManager.GetString("Command.Delete.Single.Description", resourceCulture);
             }
         }
         

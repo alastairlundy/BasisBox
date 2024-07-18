@@ -25,7 +25,7 @@ app.Configure(config =>
 {
     config.AddCommand<DeleteCommand>("")
         .WithAlias("delete")
-        .WithDescription(Resources.Command_Delete_Description);
+        .WithDescription(Resources.Command_Delete_Single_Description);
     
     config.UseAssemblyInformationalVersion();
 });

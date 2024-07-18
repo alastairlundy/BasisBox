@@ -29,7 +29,7 @@ public class RecursiveDirectoryExplorer
     /// </summary>
     /// <param name="directory"></param>
     /// <returns></returns>
-    public (IEnumerable<string> files, IEnumerable<string> directories, IEnumerable<string> emptyDirectories) GetDirectoryContents(string directory)
+    public static (IEnumerable<string> files, IEnumerable<string> directories, IEnumerable<string> emptyDirectories) GetDirectoryContents(string directory)
     {
         return GetDirectoryContents(directory, true);
     }
@@ -41,7 +41,7 @@ public class RecursiveDirectoryExplorer
     /// <param name="includeEmptyDirectories"></param>
     /// <returns></returns>
     /// <exception cref="DirectoryNotFoundException"></exception>
-    public (IEnumerable<string> files, IEnumerable<string> directories, IEnumerable<string> emptyDirectories) GetDirectoryContents(string directory, bool includeEmptyDirectories)
+    public static (IEnumerable<string> files, IEnumerable<string> directories, IEnumerable<string> emptyDirectories) GetDirectoryContents(string directory, bool includeEmptyDirectories)
     {
         List<string> files = new List<string>();
         List<string> directories = new List<string>();

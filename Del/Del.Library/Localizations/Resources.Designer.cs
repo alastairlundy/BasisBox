@@ -87,6 +87,15 @@ namespace Del.Library.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {x} is not a valid file path. If the file previously existed it may have been moved or deleted..
+        /// </summary>
+        internal static string Exceptions_FileNotFound {
+            get {
+                return ResourceManager.GetString("Exceptions.FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File {x} was deleted..
         /// </summary>
         internal static string File_Deleted {

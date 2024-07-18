@@ -30,4 +30,7 @@
     <data name="EmptyDirectory.Deleted" xml:space="preserve">
         <value>Directory {x}, which was empty, was deleted.</value>
     </data>
+    <data name="Exceptions.FileNotFound" xml:space="preserve">
+        <value>{x} is not a valid file path. If the file previously existed it may have been moved or deleted.</value>
+    </data>
 </root>

@@ -15,8 +15,12 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
+
+using AlastairLundy.Extensions.Collections.IEnumerables;
 
 using CliUtilsLib;
 
@@ -31,11 +35,11 @@ using Spectre.Console.Cli;
 
 namespace Del.Cli.Commands;
 
-public class DeleteCommand : Command<DeleteCommand.Settings>
+public class DeleteManyCommand : Command<DeleteManyCommand.Settings>
 {
     public class Settings : CommandSettings
     {
-        [CommandArgument(1, "<File Or Directory To Be Deleted>")]
+        [CommandArgument(0, "<File(s) Or Directories To Be Deleted>")]
         public string[]? FileOrDirectoryToBeDeleted { get; init; }
         
         [CommandOption("-r|--recursive")]
@@ -62,12 +66,6 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
 
     public override int Execute(CommandContext context, Settings settings)
     {
-        if (settings.FileOrDirectoryToBeDeleted == null)
-        {
-            AnsiConsole.WriteException(new ArgumentNullException(nameof(settings.FileOrDirectoryToBeDeleted),  Resources.Exceptions_NoArgumentsProvided));
-            return -1;
-        }
-
         ExceptionFormats exceptionFormats;
 
         if (settings.Verbose)
@@ -78,30 +76,36 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
         {
             exceptionFormats = ExceptionFormats.NoStackTrace;
         }
-
-        DirectoryEliminator directoryEliminator = new DirectoryEliminator();
         
-        directoryEliminator.FileDeleted += DirectoryEliminatorOnFileDeleted;
-        directoryEliminator.DirectoryDeleted += DirectoryEliminatorOnDirectoryDeleted;
+        if (settings.FileOrDirectoryToBeDeleted == null)
+        {
+            AnsiConsole.WriteException(new ArgumentNullException(nameof(settings.FileOrDirectoryToBeDeleted),  Resources.Exceptions_NoArgumentsProvided), exceptionFormats);
+            return -1;
+        }
 
-        void DirectoryEliminatorOnDirectoryDeleted(object? sender, string e)
+        FileRemover fileRemover = new FileRemover();
+        DirectoryRemover directoryRemover = new DirectoryRemover();
+
+        fileRemover.FileDeleted += DirectoryRemoverOnFileDeleted;
+        directoryRemover.FileDeleted += DirectoryRemoverOnFileDeleted;
+        directoryRemover.DirectoryDeleted += DirectoryRemoverOnDirectoryDeleted;
+
+        void DirectoryRemoverOnDirectoryDeleted(object? sender, string e)
         {
             if (settings.Verbose)
             {
-                Console.WriteLine(e);
+                AnsiConsole.WriteLine(e);
             }
         }
 
-        void DirectoryEliminatorOnFileDeleted(object? sender, string e)
+        void DirectoryRemoverOnFileDeleted(object? sender, string e)
         {
             if (settings.Verbose)
             {
-                Console.WriteLine(e);
+                AnsiConsole.WriteLine(e);
             }
         }
         
-        
-
         try
         {
             foreach (string fileOrDirectory in settings.FileOrDirectoryToBeDeleted!)
@@ -115,7 +119,7 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
                             bool deleteDirectory = true;
                             if (settings.Interactive && !settings.Force)
                             {
-                                deleteDirectory = ConsoleInteractivityHelper.DeleteDirectory(fileOrDirectory);
+                                deleteDirectory = InteractiveInputHelper.DeleteDirectory(fileOrDirectory);
                             }
 
                             if (deleteDirectory)
@@ -133,7 +137,26 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
                     {
                         if (settings.RecursivelyDeleteDirectories)
                         {
-                            directoryEliminator.DeleteRecursively(fileOrDirectory, settings.DeleteEmptyDirectory);
+                            if (settings.Interactive && !settings.Force)
+                            {
+                               (IEnumerable<string> files, IEnumerable<string> directories, IEnumerable<string> emptyDirectories) = RecursiveDirectoryExplorer.GetDirectoryContents(fileOrDirectory, settings.DeleteEmptyDirectory);
+
+                               List<string> filesToBeDeleted = InteractiveRecursiveDeletionHelper.GetFilesToBeDeleted(files).ToList();
+                               List<string> directoriesToBeDeleted = InteractiveRecursiveDeletionHelper.GetDirectoriesToBeDeleted(directories).ToList();
+                               
+                               string[] emptyDirectoryEnumerable = emptyDirectories as string[] ?? emptyDirectories.ToArray();
+                               if (emptyDirectoryEnumerable.Any())
+                               {
+                                 directoriesToBeDeleted = directoriesToBeDeleted.Combine(InteractiveRecursiveDeletionHelper.GetDirectoriesToBeDeleted(emptyDirectoryEnumerable)).ToList();
+                               }
+
+                               fileRemover.DeleteFiles(filesToBeDeleted);   
+                               directoryRemover.DeleteDirectories(directoriesToBeDeleted, settings.DeleteEmptyDirectory);
+                            }
+                            else
+                            {
+                                directoryRemover.DeleteRecursively(fileOrDirectory, settings.DeleteEmptyDirectory);
+                            }
                         }
                         else
                         {
@@ -141,20 +164,31 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
 
                             if (settings.Interactive && !settings.Force)
                             {
-                                deleteItem = ConsoleInteractivityHelper.DeleteFile(fileOrDirectory);
+                                deleteItem = InteractiveInputHelper.DeleteFile(fileOrDirectory);
                             }
 
                             if (deleteItem)
                             {
-                                Directory.Delete(fileOrDirectory);
-                                AnsiConsole.WriteLine(Resources.Item_Deleted.Replace("{x}", fileOrDirectory));   
+                               directoryRemover.DeleteDirectory(fileOrDirectory, settings.DeleteEmptyDirectory); 
                             }
                         }
                     }
                 }
                 else if (File.Exists(fileOrDirectory))
                 {
-                    
+                    if (settings.Interactive)
+                    {
+                        bool deleteFile = InteractiveInputHelper.DeleteFile(fileOrDirectory);
+
+                        if (deleteFile)
+                        {
+                            fileRemover.DeleteFile(fileOrDirectory);
+                        }
+                    }
+                    else
+                    {
+                        fileRemover.DeleteFile(fileOrDirectory);
+                    }
                 }
                 else if (!Directory.Exists(fileOrDirectory) && !File.Exists(fileOrDirectory))
                 {

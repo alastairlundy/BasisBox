@@ -33,8 +33,8 @@
     <data name="Exceptions.NoArgumentsProvided" xml:space="preserve">
         <value>No files or directories were provided.</value>
     </data>
-    <data name="Command.Delete.Description" xml:space="preserve">
-        <value>Delete one or more files or one or more directories.</value>
+    <data name="Command.Delete.Single.Description" xml:space="preserve">
+        <value>Delete a file or director either recursively or non-recursively.</value>
     </data>
     <data name="DeleteConfrmation.File" xml:space="preserve">
         <value>Do you want file {x} to be deleted?</value>
@@ -53,5 +53,8 @@
     </data>
     <data name="Input.No" xml:space="preserve">
         <value>no</value>
+    </data>
+    <data name="Command.Delete.Many.Description" xml:space="preserve">
+        <value>Delete files or directories either recursively or non-recursively.</value>
     </data>
 </root>

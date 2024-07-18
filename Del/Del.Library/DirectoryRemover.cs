@@ -15,16 +15,73 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 using Del.Library.Localizations;
 
 namespace Del.Library;
 
-public class DirectoryEliminator
+public class DirectoryRemover
 {
     public event EventHandler<string> DirectoryDeleted; 
-    public event EventHandler<string> FileDeleted; 
+    public event EventHandler<string> FileDeleted;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="directory"></param>
+    /// <param name="deleteEmptyDirectory"></param>
+    /// <returns></returns>
+    public bool TryDeleteDirectory(string directory, bool deleteEmptyDirectory)
+    {
+        try
+        {
+            DeleteDirectory(directory, deleteEmptyDirectory);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="directory"></param>
+    /// <param name="deleteEmptyDirectory"></param>
+    public void DeleteDirectory(string directory, bool deleteEmptyDirectory)
+    {
+        if (Directory.GetFiles(directory).Length == 0 &&
+            Directory.GetDirectories(directory).Length == 0)
+        {
+            if (deleteEmptyDirectory)
+            {
+                Directory.Delete(directory);
+                DirectoryDeleted?.Invoke(this, Resources.Directory_Deleted.Replace("{x}", directory));
+            }
+        }
+        else
+        {
+            Directory.Delete(directory);
+            DirectoryDeleted?.Invoke(this, Resources.Directory_Deleted.Replace("{x}", directory));
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="directories"></param>
+    /// <param name="deleteEmptyDirectory"></param>
+    public void DeleteDirectories(IEnumerable<string> directories, bool deleteEmptyDirectory)
+    {
+        foreach (string directory in directories)
+        {
+            DeleteDirectory(directory, deleteEmptyDirectory);
+        }
+    }
     
     /// <summary>
     /// 

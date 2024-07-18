@@ -22,7 +22,7 @@ using Spectre.Console;
 
 namespace Del.Cli.Helpers;
 
-public class ConsoleInteractivityHelper
+public static class InteractiveInputHelper
 {
     public static bool DeleteFile(string fileName)
     {
@@ -39,6 +39,7 @@ public class ConsoleInteractivityHelper
         bool validInputProvided = false;
         do
         {
+            AnsiConsole.WriteLine();
             AnsiConsole.Write($"{message}\t");
 
             string input = Console.ReadLine()!;
