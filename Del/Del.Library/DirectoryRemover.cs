@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+using Del.Library.Extensions;
 using Del.Library.Localizations;
 
 namespace Del.Library;
@@ -56,12 +57,20 @@ public class DirectoryRemover
     /// </summary>
     /// <param name="directory">The directory to be deleted.</param>
     /// <param name="deleteEmptyDirectory">Whether to delete the directory or not if the directory is empty.</param>
+    /// <exception cref="DirectoryNotFoundException">Thrown if the directory does not exist or could not be located.</exception>
     public void DeleteDirectory(string directory, bool deleteEmptyDirectory)
     {
-        if (Directory.GetFiles(directory).Length == 0 &&
-            Directory.GetDirectories(directory).Length == 0)
+        if (Directory.Exists(directory))
         {
-            if (deleteEmptyDirectory)
+            if (directory.IsDirectoryEmpty())
+            {
+                if (deleteEmptyDirectory)
+                {
+                    Directory.Delete(directory);
+                    DirectoryDeleted?.Invoke(this, Resources.Directory_Deleted.Replace("{x}", directory));
+                }
+            }
+            else
             {
                 Directory.Delete(directory);
                 DirectoryDeleted?.Invoke(this, Resources.Directory_Deleted.Replace("{x}", directory));
@@ -69,11 +78,32 @@ public class DirectoryRemover
         }
         else
         {
-            Directory.Delete(directory);
-            DirectoryDeleted?.Invoke(this, Resources.Directory_Deleted.Replace("{x}", directory));
+            throw new DirectoryNotFoundException(Resources.Exceptions_DirectoryNotFound.Replace("{x}", directory));
         }
     }
 
+    /// <summary>
+    /// Deletes a parent directory of a directory.
+    /// </summary>
+    /// <param name="directory">The directory to get the parent directory of.</param>
+    /// <param name="deleteEmptyDirectory">Whether to delete the parent directory if is empty or not.</param>
+    /// <exception cref="DirectoryNotFoundException">Thrown if the directory does not exist or could not be located.</exception>
+    public void DeleteParentDirectory(string directory, bool deleteEmptyDirectory)
+    {
+        if (Directory.Exists(directory))
+        {
+            if (directory.IsDirectoryEmpty() && deleteEmptyDirectory || !directory.IsDirectoryEmpty())
+            {
+                if (Directory.GetParent(directory)!.GetFiles().Length == 0)
+                {
+                    DeleteDirectory(Directory.GetParent(directory)!.Name, deleteEmptyDirectory);
+                }    
+            }
+        }
+
+        throw new DirectoryNotFoundException(Resources.Exceptions_DirectoryNotFound.Replace("{x}", directory));
+    }
+    
     /// <summary>
     /// Deletes multiple specified directories.
     /// </summary>
@@ -92,7 +122,7 @@ public class DirectoryRemover
     /// </summary>
     /// <param name="directory">The directory to be recursively deleted.</param>
     /// <param name="deleteEmptyDirectory">Whether to delete empty directories or not.</param>
-    /// <exception cref="DirectoryNotFoundException">Thrown if the directory is not found.</exception>
+    /// <exception cref="DirectoryNotFoundException">Thrown if the directory does not exist or could not be located.</exception>
     public void DeleteRecursively(string directory, bool deleteEmptyDirectory)
     {
         if (Directory.Exists(directory))
