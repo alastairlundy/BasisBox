@@ -61,10 +61,60 @@ public class DeleteDirectoryCommand : Command<DeleteDirectoryCommand.Settings>
         if (settings.DirectoryToBeDeleted == null)
         {
             AnsiConsole.WriteException(new ArgumentNullException(nameof(settings.DirectoryToBeDeleted), Resources.Exception_NoArgumentsProvided), exceptionFormats);
+            return -1;
         }
 
         try
         {
+            if (settings.DirectoryToBeDeleted.Equals("/"))
+            {
+                throw new ArgumentException(Resources.Exception_InvalidSlashArgument, settings.DirectoryToBeDeleted);
+            }
+            if (settings.DirectoryToBeDeleted.Equals("*"))
+            {
+                bool allowRecursiveEmptyDirectoryDeletion = false;
+
+                foreach (string directory in Directory.GetDirectories(settings.DirectoryToBeDeleted))
+                {
+                    if (Directory.GetFiles(directory).Length == 0)
+                    {
+                        allowRecursiveEmptyDirectoryDeletion = true;
+                    }
+                    else
+                    {
+                        allowRecursiveEmptyDirectoryDeletion = false;
+                    }
+                }
+
+                if (allowRecursiveEmptyDirectoryDeletion)
+                {
+                    DirectoryRemover directoryRemover = new DirectoryRemover();
+                    directoryRemover.DirectoryDeleted += OnDeleted;
+                    directoryRemover.FileDeleted += OnDeleted;
+
+                    void OnDeleted(object? sender, string e)
+                    {
+                        if (settings.Verbose)
+                        {
+                            AnsiConsole.WriteLine(e);
+                        }
+                    }
+                    
+                    directoryRemover.DeleteRecursively(settings.DirectoryToBeDeleted, true);
+                    
+                    if (settings.RemoveEmptyParentDirectories)
+                    {
+                        if (Directory.GetParent(settings.DirectoryToBeDeleted)!.GetFiles().Length == 0)
+                        {
+                            directoryRemover.DeleteDirectory(Directory.GetParent(settings.DirectoryToBeDeleted)!.Name, true);
+                        }    
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException(Resources.Exception_NonEmptyDirectory.Replace("{x}", settings.DirectoryToBeDeleted));
+                }
+            }
             if (Directory.Exists(settings.DirectoryToBeDeleted))
             {
                 if (!Directory.GetDirectories(settings.DirectoryToBeDeleted).Any() &&
