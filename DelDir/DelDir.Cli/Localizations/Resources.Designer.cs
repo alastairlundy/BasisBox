@@ -58,5 +58,14 @@ namespace DelDir.Cli.Localizations {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Exception_NoArgumentsProvided {
+            get {
+                return ResourceManager.GetString("Exception.NoArgumentsProvided", resourceCulture);
+            }
+        }
     }
 }
