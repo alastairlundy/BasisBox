@@ -27,4 +27,7 @@
     <data name="Exception.DirectoryNotFound" xml:space="preserve">
         <value>The directory {x} could not be located. If the directory exists please check if it has a correcy or valid path to it.</value>
     </data>
+    <data name="Exception.InvalidSlashArgument" xml:space="preserve">
+        <value>The directory argument passed is not allowed in this program for the safety of your system.</value>
+    </data>
 </root>

@@ -69,6 +69,15 @@ namespace DelDir.Cli.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The directory argument passed is not allowed in this program for the safety of your system..
+        /// </summary>
+        internal static string Exception_InvalidSlashArgument {
+            get {
+                return ResourceManager.GetString("Exception.InvalidSlashArgument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No arguments for the directory to be deleted were passed..
         /// </summary>
         internal static string Exception_NoArgumentsProvided {
