@@ -60,11 +60,29 @@ namespace DelDir.Cli.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The directory {x} could not be located. If the directory exists please check if it has a correcy or valid path to it..
+        /// </summary>
+        internal static string Exception_DirectoryNotFound {
+            get {
+                return ResourceManager.GetString("Exception.DirectoryNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No arguments for the directory to be deleted were passed..
         /// </summary>
         internal static string Exception_NoArgumentsProvided {
             get {
                 return ResourceManager.GetString("Exception.NoArgumentsProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A non-empty directory of {x} was provided. If this was intentional please use the del command or an equivalent to delete a directory with files or folders in it. If this was not intentional please view the contents of the directory and ensure it is empty before deletion. If the directory was empty please file a bug report for this program at https://github.com/alastairlundy/BasisBox/issues/.
+        /// </summary>
+        internal static string Exception_NonEmptyDirectory {
+            get {
+                return ResourceManager.GetString("Exception.NonEmptyDirectory", resourceCulture);
             }
         }
     }

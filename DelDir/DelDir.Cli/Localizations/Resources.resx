@@ -19,6 +19,12 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="Exception.NoArgumentsProvided" xml:space="preserve">
-        <value />
+        <value>No arguments for the directory to be deleted were passed.</value>
+    </data>
+    <data name="Exception.NonEmptyDirectory" xml:space="preserve">
+        <value>A non-empty directory of {x} was provided. If this was intentional please use the del command or an equivalent to delete a directory with files or folders in it. If this was not intentional please view the contents of the directory and ensure it is empty before deletion. If the directory was empty please file a bug report for this program at https://github.com/alastairlundy/BasisBox/issues/</value>
+    </data>
+    <data name="Exception.DirectoryNotFound" xml:space="preserve">
+        <value>The directory {x} could not be located. If the directory exists please check if it has a correcy or valid path to it.</value>
     </data>
 </root>

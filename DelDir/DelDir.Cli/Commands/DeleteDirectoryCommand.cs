@@ -18,6 +18,9 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+
+using Del.Library;
+
 using DelDir.Cli.Localizations;
 
 using Spectre.Console;
@@ -57,20 +60,46 @@ public class DeleteDirectoryCommand : Command<DeleteDirectoryCommand.Settings>
         
         if (settings.DirectoryToBeDeleted == null)
         {
-            AnsiConsole.WriteException(new ArgumentNullException(nameof(settings.DirectoryToBeDeleted), Resources.), exceptionFormats);
+            AnsiConsole.WriteException(new ArgumentNullException(nameof(settings.DirectoryToBeDeleted), Resources.Exception_NoArgumentsProvided), exceptionFormats);
         }
 
         try
         {
             if (Directory.Exists(settings.DirectoryToBeDeleted))
             {
-                if (Directory.GetDirectories(settings.DirectoryToBeDeleted).Any() &&
-                    Directory.GetFiles(settings.DirectoryToBeDeleted).Any())
+                if (!Directory.GetDirectories(settings.DirectoryToBeDeleted).Any() &&
+                    !Directory.GetFiles(settings.DirectoryToBeDeleted).Any())
                 {
+                    DirectoryRemover directoryRemover = new DirectoryRemover();
+                    directoryRemover.DirectoryDeleted += DirectoryRemoverOnDirectoryDeleted;
+
+                    void DirectoryRemoverOnDirectoryDeleted(object? sender, string e)
+                    {
+                        if (settings.Verbose)
+                        {
+                            AnsiConsole.WriteLine(e);
+                        }
+                    }
                     
+                    directoryRemover.DeleteDirectory(settings.DirectoryToBeDeleted, true);
+
+                    if (settings.RemoveEmptyParentDirectories)
+                    {
+                        if (Directory.GetParent(settings.DirectoryToBeDeleted)!.GetFiles().Length == 0)
+                        {
+                            directoryRemover.DeleteDirectory(Directory.GetParent(settings.DirectoryToBeDeleted)!.Name, true);
+                        }    
+                    }
+                    
+                    return 0;
+                }
+                else
+                {
+                    throw new ArgumentException(Resources.Exception_NonEmptyDirectory.Replace("{x}", settings.DirectoryToBeDeleted));
                 }
             }
-            return 0;
+
+            throw new DirectoryNotFoundException(Resources.Exception_DirectoryNotFound.Replace("{x}", settings.DirectoryToBeDeleted));
         }
         catch(Exception exception)
         {
