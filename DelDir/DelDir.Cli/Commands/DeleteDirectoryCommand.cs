@@ -42,7 +42,6 @@ public class DeleteDirectoryCommand : Command<DeleteDirectoryCommand.Settings>
         [CommandOption("-p")]
         [DefaultValue(false)]
         public bool RemoveEmptyParentDirectories { get; init; }
-
     }
 
     public override int Execute(CommandContext context, Settings settings)
