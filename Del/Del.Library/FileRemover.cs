@@ -26,11 +26,16 @@ public class FileRemover
 {
     public event EventHandler<string> FileDeleted;
 
+    public FileRemover()
+    {
+        
+    }
+
     /// <summary>
-    /// 
+    /// Attempts to delete a file.
     /// </summary>
-    /// <param name="file"></param>
-    /// <returns></returns>
+    /// <param name="file">The file to be deleted.</param>
+    /// <returns>true if the file has been successfully deleted; returns false otherwise.</returns>
     public bool TryDeleteFile(string file)
     {
         try
@@ -45,10 +50,10 @@ public class FileRemover
     }
     
     /// <summary>
-    /// 
+    /// Deletes a file.
     /// </summary>
-    /// <param name="file"></param>
-    /// <exception cref="FileNotFoundException"></exception>
+    /// <param name="file">The file to be deleted.</param>
+    /// <exception cref="FileNotFoundException">Thrown if the file doesn't exist.</exception>
     public void DeleteFile(string file)
     {
         if (File.Exists(file))
@@ -61,9 +66,9 @@ public class FileRemover
     }
 
     /// <summary>
-    /// 
+    /// Deletes multiple files.
     /// </summary>
-    /// <param name="files"></param>
+    /// <param name="files">The files to be deleted.</param>
     public void DeleteFiles(IEnumerable<string> files)
     {
         foreach (string file in files)

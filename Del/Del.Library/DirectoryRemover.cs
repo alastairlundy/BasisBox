@@ -17,7 +17,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 using Del.Library.Localizations;
 
@@ -25,15 +24,20 @@ namespace Del.Library;
 
 public class DirectoryRemover
 {
+    public DirectoryRemover()
+    {
+        
+    }
+    
     public event EventHandler<string> DirectoryDeleted; 
     public event EventHandler<string> FileDeleted;
 
     /// <summary>
-    /// 
+    /// Attempts to delete the specified Directory.
     /// </summary>
-    /// <param name="directory"></param>
-    /// <param name="deleteEmptyDirectory"></param>
-    /// <returns></returns>
+    /// <param name="directory">The directory to be deleted.</param>
+    /// <param name="deleteEmptyDirectory">Whether to delete the directory if it is empty or not.</param>
+    /// <returns>true if the directory was successfully deleted; returns false otherwise.</returns>
     public bool TryDeleteDirectory(string directory, bool deleteEmptyDirectory)
     {
         try
@@ -48,10 +52,10 @@ public class DirectoryRemover
     }
     
     /// <summary>
-    /// 
+    /// Deletes a specified directory.
     /// </summary>
-    /// <param name="directory"></param>
-    /// <param name="deleteEmptyDirectory"></param>
+    /// <param name="directory">The directory to be deleted.</param>
+    /// <param name="deleteEmptyDirectory">Whether to delete the directory or not if the directory is empty.</param>
     public void DeleteDirectory(string directory, bool deleteEmptyDirectory)
     {
         if (Directory.GetFiles(directory).Length == 0 &&
@@ -71,10 +75,10 @@ public class DirectoryRemover
     }
 
     /// <summary>
-    /// 
+    /// Deletes multiple specified directories.
     /// </summary>
-    /// <param name="directories"></param>
-    /// <param name="deleteEmptyDirectory"></param>
+    /// <param name="directories">The directories to be deleted.</param>
+    /// <param name="deleteEmptyDirectory">Whether to delete empty directories or not.</param>
     public void DeleteDirectories(IEnumerable<string> directories, bool deleteEmptyDirectory)
     {
         foreach (string directory in directories)
@@ -82,13 +86,13 @@ public class DirectoryRemover
             DeleteDirectory(directory, deleteEmptyDirectory);
         }
     }
-    
+
     /// <summary>
-    /// 
+    /// Deletes a directory recursively by deleting 
     /// </summary>
-    /// <param name="directory"></param>
-    /// <param name="deleteEmptyDirectory"></param>
-    /// <exception cref="DirectoryNotFoundException"></exception>
+    /// <param name="directory">The directory to be recursively deleted.</param>
+    /// <param name="deleteEmptyDirectory">Whether to delete empty directories or not.</param>
+    /// <exception cref="DirectoryNotFoundException">Thrown if the directory is not found.</exception>
     public void DeleteRecursively(string directory, bool deleteEmptyDirectory)
     {
         if (Directory.Exists(directory))
@@ -137,11 +141,11 @@ public class DirectoryRemover
     }
 
     /// <summary>
-    /// 
+    /// Attempts to delete a directory recursively by deleting sub-folders and files before deleting the directory.
     /// </summary>
-    /// <param name="directory"></param>
-    /// <param name="deleteEmptyDirectories"></param>
-    /// <returns></returns>
+    /// <param name="directory">The parent directory to be deleted.</param>
+    /// <param name="deleteEmptyDirectories">Whether to delete empty sub-folders or not.</param>
+    /// <returns>true if the directory was recursively deleted successfully; returns false otherwise.</returns>
     public bool TryDeleteRecursively(string directory, bool deleteEmptyDirectories)
     {
         try

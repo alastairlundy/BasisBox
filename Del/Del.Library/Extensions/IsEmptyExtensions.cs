@@ -23,6 +23,12 @@ namespace Del.Library.Extensions;
 public static class IsEmptyExtensions
 {
     
+    /// <summary>
+    /// Checks if a Directory is empty or not.
+    /// </summary>
+    /// <param name="directory">The directory to be searched.</param>
+    /// <returns>true if the directory is empty; returns false otherwise.</returns>
+    /// <exception cref="DirectoryNotFoundException">Thrown if the directory does not exist.</exception>
     public static bool IsDirectoryEmpty(this string directory)
     {
         if (Directory.Exists(directory))

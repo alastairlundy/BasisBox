@@ -21,26 +21,29 @@ using Del.Library.Localizations;
 
 namespace Del.Library;
 
-public class RecursiveDirectoryExplorer
+/// <summary>
+/// 
+/// </summary>
+public static class RecursiveDirectoryExplorer
 {
     
     /// <summary>
-    /// 
+    /// Gets the directories and files within a parent directory.
     /// </summary>
-    /// <param name="directory"></param>
-    /// <returns></returns>
+    /// <param name="directory">The directory to be searched.</param>
+    /// <returns>the directories and files within a parent directory.</returns>
     public static (IEnumerable<string> files, IEnumerable<string> directories, IEnumerable<string> emptyDirectories) GetDirectoryContents(string directory)
     {
         return GetDirectoryContents(directory, true);
     }
     
     /// <summary>
-    /// 
+    /// Gets the directories and files within a parent directory.
     /// </summary>
-    /// <param name="directory"></param>
-    /// <param name="includeEmptyDirectories"></param>
-    /// <returns></returns>
-    /// <exception cref="DirectoryNotFoundException"></exception>
+    /// <param name="directory">The directory to be searched.</param>
+    /// <param name="includeEmptyDirectories">Whether to include empty directories or not.</param>
+    /// <returns>the directories and files within a parent directory.</returns>
+    /// <exception cref="DirectoryNotFoundException">Thrown if the directory does not exist.</exception>
     public static (IEnumerable<string> files, IEnumerable<string> directories, IEnumerable<string> emptyDirectories) GetDirectoryContents(string directory, bool includeEmptyDirectories)
     {
         List<string> files = new List<string>();
