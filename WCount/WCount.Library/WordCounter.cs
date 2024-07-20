@@ -14,7 +14,7 @@
    limitations under the License.
  */
 
-using WCount.Library.localizations;
+using WCount.Library.Localizations;
 
 namespace WCount.Library;
 
@@ -23,55 +23,75 @@ public static class WordCounter
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="files"></param>
+    /// <param name="s"></param>
     /// <returns></returns>
-    public static ulong TotalWordCount(string[] files)
+    public static ulong CountWords(this string s)
     {
-        long[] wordCounts = new long[files!.Length];
-        for (int index = 0; index < files.Length; index++)
-        {
-            wordCounts[index] =  CountWords(files[index]);
-        }
-            
-        ulong totalWordCounts = 0;
+        ulong totalCount = 0;
+        
+        string[] words = s.Split(' ');
 
-        foreach (int lineCount in wordCounts)
+        if (words.Length > 0)
         {
-            if (lineCount == -1)
+            totalCount += Convert.ToUInt64(words.Length);
+        }
+        else
+        {
+            if (s.Length > 0)
             {
-                return ulong.MinValue;
+                totalCount = 1;
             }
-            
-            totalWordCounts += Convert.ToUInt64(lineCount);
         }
 
-        return totalWordCounts;
+        return totalCount;
     }
-
+    
     /// <summary>
     /// 
     /// </summary>
     /// <param name="filePath"></param>
     /// <returns></returns>
     /// <exception cref="FileNotFoundException"></exception>
-    public static long CountWords(string filePath)
+    public static ulong CountWordsInFile(this string filePath)
     {
         if (File.Exists(filePath))
         {
-            long wordCount = 0;
+            ulong wordCount = 0;
             
             string[] lines = File.ReadAllLines(filePath);
 
             foreach (string line in lines)
             {
-                string[] words = line.Split(' ');
-
-                wordCount += Convert.ToInt64(words.Length);
+                wordCount += CountWords(line);
             }
 
             return wordCount;
         }
+        else
+        {
+            throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+        }
+    }
 
-        throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="words"></param>
+    /// <returns></returns>
+    public static ulong CountWords(this IEnumerable<string> words)
+    {
+        ulong totalCount = 0;
+        
+        foreach (string s in words)
+        {
+            var _words = s.Split(' ');
+
+            if (_words.Length > 0)
+            {
+                totalCount += Convert.ToUInt64(_words.Length);
+            }
+        }
+
+        return totalCount;
     }
 }

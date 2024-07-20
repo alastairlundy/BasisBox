@@ -14,7 +14,7 @@
    limitations under the License.
  */
 
-using WCount.Library.localizations;
+using WCount.Library.Localizations;
 
 namespace WCount.Library;
 
@@ -23,64 +23,41 @@ public static class LineCounter
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="files"></param>
+    /// <param name="filePath"></param>
     /// <returns></returns>
-    public static ulong TotalLineCount(string[] files)
+    /// <exception cref="FileNotFoundException"></exception>
+    public static ulong CountLinesInFile(this string filePath)
     {
-        int[] lineCounts = new int[files.Length];
-        for (int index = 0; index < files.Length; index++)
+        if (File.Exists(filePath))
         {
-            lineCounts[index] = CountLinesInt(files[index]);
+            return File.ReadAllLines(filePath).CountLines();
         }
-
-        ulong totalLineCounts = 0;
-
-        foreach (int lineCount in lineCounts)
+        else
         {
-            if (lineCount == -1)
-            {
-                return ulong.MinValue;
-            }
-            
-            totalLineCounts += Convert.ToUInt64(lineCount);
+            throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
         }
-
-        return totalLineCounts;
     }
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="filePath"></param>
+    /// <param name="words"></param>
     /// <returns></returns>
-    /// <exception cref="FileNotFoundException"></exception>
-    public static int CountLinesInt(string filePath)
+    public static ulong CountLines(this IEnumerable<string> words)
     {
-        if(File.Exists(filePath))
+        ulong totalCount = 0;
+        
+        foreach (string s in words)
         {
-            string[] lines = File.ReadAllLines(filePath);
-
-            return lines.Length;
-        }
-
-        throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
-    }
-
-    public static ulong CountLinesLong(string filePath)
-    {
-        if (File.Exists(filePath))
-        {
-            ulong wordCount = 0;
-            IEnumerable<string> lines = File.ReadLines(filePath);
-            
-            foreach (string line in lines)
+            foreach (char c in s)
             {
-                wordCount++;
+                if (c.Equals('\n') || c.Equals(char.Parse("\r\n")))
+                {
+                    totalCount++;
+                }
             }
-
-            return wordCount;
         }
 
-        throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+        return totalCount;
     }
 }

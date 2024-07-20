@@ -15,69 +15,63 @@
  */
 
 using System.Text;
-using WCount.Library.localizations;
+using WCount.Library.Enums;
+using WCount.Library.Localizations;
 
 namespace WCount.Library;
 
 public static class ByteCounter
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="files"></param>
-    /// <returns></returns>
-    public static ulong TotalByteCount(string[] files)
+    public static int CountBytes(this string s, TextEncodingType textEncodingType)
     {
-        ulong[] lineCounts = new ulong[files.Length];
-        for (int index = 0; index < files.Length; index++)
+        byte[] bytes = textEncodingType switch
         {
-            lineCounts[index] = CountBytes(files[index]);
-        }
+            TextEncodingType.LATIN1 => Encoding.Latin1.GetBytes(s),
+            TextEncodingType.UNICODE => Encoding.Unicode.GetBytes(s),
+            TextEncodingType.ASCII => Encoding.ASCII.GetBytes(s),
+            TextEncodingType.UTF7 => Encoding.UTF7.GetBytes(s),
+            TextEncodingType.UTF8 => Encoding.UTF8.GetBytes(s),
+            TextEncodingType.UTF32 => Encoding.UTF32.GetBytes(s),
+            _ => throw new NotImplementedException()
+        };
 
-        ulong totalLineCounts = 0;
-
-        foreach (int lineCount in lineCounts)
-        {
-            if (lineCount == -1)
-            {
-                return ulong.MinValue;
-            }
-            
-            totalLineCounts += Convert.ToUInt64(lineCount);
-        }
-
-        return totalLineCounts;
+        return bytes.Length;
     }
-    
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="filePath"></param>
+    /// <param name="textEncodingType"></param>
     /// <returns></returns>
     /// <exception cref="FileNotFoundException"></exception>
-    public static ulong CountBytes(string filePath)
+    public static ulong CountBytesInFile(this string filePath, TextEncodingType textEncodingType)
     {
         if (File.Exists(filePath))
         {
-            ulong byteCount = 0;
-            
-            string[] lines = File.ReadAllLines(filePath);
+            return CountBytes(File.ReadAllLines(filePath), textEncodingType);
+        }
+        else
+        {
+            throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+        }
+    }
 
-            foreach (string line in lines)
-            {
-                string[] words = line.Split(' ');
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="enumerable"></param>
+    /// <param name="textEncodingType"></param>
+    /// <returns></returns>
+    public static ulong CountBytes(this IEnumerable<string> enumerable, TextEncodingType textEncodingType)
+    {
+        ulong totalBytes = 0;
 
-                foreach (string word in words)
-                {
-                    byte[] bytes = Encoding.UTF8.GetBytes(word);
-
-                    byteCount += Convert.ToUInt64(bytes.Length);
-                }
-            }
-
-            return byteCount;
+        foreach (string s in enumerable)
+        {
+            totalBytes += Convert.ToUInt64(CountBytes(s, textEncodingType));
         }
 
-        throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+        return totalBytes;
     }
 }
