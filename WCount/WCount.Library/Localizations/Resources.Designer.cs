@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WCount.Library.localizations {
+namespace WCount.Library.Localizations {
     using System;
     
     
