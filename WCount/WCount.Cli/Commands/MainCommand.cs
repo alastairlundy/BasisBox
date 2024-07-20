@@ -25,6 +25,7 @@ using Spectre.Console.Cli;
 
 using WCount.Cli.Localizations;
 using WCount.Library;
+using WCount.Library.Enums;
 
 namespace WCount.Cli.Commands;
 
@@ -93,13 +94,17 @@ public class MainCommand : Command<MainCommand.Settings>
                 {
                     grid.AddColumn();
                     grid.AddColumn();
+
+                    ulong totalLines = 0;
                     
                     foreach (string file in settings.Files!)
                     {
-                        grid.AddRow(new string[] { LineCounter.CountLinesInt(file).ToString(), new TextPath(file).ToString()!});
+                        ulong lineCount = file.CountLinesInFile();
+                        totalLines += lineCount;
+                        grid.AddRow(new string[] { lineCount.ToString(), new TextPath(file).ToString()!});
                     }
 
-                    grid.AddRow(new string[] { LineCounter.TotalLineCount(settings.Files).ToString(), Resources.App_Total_Label});
+                    grid.AddRow(new string[] { totalLines.ToString() , Resources.App_Total_Label});
                     
                     AnsiConsole.Write(grid);
                     return 0;
@@ -109,13 +114,17 @@ public class MainCommand : Command<MainCommand.Settings>
                 {
                     grid.AddColumn();
                     grid.AddColumn();
+
+                    ulong totalWords = 0;
                     
                     foreach (string file in settings.Files!)
                     {
-                        grid.AddRow(new string[] { WordCounter.CountWords(file).ToString(), file});
+                        ulong wordCount = file.CountWords();
+                        totalWords += wordCount;
+                        grid.AddRow(new string[] { wordCount.ToString(), file});
                     }
 
-                    grid.AddRow(new string[] { WordCounter.TotalWordCount(settings.Files).ToString(), Resources.App_Total_Label});
+                    grid.AddRow(new string[] { totalWords.ToString(), Resources.App_Total_Label});
                     
                     AnsiConsole.Write(grid);
                     return 0;
@@ -125,13 +134,16 @@ public class MainCommand : Command<MainCommand.Settings>
                 {   
                     grid.AddColumn();
                     grid.AddColumn();
-                    
+
+                    ulong totalChars = 0;
                     foreach (string file in settings.Files!)
                     {
-                        grid.AddRow(new string[] { CharCounter.CountCharacters(file).ToString(), file });
+                        ulong charCount = file.CountCharsInFile();
+                        totalChars += charCount;
+                        grid.AddRow(new string[] { charCount.ToString(), file });
                     }
 
-                    grid.AddRow(new string[] { CharCounter.TotalCharCount(settings.Files).ToString(), Resources.App_Total_Label});
+                    grid.AddRow(new string[] {totalChars.ToString(), Resources.App_Total_Label});
                     
                     AnsiConsole.Write(grid);
                     return 0;
@@ -141,13 +153,17 @@ public class MainCommand : Command<MainCommand.Settings>
                 {
                     grid.AddColumn();
                     grid.AddColumn();
+
+                    ulong totalBytes = 0;
                     
                     foreach (string file in settings.Files!)
                     {
-                        grid.AddRow(new string[] { ByteCounter.CountBytes(file).ToString(), file});
+                        ulong byteCount = file.CountBytesInFile(TextEncodingType.UTF8);
+                        totalBytes += byteCount;
+                        grid.AddRow(new string[] { byteCount.ToString(), file});
                     }
 
-                    grid.AddRow(new string[] { ByteCounter.TotalByteCount(settings.Files).ToString(), Resources.App_Total_Label});
+                    grid.AddRow(new string[] { totalBytes.ToString(), Resources.App_Total_Label});
 
                     AnsiConsole.Write(grid);
                     return 0;
@@ -155,9 +171,16 @@ public class MainCommand : Command<MainCommand.Settings>
 
                 if (!settings.WordCount && !settings.LineCount && !settings.ByteCount && !settings.CharacterCount)
                 {
-                    ulong totalLineCount = LineCounter.TotalLineCount(settings.Files!);
-                    ulong totalWordCount = WordCounter.TotalWordCount(settings.Files!);
-                    ulong totalCharCount = CharCounter.TotalCharCount(settings.Files!);
+                    ulong totalLineCount = 0;
+                    ulong totalWordCount = 0;
+                    ulong totalCharCount = 0;
+
+                    foreach (string file in settings.Files!)
+                    {
+                        totalLineCount += file.CountLinesInFile();
+                        totalWordCount += file.CountWordsInFile();
+                        totalCharCount += file.CountCharsInFile();
+                    }
                     
                     grid.AddColumn();
                     grid.AddColumn();
@@ -165,7 +188,7 @@ public class MainCommand : Command<MainCommand.Settings>
                     
                     foreach (string file in settings.Files!)
                     {
-                        grid.AddRow(new string[] { LineCounter.CountLinesInt(file).ToString(), WordCounter.CountWords(file).ToString(), CharCounter.CountCharacters(file).ToString(), file});
+                        grid.AddRow(new string[] { file.CountLinesInFile().ToString(), file.CountWords().ToString(), file.CountCharsInFile().ToString(), file});
                     }
 
                     grid.AddRow(new string[] { totalLineCount.ToString(), totalWordCount.ToString(), totalCharCount.ToString(), Resources.App_Total_Label});
