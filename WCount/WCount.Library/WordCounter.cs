@@ -88,11 +88,11 @@ public static class WordCounter
         
         foreach (string s in enumerable)
         {
-            var _words = s.Split(' ');
+            var words = s.Split(' ');
 
-            if (_words.Length > 0)
+            if (words.Length > 0)
             {
-                totalCount += Convert.ToUInt64(_words.Length);
+                totalCount += Convert.ToUInt64(words.Length);
             }
         }
 
