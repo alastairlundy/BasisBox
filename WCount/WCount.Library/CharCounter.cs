@@ -24,10 +24,10 @@ public static class CharCounter
     /// <exception cref="FileNotFoundException"></exception>
     public static ulong CountCharsInFile(this string filePath)
     {
-        ulong totalChars = 0;
-        
         if (File.Exists(filePath))
         {
+            ulong totalChars = 0;
+            
             string[] lines = File.ReadAllLines(filePath);
 
             foreach (string line in lines)
