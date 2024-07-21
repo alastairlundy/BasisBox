@@ -15,6 +15,7 @@
  */
 
 
+// ReSharper disable InconsistentNaming
 namespace WCount.Library.Enums;
 
 public enum TextEncodingType
