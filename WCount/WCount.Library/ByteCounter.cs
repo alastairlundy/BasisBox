@@ -22,6 +22,13 @@ namespace WCount.Library;
 
 public static class ByteCounter
 {
+    /// <summary>
+    /// Gets the number of bytes in a string.
+    /// </summary>
+    /// <param name="s">The string to be searched.</param>
+    /// <param name="textEncodingType">The type of encoding to use to decode the bytes.</param>
+    /// <returns>the number of bytes in the string.</returns>
+    /// <exception cref="ArgumentException">Thrown if the text encoding is not supported.</exception>
     public static int CountBytes(this string s, TextEncodingType textEncodingType)
     {
         byte[] bytes = textEncodingType switch
@@ -32,19 +39,19 @@ public static class ByteCounter
             TextEncodingType.UTF7 => Encoding.UTF7.GetBytes(s),
             TextEncodingType.UTF8 => Encoding.UTF8.GetBytes(s),
             TextEncodingType.UTF32 => Encoding.UTF32.GetBytes(s),
-            _ => throw new NotImplementedException()
+            _ => throw new ArgumentException()
         };
 
         return bytes.Length;
     }
 
     /// <summary>
-    /// 
+    /// Gets the number of bytes in a file.
     /// </summary>
-    /// <param name="filePath"></param>
-    /// <param name="textEncodingType"></param>
-    /// <returns></returns>
-    /// <exception cref="FileNotFoundException"></exception>
+    /// <param name="filePath">The file path of the file to be searched.</param>
+    /// <param name="textEncodingType">The type of encoding to use to decode the bytes.</param>
+    /// <returns>the number of bytes in a file.</returns>
+    /// <exception cref="FileNotFoundException">Thrown if the file could not be located.</exception>
     public static ulong CountBytesInFile(this string filePath, TextEncodingType textEncodingType)
     {
         if (File.Exists(filePath))
@@ -58,11 +65,11 @@ public static class ByteCounter
     }
 
     /// <summary>
-    /// 
+    /// Gets the number of bytes in an IEnumerable of strings.
     /// </summary>
-    /// <param name="enumerable"></param>
-    /// <param name="textEncodingType"></param>
-    /// <returns></returns>
+    /// <param name="enumerable">The IEnumerable to be searched.</param>
+    /// <param name="textEncodingType">The type of encoding to use to decode the bytes.</param>
+    /// <returns>the number of bytes in a specified IEnumerable.</returns>
     public static ulong CountBytes(this IEnumerable<string> enumerable, TextEncodingType textEncodingType)
     {
         ulong totalBytes = 0;
