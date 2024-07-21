@@ -14,6 +14,9 @@
    limitations under the License.
  */
 
+using System.Collections.Generic;
+using System.IO;
+
 using WCount.Library.Localizations;
 
 namespace WCount.Library;

@@ -14,7 +14,11 @@
    limitations under the License.
  */
 
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text;
+
 using WCount.Library.Enums;
 using WCount.Library.Localizations;
 
