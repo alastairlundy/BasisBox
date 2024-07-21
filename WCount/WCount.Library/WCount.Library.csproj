@@ -5,7 +5,8 @@
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageLicense>LICENSE.txt</PackageLicense>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <Title>WCount.Library</Title>
         <Authors>AlastairLundy</Authors>
         <Copyright>Copyright (c) Alastair Lundy 2024</Copyright>
@@ -13,13 +14,23 @@
         <RepositoryType>git</RepositoryType>
         <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <Description>Count the number of lines, words, characters, and/or bytes in specified files, strings, or IEnumerables of strings.</Description>
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Include="..\LICENSE.txt">
-        <Link>LICENSE.txt</Link>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
+        <Content Include="..\LICENSE.txt">
+            <Link>LICENSE.txt</Link>
+            <PackagePath>LICENSE.txt</PackagePath>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="README.md">
+            <Link>README.md</Link>
+            <PackagePath>README.md</PackagePath>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
