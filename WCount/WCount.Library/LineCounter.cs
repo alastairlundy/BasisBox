@@ -21,11 +21,11 @@ namespace WCount.Library;
 public static class LineCounter
 {
     /// <summary>
-    /// 
+    /// Gets the number of lines in a file.
     /// </summary>
-    /// <param name="filePath"></param>
-    /// <returns></returns>
-    /// <exception cref="FileNotFoundException"></exception>
+    /// <param name="filePath">The file path of the file to be searched.</param>
+    /// <returns>the number of lines in a file.</returns>
+    /// <exception cref="FileNotFoundException">Thrown if the file could not be located.</exception>
     public static ulong CountLinesInFile(this string filePath)
     {
         if (File.Exists(filePath))
@@ -39,23 +39,37 @@ public static class LineCounter
     }
 
     /// <summary>
-    /// 
+    /// Gets the number of lines in a string.
     /// </summary>
-    /// <param name="words"></param>
-    /// <returns></returns>
-    public static ulong CountLines(this IEnumerable<string> words)
+    /// <param name="s">The string to be searched.</param>
+    /// <returns>the number of lines in a string.</returns>
+    public static ulong CountLines(this string s)
     {
         ulong totalCount = 0;
         
-        foreach (string s in words)
+        foreach (char c in s)
         {
-            foreach (char c in s)
+            if (c.Equals('\n') || c.Equals(char.Parse("\r\n")))
             {
-                if (c.Equals('\n') || c.Equals(char.Parse("\r\n")))
-                {
-                    totalCount++;
-                }
+                totalCount++;
             }
+        }
+
+        return totalCount;
+    }
+
+    /// <summary>
+    /// Gets the number of lines in an IEnumerable of strings.
+    /// </summary>
+    /// <param name="enumerable">The IEnumerable to be searched.</param>
+    /// <returns>the number of lines in the specified IEnumerable.</returns>
+    public static ulong CountLines(this IEnumerable<string> enumerable)
+    {
+        ulong totalCount = 0;
+        
+        foreach (string s in enumerable)
+        {
+            totalCount += CountLines(s);
         }
 
         return totalCount;

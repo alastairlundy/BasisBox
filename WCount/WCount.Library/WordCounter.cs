@@ -21,10 +21,10 @@ namespace WCount.Library;
 public static class WordCounter
 {
     /// <summary>
-    /// 
+    /// Gets the number of words in a string.
     /// </summary>
-    /// <param name="s"></param>
-    /// <returns></returns>
+    /// <param name="s">The string to be searched.</param>
+    /// <returns>The number of words in the provided string.</returns>
     public static ulong CountWords(this string s)
     {
         ulong totalCount = 0;
@@ -47,11 +47,11 @@ public static class WordCounter
     }
     
     /// <summary>
-    /// 
+    /// Gets the number of words in a file.
     /// </summary>
-    /// <param name="filePath"></param>
-    /// <returns></returns>
-    /// <exception cref="FileNotFoundException"></exception>
+    /// <param name="filePath">The file path of the file to be searched.</param>
+    /// <returns>The number of words in the file.</returns>
+    /// <exception cref="FileNotFoundException">Thrown if the file could not be found.</exception>
     public static ulong CountWordsInFile(this string filePath)
     {
         if (File.Exists(filePath))
@@ -74,15 +74,15 @@ public static class WordCounter
     }
 
     /// <summary>
-    /// 
+    /// Gets the number of words in an IEnumerable of strings.
     /// </summary>
-    /// <param name="words"></param>
-    /// <returns></returns>
-    public static ulong CountWords(this IEnumerable<string> words)
+    /// <param name="enumerable">The IEnumerable of strings to be searched.</param>
+    /// <returns>the number of words in an IEnumerable of strings.</returns>
+    public static ulong CountWords(this IEnumerable<string> enumerable)
     {
         ulong totalCount = 0;
         
-        foreach (string s in words)
+        foreach (string s in enumerable)
         {
             var _words = s.Split(' ');
 
