@@ -11,12 +11,12 @@
 | NewDir | newdir | mkdir | Create new directories with or without parent directories. | C# |
 | LoginName | loginname | logname | Prints the name of the current user name. | C# |
 | Del | del | rm | Delete a file or directory, either recursively or non-recursively. | C# |
+| DelDir | deldir | rmdir | Delete a directory, either recursively or non-recursively. | C# |
 
 
 ### Programs being developed
 | Program name | Description | Written  In |
 |-|-|-|
-| DelDir | Delete a directory, either recursively or non-recursively. | C# |
 | Parrot | | C# |
 | ConCat | | C# |
 | Moment | | C# |
