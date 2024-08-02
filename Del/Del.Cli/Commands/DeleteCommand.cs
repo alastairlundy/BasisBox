@@ -149,7 +149,7 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
                         }
                         
                         fileRemover.DeleteFiles(filesToBeDeleted);
-                        directoryRemover.DeleteDirectories(directoriesToBeDeleted, settings.DeleteEmptyDirectory);
+                        directoryRemover.DeleteDirectories(directoriesToBeDeleted, settings.DeleteEmptyDirectory, false);
                     }
                     else
                     {
@@ -199,7 +199,7 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
                                 }
                             }
 
-                            directoryRemover.DeleteDirectories(directoriesToBeDeleted, settings.DeleteEmptyDirectory);
+                            directoryRemover.DeleteDirectories(directoriesToBeDeleted, settings.DeleteEmptyDirectory, false);
                             fileRemover.DeleteFiles(filesToBeDeleted);
                             
                         }
@@ -209,7 +209,7 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
 
                             if (deleteDirectory)
                             {
-                                directoryRemover.DeleteDirectory(settings.FileOrDirectoryToBeDeleted, settings.DeleteEmptyDirectory);
+                                directoryRemover.DeleteDirectory(settings.FileOrDirectoryToBeDeleted, settings.DeleteEmptyDirectory, false);
                             }
                         }
                     }
@@ -221,7 +221,7 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
                         }
                         else
                         {
-                            directoryRemover.DeleteDirectory(settings.FileOrDirectoryToBeDeleted, settings.DeleteEmptyDirectory);
+                            directoryRemover.DeleteDirectory(settings.FileOrDirectoryToBeDeleted, settings.DeleteEmptyDirectory, false);
                         }
                     }
                     

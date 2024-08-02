@@ -133,7 +133,7 @@ public class DeleteManyCommand : Command<DeleteManyCommand.Settings>
                         }
                         
                         fileRemover.DeleteFiles(filesToBeDeleted);
-                        directoryRemover.DeleteDirectories(directoriesToBeDeleted, settings.DeleteEmptyDirectory);
+                        directoryRemover.DeleteDirectories(directoriesToBeDeleted, settings.DeleteEmptyDirectory, false);
                     }
                     else
                     {
@@ -181,7 +181,7 @@ public class DeleteManyCommand : Command<DeleteManyCommand.Settings>
                                }
 
                                fileRemover.DeleteFiles(filesToBeDeleted);   
-                               directoryRemover.DeleteDirectories(directoriesToBeDeleted, settings.DeleteEmptyDirectory);
+                               directoryRemover.DeleteDirectories(directoriesToBeDeleted, settings.DeleteEmptyDirectory, false);
                             }
                             else
                             {
@@ -199,7 +199,7 @@ public class DeleteManyCommand : Command<DeleteManyCommand.Settings>
 
                             if (deleteItem)
                             {
-                               directoryRemover.DeleteDirectory(fileOrDirectory, settings.DeleteEmptyDirectory); 
+                               directoryRemover.DeleteDirectory(fileOrDirectory, settings.DeleteEmptyDirectory, false); 
                             }
                         }
                     }
