@@ -15,7 +15,7 @@
  */
 
 using System.IO;
-
+using AlastairLundy.Extensions.System;
 using Del.Library.Localizations;
 
 namespace Del.Library.Extensions;
@@ -33,11 +33,45 @@ public static class IsEmptyExtensions
     {
         if (Directory.Exists(directory))
         {
-            return Directory.GetDirectories(directory).Length == 0 && Directory.GetFiles(directory).Length == 0;
+            return Directory.GetFiles(directory).Length == 0;
         }
         else
         {
-            throw new DirectoryNotFoundException($"{Resources.Exceptions_DirectoryNotFound.Replace("{x}", directory)}");
+            throw new DirectoryNotFoundException(Resources.Exceptions_DirectoryNotFound.Replace("{x}", directory));
         }
+    }
+
+    /// <summary>
+    /// Determines whether subdirectories of a directory are empty.
+    /// </summary>
+    /// <param name="directory">The directory to be searched.</param>
+    /// <returns>true if all subdirectories in a directory are empty; returns false otherwise.</returns>
+    /// <exception cref="DirectoryNotFoundException">Thrown if the directory does not exist or could not be located.</exception>
+    public static bool AreSubdirectoriesEmpty(this string directory)
+    {
+        if (!Directory.Exists(directory))
+        {
+            throw new DirectoryNotFoundException(Resources.Exceptions_DirectoryNotFound.Replace("{x}", directory));
+        }
+        
+        string[] subDirectories = Directory.GetDirectories(directory);
+                
+        bool[] allowRecursiveEmptyDirectoryDeletion = new bool[subDirectories.Length];
+
+        for (int i = 0; i < subDirectories.Length; i++)
+        {
+            string dir = subDirectories[i];
+                    
+            if (dir.IsDirectoryEmpty())
+            {
+                allowRecursiveEmptyDirectoryDeletion[i] = true;
+            }
+            else
+            {
+                allowRecursiveEmptyDirectoryDeletion[i] = false;
+            }
+        }
+
+        return allowRecursiveEmptyDirectoryDeletion.IsAllTrue();
     }
 }
