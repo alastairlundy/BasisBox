@@ -18,9 +18,9 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-
+using AlastairLundy.Extensions.System;
 using Del.Library;
-
+using Del.Library.Extensions;
 using DelDir.Cli.Localizations;
 
 using Spectre.Console;
@@ -71,21 +71,8 @@ public class DeleteDirectoryCommand : Command<DeleteDirectoryCommand.Settings>
             }
             if (settings.DirectoryToBeDeleted.Equals("*"))
             {
-                bool allowRecursiveEmptyDirectoryDeletion = false;
 
-                foreach (string directory in Directory.GetDirectories(settings.DirectoryToBeDeleted))
-                {
-                    if (Directory.GetFiles(directory).Length == 0)
-                    {
-                        allowRecursiveEmptyDirectoryDeletion = true;
-                    }
-                    else
-                    {
-                        allowRecursiveEmptyDirectoryDeletion = false;
-                    }
-                }
-
-                if (allowRecursiveEmptyDirectoryDeletion)
+                if (settings.DirectoryToBeDeleted.AreSubdirectoriesEmpty())
                 {
                     DirectoryRemover directoryRemover = new DirectoryRemover();
                     directoryRemover.DirectoryDeleted += OnDeleted;
@@ -103,7 +90,7 @@ public class DeleteDirectoryCommand : Command<DeleteDirectoryCommand.Settings>
                     
                     if (settings.RemoveEmptyParentDirectories)
                     {
-                        if (Directory.GetParent(settings.DirectoryToBeDeleted)!.GetFiles().Length == 0)
+                        if (Directory.GetParent(settings.DirectoryToBeDeleted)!.Name.IsDirectoryEmpty())
                         {
                             directoryRemover.DeleteDirectory(Directory.GetParent(settings.DirectoryToBeDeleted)!.Name, true);
                         }    
@@ -134,7 +121,7 @@ public class DeleteDirectoryCommand : Command<DeleteDirectoryCommand.Settings>
 
                     if (settings.RemoveEmptyParentDirectories)
                     {
-                        if (Directory.GetParent(settings.DirectoryToBeDeleted)!.GetFiles().Length == 0)
+                        if (Directory.GetParent(settings.DirectoryToBeDeleted)!.Name.IsDirectoryEmpty())
                         {
                             directoryRemover.DeleteDirectory(Directory.GetParent(settings.DirectoryToBeDeleted)!.Name, true);
                         }    
