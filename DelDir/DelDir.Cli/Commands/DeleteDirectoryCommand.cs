@@ -90,10 +90,7 @@ public class DeleteDirectoryCommand : Command<DeleteDirectoryCommand.Settings>
                     
                     if (settings.RemoveEmptyParentDirectories)
                     {
-                        if (Directory.GetParent(settings.DirectoryToBeDeleted)!.Name.IsDirectoryEmpty())
-                        {
-                            directoryRemover.DeleteDirectory(Directory.GetParent(settings.DirectoryToBeDeleted)!.Name, true);
-                        }    
+                        directoryRemover.DeleteParentDirectory(settings.DirectoryToBeDeleted, true);
                     }
 
                     return 0;
@@ -123,10 +120,7 @@ public class DeleteDirectoryCommand : Command<DeleteDirectoryCommand.Settings>
 
                     if (settings.RemoveEmptyParentDirectories)
                     {
-                        if (Directory.GetParent(settings.DirectoryToBeDeleted)!.Name.IsDirectoryEmpty())
-                        {
-                            directoryRemover.DeleteDirectory(Directory.GetParent(settings.DirectoryToBeDeleted)!.Name, true);
-                        }    
+                        directoryRemover.DeleteParentDirectory(settings.DirectoryToBeDeleted, true);
                     }
                     
                     return 0;
