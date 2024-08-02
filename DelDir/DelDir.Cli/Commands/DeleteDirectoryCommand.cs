@@ -90,7 +90,7 @@ public class DeleteDirectoryCommand : Command<DeleteDirectoryCommand.Settings>
                     
                     if (settings.RemoveEmptyParentDirectories)
                     {
-                        directoryRemover.DeleteParentDirectory(settings.DirectoryToBeDeleted, true);
+                        directoryRemover.DeleteParentDirectory(settings.DirectoryToBeDeleted, settings.RemoveEmptyParentDirectories);
                     }
 
                     return 0;
@@ -120,7 +120,7 @@ public class DeleteDirectoryCommand : Command<DeleteDirectoryCommand.Settings>
 
                     if (settings.RemoveEmptyParentDirectories)
                     {
-                        directoryRemover.DeleteParentDirectory(settings.DirectoryToBeDeleted, true);
+                        directoryRemover.DeleteParentDirectory(settings.DirectoryToBeDeleted, settings.RemoveEmptyParentDirectories);
                     }
                     
                     return 0;
@@ -130,8 +130,10 @@ public class DeleteDirectoryCommand : Command<DeleteDirectoryCommand.Settings>
                     throw new ArgumentException(Resources.Exception_NonEmptyDirectory.Replace("{x}", settings.DirectoryToBeDeleted));
                 }
             }
-
-            throw new DirectoryNotFoundException(Resources.Exception_DirectoryNotFound.Replace("{x}", settings.DirectoryToBeDeleted));
+            else
+            {
+                throw new DirectoryNotFoundException(Resources.Exception_DirectoryNotFound.Replace("{x}", settings.DirectoryToBeDeleted));
+            }
         }
         catch(Exception exception)
         {
