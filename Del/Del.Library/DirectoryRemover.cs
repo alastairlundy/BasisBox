@@ -38,12 +38,13 @@ public class DirectoryRemover
     /// </summary>
     /// <param name="directory">The directory to be deleted.</param>
     /// <param name="deleteEmptyDirectory">Whether to delete the directory if it is empty or not.</param>
+    /// <param name="deleteParentDirectory"></param>
     /// <returns>true if the directory was successfully deleted; returns false otherwise.</returns>
-    public bool TryDeleteDirectory(string directory, bool deleteEmptyDirectory)
+    public bool TryDeleteDirectory(string directory, bool deleteEmptyDirectory, bool deleteParentDirectory)
     {
         try
         {
-            DeleteDirectory(directory, deleteEmptyDirectory);
+            DeleteDirectory(directory, deleteEmptyDirectory, deleteParentDirectory);
             return true;
         }
         catch
@@ -51,29 +52,27 @@ public class DirectoryRemover
             return false;
         }
     }
-    
+
     /// <summary>
     /// Deletes a specified directory.
     /// </summary>
     /// <param name="directory">The directory to be deleted.</param>
     /// <param name="deleteEmptyDirectory">Whether to delete the directory or not if the directory is empty.</param>
+    /// <param name="deleteParentDirectory"></param>
     /// <exception cref="DirectoryNotFoundException">Thrown if the directory does not exist or could not be located.</exception>
-    public void DeleteDirectory(string directory, bool deleteEmptyDirectory)
+    public void DeleteDirectory(string directory, bool deleteEmptyDirectory, bool deleteParentDirectory)
     {
         if (Directory.Exists(directory))
         {
-            if (directory.IsDirectoryEmpty())
+            if ((directory.IsDirectoryEmpty() && deleteEmptyDirectory) || !deleteEmptyDirectory)
             {
-                if (deleteEmptyDirectory)
-                {
                     Directory.Delete(directory);
                     DirectoryDeleted?.Invoke(this, Resources.Directory_Deleted.Replace("{x}", directory));
-                }
-            }
-            else
-            {
-                Directory.Delete(directory);
-                DirectoryDeleted?.Invoke(this, Resources.Directory_Deleted.Replace("{x}", directory));
+
+                    if (deleteParentDirectory)
+                    {
+                       DeleteParentDirectory(directory, deleteEmptyDirectory);
+                    }
             }
         }
         else
@@ -94,26 +93,27 @@ public class DirectoryRemover
         {
             if (directory.IsDirectoryEmpty() && deleteEmptyDirectory || !directory.IsDirectoryEmpty())
             {
-                if (Directory.GetParent(directory)!.GetFiles().Length == 0)
-                {
-                    DeleteDirectory(Directory.GetParent(directory)!.Name, deleteEmptyDirectory);
-                }    
+                string parentDirectory = Directory.GetParent(directory)!.FullName;
+                
+                Directory.Delete(parentDirectory);
+                DirectoryDeleted?.Invoke(this, Resources.Directory_Deleted.Replace("{x}", parentDirectory));
             }
         }
 
         throw new DirectoryNotFoundException(Resources.Exceptions_DirectoryNotFound.Replace("{x}", directory));
     }
-    
+
     /// <summary>
     /// Deletes multiple specified directories.
     /// </summary>
     /// <param name="directories">The directories to be deleted.</param>
     /// <param name="deleteEmptyDirectory">Whether to delete empty directories or not.</param>
-    public void DeleteDirectories(IEnumerable<string> directories, bool deleteEmptyDirectory)
+    /// <param name="deleteParentDirectory"></param>
+    public void DeleteDirectories(IEnumerable<string> directories, bool deleteEmptyDirectory, bool deleteParentDirectory)
     {
         foreach (string directory in directories)
         {
-            DeleteDirectory(directory, deleteEmptyDirectory);
+            DeleteDirectory(directory, deleteEmptyDirectory, deleteParentDirectory);
         }
     }
 
