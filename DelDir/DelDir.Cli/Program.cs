@@ -27,9 +27,16 @@ app.Configure(config =>
         branchConfig.AddCommand<DeleteDirectoryCommand>("")
             .WithAlias("delete-directory")
             .WithAlias("delete");
+
+        branchConfig.AddCommand<DeleteManyDirectoriesCommand>("many")
+            .WithAlias("multi")
+            .WithAlias("delete-many")
+            .WithAlias("delete-multi");
     });
     
     config.UseAssemblyInformationalVersion();
 });
+
+app.SetDefaultCommand<DeleteDirectoryCommand>();
 
 return app.Run(args);
