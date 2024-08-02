@@ -95,6 +95,8 @@ public class DeleteDirectoryCommand : Command<DeleteDirectoryCommand.Settings>
                             directoryRemover.DeleteDirectory(Directory.GetParent(settings.DirectoryToBeDeleted)!.Name, true);
                         }    
                     }
+
+                    return 0;
                 }
                 else
                 {
