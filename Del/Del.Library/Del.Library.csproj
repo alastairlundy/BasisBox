@@ -10,11 +10,15 @@
         <Copyright>Copyright (c) 2024 Alastair Lundy</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/BasisBox</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 1.0.0
+* Changes to the IsEmptyExtensions
+* Added new ``AreSubdiriectoriesEmpty`` extension method</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Description>A library to assist in deleting files and folders recursively or non-recursively.</Description>
+        <PackageVersion>1.1.0</PackageVersion>
+        <Version>1.1.0</Version>
     </PropertyGroup>
 
     <ItemGroup>
