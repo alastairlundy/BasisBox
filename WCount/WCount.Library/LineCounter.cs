@@ -14,14 +14,16 @@
    limitations under the License.
  */
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 
+using WCount.Library.Interfaces;
 using WCount.Library.Localizations;
 
 namespace WCount.Library;
 
-public static class LineCounter
+public class LineCounter : ILineCounter
 {
     /// <summary>
     /// Gets the number of lines in a file.
@@ -29,11 +31,11 @@ public static class LineCounter
     /// <param name="filePath">The file path of the file to be searched.</param>
     /// <returns>the number of lines in a file.</returns>
     /// <exception cref="FileNotFoundException">Thrown if the file could not be located.</exception>
-    public static ulong CountLinesInFile(this string filePath)
+    public ulong CountLinesInFile(string filePath)
     {
         if (File.Exists(filePath))
         {
-            return File.ReadAllLines(filePath).CountLines();
+            return CountLines(File.ReadAllLines(filePath));
         }
         else
         {
@@ -46,13 +48,13 @@ public static class LineCounter
     /// </summary>
     /// <param name="s">The string to be searched.</param>
     /// <returns>the number of lines in a string.</returns>
-    public static ulong CountLines(this string s)
+    public ulong CountLines(string s)
     {
         ulong totalCount = 0;
         
         foreach (char c in s)
         {
-            if (c.Equals('\n') || c.Equals(char.Parse("\r\n")))
+            if (c.Equals('\n') || c.Equals(char.Parse("\r\n")) || c.ToString().Equals(Environment.NewLine))
             {
                 totalCount++;
             }
@@ -66,7 +68,7 @@ public static class LineCounter
     /// </summary>
     /// <param name="enumerable">The IEnumerable to be searched.</param>
     /// <returns>the number of lines in the specified IEnumerable.</returns>
-    public static ulong CountLines(this IEnumerable<string> enumerable)
+    public ulong CountLines(IEnumerable<string> enumerable)
     {
         ulong totalCount = 0;
         

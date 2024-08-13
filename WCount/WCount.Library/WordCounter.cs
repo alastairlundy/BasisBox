@@ -18,18 +18,19 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+using WCount.Library.Interfaces;
 using WCount.Library.Localizations;
 
 namespace WCount.Library;
 
-public static class WordCounter
+public class WordCounter : IWordCounter
 {
     /// <summary>
     /// Gets the number of words in a string.
     /// </summary>
     /// <param name="s">The string to be searched.</param>
     /// <returns>The number of words in the provided string.</returns>
-    public static ulong CountWords(this string s)
+    public ulong CountWords(string s)
     {
         ulong totalCount = 0;
         
@@ -56,7 +57,7 @@ public static class WordCounter
     /// <param name="filePath">The file path of the file to be searched.</param>
     /// <returns>The number of words in the file.</returns>
     /// <exception cref="FileNotFoundException">Thrown if the file could not be found.</exception>
-    public static ulong CountWordsInFile(this string filePath)
+    public ulong CountWordsInFile(string filePath)
     {
         if (File.Exists(filePath))
         {
@@ -82,7 +83,7 @@ public static class WordCounter
     /// </summary>
     /// <param name="enumerable">The IEnumerable of strings to be searched.</param>
     /// <returns>the number of words in an IEnumerable of strings.</returns>
-    public static ulong CountWords(this IEnumerable<string> enumerable)
+    public ulong CountWords(IEnumerable<string> enumerable)
     {
         ulong totalCount = 0;
         
