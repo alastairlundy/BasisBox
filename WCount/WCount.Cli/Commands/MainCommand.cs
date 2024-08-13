@@ -17,15 +17,16 @@
 using System.ComponentModel;
 
 using System.Reflection;
-
+using System.Text;
 using AlastairLundy.Extensions.System;
 
 using Spectre.Console;
 using Spectre.Console.Cli;
 
 using WCount.Cli.Localizations;
+
 using WCount.Library;
-using WCount.Library.Enums;
+using WCount.Library.Extensions;
 
 namespace WCount.Cli.Commands;
 
@@ -92,6 +93,8 @@ public class MainCommand : Command<MainCommand.Settings>
 
                 if (settings.LineCount)
                 {
+                    LineCounter lineCounter = new LineCounter();
+                    
                     grid.AddColumn();
                     grid.AddColumn();
 
@@ -99,7 +102,7 @@ public class MainCommand : Command<MainCommand.Settings>
                     
                     foreach (string file in settings.Files!)
                     {
-                        ulong lineCount = file.CountLinesInFile();
+                        ulong lineCount = lineCounter.CountLinesInFile(file);
                         totalLines += lineCount;
                         grid.AddRow(new string[] { lineCount.ToString(), new TextPath(file).ToString()!});
                     }
@@ -112,6 +115,8 @@ public class MainCommand : Command<MainCommand.Settings>
 
                 if (settings.WordCount)
                 {
+                    WordCounter wordCounter = new WordCounter();
+                    
                     grid.AddColumn();
                     grid.AddColumn();
 
@@ -119,7 +124,7 @@ public class MainCommand : Command<MainCommand.Settings>
                     
                     foreach (string file in settings.Files!)
                     {
-                        ulong wordCount = file.CountWords();
+                        ulong wordCount = wordCounter.CountWordsInFile(file);
                         totalWords += wordCount;
                         grid.AddRow(new string[] { wordCount.ToString(), file});
                     }
@@ -131,14 +136,16 @@ public class MainCommand : Command<MainCommand.Settings>
                 }
 
                 if (settings.CharacterCount)
-                {   
+                {
+                    CharCounter charCounter = new CharCounter();
+                    
                     grid.AddColumn();
                     grid.AddColumn();
 
                     ulong totalChars = 0;
                     foreach (string file in settings.Files!)
                     {
-                        ulong charCount = file.CountCharsInFile();
+                        ulong charCount = charCounter.CountCharactersInFile(file);
                         totalChars += charCount;
                         grid.AddRow(new string[] { charCount.ToString(), file });
                     }
@@ -151,6 +158,8 @@ public class MainCommand : Command<MainCommand.Settings>
                 
                 if (settings.ByteCount)
                 {
+                    ByteCounter byteCounter = new ByteCounter();
+
                     grid.AddColumn();
                     grid.AddColumn();
 
@@ -158,7 +167,7 @@ public class MainCommand : Command<MainCommand.Settings>
                     
                     foreach (string file in settings.Files!)
                     {
-                        ulong byteCount = file.CountBytesInFile(TextEncodingType.UTF8);
+                        ulong byteCount = byteCounter.CountBytesInFile(file, Encoding.UTF8);
                         totalBytes += byteCount;
                         grid.AddRow(new string[] { byteCount.ToString(), file});
                     }
@@ -171,15 +180,19 @@ public class MainCommand : Command<MainCommand.Settings>
 
                 if (!settings.WordCount && !settings.LineCount && !settings.ByteCount && !settings.CharacterCount)
                 {
+                    WordCounter wordCounter = new WordCounter();
+                    CharCounter charCounter = new CharCounter();
+                    LineCounter lineCounter = new LineCounter();
+                    
                     ulong totalLineCount = 0;
                     ulong totalWordCount = 0;
                     ulong totalCharCount = 0;
 
                     foreach (string file in settings.Files!)
                     {
-                        totalLineCount += file.CountLinesInFile();
-                        totalWordCount += file.CountWordsInFile();
-                        totalCharCount += file.CountCharsInFile();
+                        totalLineCount += lineCounter.CountLinesInFile(file);
+                        totalWordCount += wordCounter.CountWordsInFile(file);
+                        totalCharCount += charCounter.CountCharactersInFile(file);
                     }
                     
                     grid.AddColumn();
@@ -188,7 +201,7 @@ public class MainCommand : Command<MainCommand.Settings>
                     
                     foreach (string file in settings.Files!)
                     {
-                        grid.AddRow(new string[] { file.CountLinesInFile().ToString(), file.CountWords().ToString(), file.CountCharsInFile().ToString(), file});
+                        grid.AddRow(new string[] { lineCounter.CountLinesInFile(file).ToString(), file.CountWords().ToString(), charCounter.CountCharactersInFile(file).ToString(), file});
                     }
 
                     grid.AddRow(new string[] { totalLineCount.ToString(), totalWordCount.ToString(), totalCharCount.ToString(), Resources.App_Total_Label});
