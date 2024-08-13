@@ -38,7 +38,7 @@ namespace WCount.Library.Localizations {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WCount.Library.localizations.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WCount.Library.Localizations.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,11 +60,29 @@ namespace WCount.Library.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The encoding scheme provided is not supported. Please try again with a different encoding scheme..
+        /// </summary>
+        internal static string Exceptions_EncodingNotSupported {
+            get {
+                return ResourceManager.GetString("Exceptions.EncodingNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find the specified file. If the file exists, the path may be incorrect or the file may be inaccessible..
         /// </summary>
         internal static string Exceptions_FileNotFound_Message {
             get {
                 return ResourceManager.GetString("Exceptions.FileNotFound.Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WCount does not support UTF7 as it is deprecated and insecure. Please use a differen encoding scheme..
+        /// </summary>
+        internal static string Exceptions_UTF7NotSupported {
+            get {
+                return ResourceManager.GetString("Exceptions.UTF7NotSupported", resourceCulture);
             }
         }
     }
