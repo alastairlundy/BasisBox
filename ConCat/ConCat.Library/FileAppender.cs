@@ -21,11 +21,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-using AlastairLundy.Extensions.System.IEnumerableExtensions;
+using AlastairLundy.Extensions.Collections.IEnumerables;
 
 using CliUtilsLib;
 
 using ConCat.Library.Localizations;
+
 using NLine.Library;
 
 // ReSharper disable RedundantIfElseBlock
@@ -171,13 +172,15 @@ public class FileAppender
     }
 
     /// <summary>
-    /// 
+    /// Writes the appended strings to a file.
     /// </summary>
-    /// <param name="fileName"></param>
-    /// <exception cref="UnauthorizedAccessException"></exception>
+    /// <param name="filePath">The path to save the file to.</param>
+    /// <param name="fileName">The name of the file to be written.</param>
+    /// <param name="useAdminPrivileges"></param>
+    /// <exception cref="UnauthorizedAccessException">Thrown if the system has inadequate permission to .</exception>
     /// <exception cref="FileNotFoundException"></exception>
     /// <exception cref="Exception"></exception>
-    public void WriteToFile(string fileName)
+    public void WriteToFile(string filePath, string fileName, bool useAdminPrivileges)
     {
         if (FileFinder.IsAFile(fileName))
         {
@@ -186,6 +189,11 @@ public class FileAppender
                 if (File.Exists(fileName))
                 {
                     File.Delete(fileName);
+                }
+
+                if (fileName.Contains(filePath) == false)
+                {
+                    fileName = string.Join(filePath, fileName);
                 }
 
                 File.WriteAllLines(fileName, AppendedFileContents);

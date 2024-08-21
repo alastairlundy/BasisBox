@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AlastairLundy.Extensions.Collections" Version="5.*" />
       <PackageReference Include="CliUtilsLib" Version="1.*" />
       <PackageReference Include="NLine.Library" Version="1.*" />
     </ItemGroup>
