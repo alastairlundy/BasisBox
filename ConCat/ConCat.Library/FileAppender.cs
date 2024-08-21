@@ -59,7 +59,7 @@ public class FileAppender
     }
     
     /// <summary>
-    /// 
+    /// Attempts to append the contents of a file to an existing list.
     /// </summary>
     /// <param name="fileToBeAppended">The file to have its contents appended to the existing file contents. If no existing file contents exists, this will become the contents appended to in the future.</param>
     /// <returns>true if the files where successfully appended; returns false otherwise.</returns>
@@ -78,11 +78,11 @@ public class FileAppender
     }
     
     /// <summary>
-    /// 
+    /// Appends the contents of a file to an existing list.
     /// </summary>
-    /// <param name="fileToBeAppended"></param>
-    /// <exception cref="Exception"></exception>
-    /// <exception cref="FileNotFoundException"></exception>
+    /// <param name="fileToBeAppended">The file to have the contents appended.</param>
+    /// <exception cref="Exception">Thrown if the file appending fails.</exception>
+    /// <exception cref="FileNotFoundException">Thrown if the file specified is not found.</exception>
     public void AppendFile(string fileToBeAppended)
     {
         if (FileFinder.IsAFile(fileToBeAppended) || File.Exists(fileToBeAppended))
@@ -92,10 +92,6 @@ public class FileAppender
                 string[] fileContents = File.ReadAllLines(fileToBeAppended);
 
                 AppendFileContents(fileContents);
-            }
-            catch (UnauthorizedAccessException exception)
-            {
-                throw new Exception(exception.Message, exception);
             }
             catch (Exception exception)
             {
@@ -109,16 +105,16 @@ public class FileAppender
     }
 
     /// <summary>
-    /// 
+    /// Append the contents of an ordered enumerable of files to an existing list.
     /// </summary>
-    /// <param name="filesToBeAppended"></param>
+    /// <param name="filesToBeAppended">The file to have the contents appended.</param>
     public void AppendFiles(IOrderedEnumerable<string> filesToBeAppended)
     {
         AppendFiles(filesToBeAppended.ToArray());
     }
 
     /// <summary>
-    /// 
+    /// Append the contents of the IEnumerable of files to an existing list.
     /// </summary>
     /// <param name="filesToBeAppended"></param>
     public void AppendFiles(IEnumerable<string> filesToBeAppended)
@@ -130,10 +126,10 @@ public class FileAppender
     }
 
     /// <summary>
-    /// 
+    /// Append the contents of a file to an existing list.
     /// </summary>
-    /// <param name="fileContents"></param>
-    /// <exception cref="Exception"></exception>
+    /// <param name="fileContents">The file contents to be appended.</param>
+    /// <exception cref="Exception">Thrown if the file appending fails.</exception>
     public void AppendFileContents(IEnumerable<string> fileContents)
     {
         try
@@ -154,9 +150,9 @@ public class FileAppender
     }
 
     /// <summary>
-    /// 
+    /// Returns the appended contents to an IEnumerable.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>the list of appended strings as an enumerable.</returns>
     public IEnumerable<string> ToEnumerable()
     {
         return AppendedFileContents;
