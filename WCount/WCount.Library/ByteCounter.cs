@@ -33,7 +33,7 @@ public class ByteCounter : IByteCounter
     /// <param name="textEncodingType">The type of encoding to use to decode the bytes.</param>
     /// <returns>the number of bytes in the string.</returns>
     /// <exception cref="ArgumentException">Thrown if the text encoding is not supported.</exception>
-    public  int CountBytes(string s, Encoding textEncodingType)
+    public int CountBytes(string s, Encoding textEncodingType)
     {
         byte[] bytes;
         
