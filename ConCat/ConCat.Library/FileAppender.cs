@@ -159,15 +159,6 @@ public class FileAppender
     }
     
     /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public string[] ToArray()
-    {
-        return AppendedFileContents.ToArray();
-    }
-
-    /// <summary>
     /// Writes the appended strings to a file.
     /// </summary>
     /// <param name="filePath">The path to save the file to.</param>
