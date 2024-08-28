@@ -26,11 +26,14 @@ namespace ConCat.Library.Logic;
 public static class ConCatAppender
 {
     /// <summary>
-    /// 
+    /// Appends the contents of files.
     /// </summary>
-    /// <param name="files"></param>
-    /// <param name="addLineNumbering"></param>
-    /// <returns></returns>
+    /// <param name="files">The files to be appended.</param>
+    /// <param name="addLineNumbering">Adds line numbers to the appended file contents.</param>
+    /// <returns>the appended file contents as an IEnumerable of strings.</returns>
+    /// <exception cref="UnauthorizedAccessException"></exception>
+    /// <exception cref="FileNotFoundException"></exception>
+    /// <exception cref="Exception"></exception>
     public static IEnumerable<string> AppendFiles(IEnumerable<string> files, bool addLineNumbering)
     {
         try
@@ -42,7 +45,7 @@ public static class ConCatAppender
                 fileAppender.AppendFile(file);
             }
                   
-            return fileAppender.ToArray();
+            return fileAppender.ToEnumerable();
         }
         catch (UnauthorizedAccessException exception)
         {
@@ -59,11 +62,11 @@ public static class ConCatAppender
     }
     
     /// <summary>
-    /// 
+    /// Appends the contents of files.
     /// </summary>
-    /// <param name="existingFiles"></param>
+    /// <param name="existingFiles">The files to </param>
     /// <param name="newFiles"></param>
-    /// <param name="addLineNumbering"></param>
+    /// <param name="addLineNumbering">Adds line numbers to the appended file contents.</param>
     /// <returns></returns>
     /// <exception cref="UnauthorizedAccessException"></exception>
     /// <exception cref="FileNotFoundException"></exception>
@@ -79,7 +82,7 @@ public static class ConCatAppender
                   fileAppender.AppendFiles(filesToBeAppended);
                   fileAppender.AppendFiles(existingFiles);
                   
-                  return fileAppender.ToArray();
+                  return fileAppender.ToEnumerable();
               }
               catch (UnauthorizedAccessException exception)
               {

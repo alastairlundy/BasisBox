@@ -7,6 +7,14 @@ namespace ConCat.Library.Logic;
 
 public static class ConCatCopying
 {
+    /// <summary>
+    /// </summary>
+    /// <param name="existingFile">The file to be copied</param>
+    /// <param name="newFile">The destination file.</param>
+    /// <param name="addLineNumbering">Adds line numbers to the appended file contents.</param>
+    /// <exception cref="UnauthorizedAccessException"></exception>
+    /// <exception cref="FileNotFoundException"></exception>
+    /// <exception cref="Exception"></exception>
     public static void CopyFile(string existingFile, string newFile, bool addLineNumbering)
     {
         try
