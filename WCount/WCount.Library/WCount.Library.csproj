@@ -18,7 +18,7 @@
 * Re-added extension methods in a separate namespace since the Counter clases are no longer static</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Description>Count the number of lines, words, characters, and/or bytes in specified files, strings, or IEnumerables of strings.</Description>
-        <Version>2.0.0-preview.1</Version>
+        <Version>2.0.0-preview.2</Version>
     </PropertyGroup>
 
     <ItemGroup>

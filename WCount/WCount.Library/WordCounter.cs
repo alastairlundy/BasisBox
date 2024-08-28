@@ -38,13 +38,23 @@ public class WordCounter : IWordCounter
 
         if (words.Length > 0)
         {
-            totalCount += Convert.ToUInt64(words.Length);
+            foreach (string word in words)
+            {
+                if (string.IsNullOrWhiteSpace(word) == false)
+                {
+                    totalCount += 1;
+                }
+            }
         }
         else
         {
-            if (s.Length > 0)
+            if (s.Length > 0 && string.IsNullOrWhiteSpace(s) == false)
             {
                 totalCount = 1;
+            }
+            else
+            {
+                totalCount = 0;
             }
         }
 
@@ -89,12 +99,7 @@ public class WordCounter : IWordCounter
         
         foreach (string s in enumerable)
         {
-            var words = s.Split(' ');
-
-            if (words.Length > 0)
-            {
-                totalCount += Convert.ToUInt64(words.Length);
-            }
+            totalCount += CountWords(s);
         }
 
         return totalCount;
