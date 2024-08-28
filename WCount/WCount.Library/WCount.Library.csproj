@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -12,13 +11,13 @@
         <Copyright>Copyright (c) Alastair Lundy 2024</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/BasisBox/</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>### Changes since 1.1.0
-* Added interfaces for WordCounter, ByteCounter, LineCounter, and CharCounter
-* Reformed ByteCounter, LineCounter, WordCounter, and CharCounter to use the new interfaces
-* Re-added extension methods in a separate namespace since the Counter clases are no longer static</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 2.0.0 Preview 1
+* Fixed an issue with Word Counting
+* Added .NET 6 support</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Description>Count the number of lines, words, characters, and/or bytes in specified files, strings, or IEnumerables of strings.</Description>
         <Version>2.0.0-preview.2</Version>
+        <TargetFrameworks>net8.0;net6.0</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
