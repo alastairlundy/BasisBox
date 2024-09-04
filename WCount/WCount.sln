@@ -1,8 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCount.Cli", "WCount.Cli\WCount.Cli.csproj", "{FF2FE995-8CF8-4E10-9CDA-12F1B16DA915}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WCount.Cli", "WCount.Cli\WCount.Cli.csproj", "{FF2FE995-8CF8-4E10-9CDA-12F1B16DA915}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCount.Library", "WCount.Library\WCount.Library.csproj", "{231F7C8F-0F9C-480B-A52B-8E2ECA925F2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WCount.Library", "WCount.Library\WCount.Library.csproj", "{231F7C8F-0F9C-480B-A52B-8E2ECA925F2B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCount.Desktop", "WCount.Desktop\WCount.Desktop.csproj", "{108D7615-3962-4622-B48F-F5390C9BD68D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

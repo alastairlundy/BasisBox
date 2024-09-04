@@ -1,0 +1,31 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="350"
+        x:Class="WCount.Desktop.StatisticsWindow"
+        Title="Statistics Window" FontSize="18" FontFamily="Noto Sans">
+	<Grid RowDefinitions="auto auto auto" ColumnDefinitions="* auto auto *">
+
+		<TextBlock Grid.Row="0" Grid.Column="1" Text="WCount Statistics" TextAlignment="Center" FontSize="24"/>
+
+		<StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+			<TextBlock x:Name="fileNameLabel"/>
+			<TextBlock x:Name="fileNameResult" Margin="10 0 0 0"/>
+		</StackPanel>
+		
+		<StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="0 20 0 0">
+			<TextBlock TextAlignment="Center" x:Name="lineCountLabel" Text="A" FontWeight="Medium"/>
+			<TextBlock TextAlignment="Center" x:Name="byteCountLabel" Text="B" FontWeight="Medium" Margin="0 5 0 0"/>
+			<TextBlock TextAlignment="Center" x:Name="charCountLabel" Text="C" FontWeight="Medium" Margin="0 5 0 0"/>
+			<TextBlock TextAlignment="Center" x:Name="wordCountLabel" Text="D" FontWeight="Medium" Margin="0 5 0 0"/>
+		</StackPanel>
+		<StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="2" Margin="0 20 0 0">
+				<TextBlock x:Name="lineCountResult" Text="1" FontWeight="Normal"/>
+				<TextBlock x:Name="byteCountResult" Margin="0 5 0 0"/>
+				<TextBlock x:Name="charCountResult" Margin="0 5 0 0"/>
+				<TextBlock x:Name="wordCountResult" Margin="0 5 0 0"/>
+		</StackPanel>
+		
+	</Grid> 
+</Window>
