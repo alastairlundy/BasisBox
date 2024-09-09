@@ -157,6 +157,49 @@ public class FileAppender
     {
         return AppendedFileContents;
     }
+
+    /// <summary>
+    /// Writes the appended strings to a file.
+    /// </summary>
+    /// <param name="filePath">The path to save the file to.</param>
+    /// <param name="useAdminPrivileges"></param>
+    /// <exception cref="UnauthorizedAccessException"></exception>
+    /// <exception cref="FileNotFoundException"></exception>
+    /// <exception cref="Exception"></exception>
+    public void WriteToFile(string filePath, bool useAdminPrivileges)
+    {
+        if (FileFinder.IsAFile(filePath))
+        {
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+
+                File.WriteAllLines(filePath, AppendedFileContents);
+            }
+            catch (UnauthorizedAccessException exception)
+            {
+                throw new UnauthorizedAccessException(exception.Message, exception);
+            }
+            catch (FileNotFoundException exception)
+            {
+                throw new FileNotFoundException(exception.Message, filePath, exception);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message, exception);
+            }
+        }
+        else
+        {
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException(Resources.Exceptions_FileNotFound, filePath);
+            }
+        }
+    }
     
     /// <summary>
     /// Writes the appended strings to a file.
@@ -169,41 +212,17 @@ public class FileAppender
     /// <exception cref="Exception"></exception>
     public void WriteToFile(string filePath, string fileName, bool useAdminPrivileges)
     {
-        if (FileFinder.IsAFile(fileName))
+        string tempFilePath;
+
+        if (fileName.Contains(filePath) == false)
         {
-            try
-            {
-                if (File.Exists(fileName))
-                {
-                    File.Delete(fileName);
-                }
-
-                if (fileName.Contains(filePath) == false)
-                {
-                    fileName = string.Join(filePath, fileName);
-                }
-
-                File.WriteAllLines(fileName, AppendedFileContents);
-            }
-            catch (UnauthorizedAccessException exception)
-            {
-                throw new UnauthorizedAccessException(exception.Message, exception);
-            }
-            catch (FileNotFoundException exception)
-            {
-                throw new FileNotFoundException(exception.Message, fileName, exception);
-            }
-            catch (Exception exception)
-            {
-                throw new Exception(exception.Message, exception);
-            }
+            tempFilePath = string.Join(filePath, fileName);
         }
         else
         {
-            if (!File.Exists(fileName))
-            {
-                throw new FileNotFoundException(Resources.Exceptions_FileNotFound, fileName);
-            }
+            tempFilePath = fileName;
         }
+        
+        WriteToFile(tempFilePath, useAdminPrivileges);
     }
 }
