@@ -199,28 +199,4 @@ public class FileAppender
             }
         }
     }
-    
-    /// <summary>
-    /// Writes the appended strings to a file.
-    /// </summary>
-    /// <param name="filePath">The path to save the file to.</param>
-    /// <param name="fileName">The name of the file to be written.</param>
-    /// <exception cref="UnauthorizedAccessException">Thrown if the system has inadequate permission to .</exception>
-    /// <exception cref="FileNotFoundException"></exception>
-    /// <exception cref="Exception"></exception>
-    public void WriteToFile(string filePath, string fileName)
-    {
-        string tempFilePath;
-
-        if (fileName.Contains(filePath) == false)
-        {
-            tempFilePath = string.Join(filePath, fileName);
-        }
-        else
-        {
-            tempFilePath = fileName;
-        }
-        
-        WriteToFile(tempFilePath);
-    }
 }

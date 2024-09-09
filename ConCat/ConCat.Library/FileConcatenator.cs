@@ -28,13 +28,12 @@ public static class FileConcatenator
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="files"></param>
-    /// <param name="appendLineNumbers"></param>
+    /// <param name="files">The files to be concatenated.</param>
+    /// <param name="addLineNumbers">Whether to add line numbers to the files.</param>
     /// <returns></returns>
-    public static IEnumerable<string> ConcatenateToStringEnumerable(IEnumerable<string> files, bool appendLineNumbers)
+    public static IEnumerable<string> ConcatenateToStringEnumerable(IEnumerable<string> files, bool addLineNumbers)
     {
-        FileAppender fileAppender = new FileAppender(appendLineNumbers);
-
+        FileAppender fileAppender = new FileAppender(addLineNumbers);
         fileAppender.AppendFiles(files);
 
         return fileAppender.ToEnumerable();
@@ -44,14 +43,14 @@ public static class FileConcatenator
     /// Concatenates the contents of specified files and saves it to a new file.
     /// </summary>
     /// <param name="filePath"></param>
-    /// <param name="files"></param>
-    /// <param name="appendLineNumbers"></param>
-    /// <exception cref="Exception"></exception>
-    public static void ConcatenateToFile(string filePath, IEnumerable<string> files, bool appendLineNumbers)
+    /// <param name="files">The files to be concatenated.</param>
+    /// <param name="addLineNumbers">Whether to add line numbers to the files.</param>
+    /// <exception cref="Exception">Thrown </exception>
+    public static void ConcatenateToFile(string filePath, IEnumerable<string> files, bool addLineNumbers)
     {
         try
         {
-            File.WriteAllLines(filePath, ConcatenateToStringEnumerable(files, appendLineNumbers));
+            File.WriteAllLines(filePath, ConcatenateToStringEnumerable(files, addLineNumbers));
         }
         catch (Exception ex)
         {
