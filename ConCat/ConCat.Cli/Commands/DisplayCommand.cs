@@ -17,6 +17,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using ConCat.Cli.Helpers;
@@ -47,12 +48,14 @@ public class DisplayCommand : Command<DisplayCommand.Settings>
 
         try
         {
-            foreach (string line in ConCatAppender.AppendFiles(settings.Files, settings.AppendLineNumbers))
+            IEnumerable<string> lines = FileConcatenator.ConcatenateToStringEnumerable(settings.Files, settings.AppendLineNumbers);
+            
+            foreach (string line in lines)
             {
                 AnsiConsole.WriteLine(line);
             }
 
-            return 1;
+            return 0;
         }
         catch (UnauthorizedAccessException exception)
         {
