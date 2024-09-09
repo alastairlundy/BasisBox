@@ -67,7 +67,7 @@ public class AppendCommand : Command<AppendCommand.Settings>
                 AnsiConsole.WriteLine(Resources.Command_UpdateFile_Success.Replace("{x}", file));
             }
 
-            return 0;
+            return 1;
         }
         catch (UnauthorizedAccessException exception)
         {

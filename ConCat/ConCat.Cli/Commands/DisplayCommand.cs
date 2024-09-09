@@ -55,7 +55,7 @@ public class DisplayCommand : Command<DisplayCommand.Settings>
                 AnsiConsole.WriteLine(line);
             }
 
-            return 0;
+            return 1;
         }
         catch (UnauthorizedAccessException exception)
         {
