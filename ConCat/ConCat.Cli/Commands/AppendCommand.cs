@@ -20,13 +20,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+using System.Runtime.Loader;
+using AlastairLundy.Extensions.Collections.IEnumerables;
 using CliUtilsLib;
 
 using ConCat.Cli.Helpers;
 using ConCat.Cli.Localizations;
 using ConCat.Cli.Settings;
-
+using ConCat.Library;
 using ConCat.Library.Logic;
 
 using Spectre.Console;
@@ -43,7 +44,7 @@ public class AppendCommand : Command<AppendCommand.Settings>
 
     public override int Execute(CommandContext context, Settings settings)
     {
-        if (settings.Files == null || settings.Files.Count() == 0)
+        if (settings.Files == null || !settings.Files.Any())
         {
             AnsiConsole.WriteException(new NullReferenceException(Resources.Exceptions_NoFileProvided));
             return -1;
@@ -59,17 +60,14 @@ public class AppendCommand : Command<AppendCommand.Settings>
                 return -1;
             }
             
-            string[] newContents = ConCatAppender.AppendFiles(files.Value.existingFiles, files.Value.newFiles,
-                settings.AppendLineNumbers).ToArray();
-
             foreach (string file in files.Value.newFiles)
             {
-                File.WriteAllLines(file, newContents);
+                ConCatAppender.ToNewFile(file, files.Value.existingFiles, settings.AppendLineNumbers, file);
                 
                 AnsiConsole.WriteLine(Resources.Command_UpdateFile_Success.Replace("{x}", file));
             }
 
-            return 1;
+            return 0;
         }
         catch (UnauthorizedAccessException exception)
         {
