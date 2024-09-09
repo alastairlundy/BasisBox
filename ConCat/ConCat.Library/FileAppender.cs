@@ -80,7 +80,7 @@ public class FileAppender
     /// <summary>
     /// Appends the contents of a file to an existing list.
     /// </summary>
-    /// <param name="fileToBeAppended">The file to have the contents appended.</param>
+    /// <param name="fileToBeAppended">The file to be appended.</param>
     /// <exception cref="Exception">Thrown if the file appending fails.</exception>
     /// <exception cref="FileNotFoundException">Thrown if the file specified is not found.</exception>
     public void AppendFile(string fileToBeAppended)
@@ -107,7 +107,7 @@ public class FileAppender
     /// <summary>
     /// Append the contents of an ordered enumerable of files to an existing list.
     /// </summary>
-    /// <param name="filesToBeAppended">The file to have the contents appended.</param>
+    /// <param name="filesToBeAppended">The files to be appended to the existing appended content.</param>
     public void AppendFiles(IOrderedEnumerable<string> filesToBeAppended)
     {
         AppendFiles(filesToBeAppended.ToArray());
@@ -116,7 +116,7 @@ public class FileAppender
     /// <summary>
     /// Append the contents of the IEnumerable of files to an existing list.
     /// </summary>
-    /// <param name="filesToBeAppended"></param>
+    /// <param name="filesToBeAppended">The files to be appended to the existing appended content.</param>
     public void AppendFiles(IEnumerable<string> filesToBeAppended)
     {
         foreach (string file in filesToBeAppended)
@@ -162,9 +162,9 @@ public class FileAppender
     /// Writes the appended strings to a file.
     /// </summary>
     /// <param name="filePath">The path to save the file to.</param>
-    /// <exception cref="UnauthorizedAccessException"></exception>
-    /// <exception cref="FileNotFoundException"></exception>
-    /// <exception cref="Exception"></exception>
+    /// <exception cref="ArgumentException">Thrown if an invalid file path is provided.</exception>
+    /// <exception cref="FileNotFoundException">Thrown if the file specified is not found.</exception>
+    /// <exception cref="Exception">Thrown if an exception occurs when attempting to write the file.</exception>
     public void WriteToFile(string filePath)
     {
         if (FileFinder.IsAFile(filePath))
@@ -178,10 +178,6 @@ public class FileAppender
 
                 File.WriteAllLines(filePath, AppendedFileContents);
             }
-            catch (UnauthorizedAccessException exception)
-            {
-                throw new UnauthorizedAccessException(exception.Message, exception);
-            }
             catch (FileNotFoundException exception)
             {
                 throw new FileNotFoundException(exception.Message, filePath, exception);
@@ -193,10 +189,7 @@ public class FileAppender
         }
         else
         {
-            if (!File.Exists(filePath))
-            {
-                throw new FileNotFoundException(Resources.Exceptions_FileNotFound, filePath);
-            }
+            throw new ArgumentException(Resources.Exceptions_NoFileProvided, filePath);
         }
     }
 }

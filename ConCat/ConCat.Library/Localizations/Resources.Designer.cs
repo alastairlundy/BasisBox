@@ -60,11 +60,20 @@ namespace ConCat.Library.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The file specified could not be found. If the file exists, consider checking your input for typos or mistakes..
+        ///   Looks up a localized string similar to The program was unable to find the specified file. If the file exists, consider checking your input for typos or mistakes..
         /// </summary>
         internal static string Exceptions_FileNotFound {
             get {
                 return ResourceManager.GetString("Exceptions.FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No File was provided as an argument..
+        /// </summary>
+        internal static string Exceptions_NoFileProvided {
+            get {
+                return ResourceManager.GetString("Exceptions.NoFileProvided", resourceCulture);
             }
         }
     }

@@ -4,7 +4,7 @@ namespace ConCat.Cli;
 
 public static class Constants
 {
-    public static string GitHubIssuesUrl = "https://github.com/alastairlundy/utils/issues/new/";
+    public static string GitHubIssuesUrl = "https://github.com/alastairlundy/BasisBox/issues/new/";
 
 
 }
