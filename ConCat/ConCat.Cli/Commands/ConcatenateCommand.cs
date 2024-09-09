@@ -20,11 +20,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AlastairLundy.Extensions.Collections.IEnumerables;
 using CliUtilsLib;
+
 using ConCat.Cli.Helpers;
 using ConCat.Cli.Localizations;
 using ConCat.Cli.Settings;
-
+using ConCat.Library;
+using ConCat.Library.Logic;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
@@ -44,13 +47,27 @@ public class ConcatenateCommand : Command<ConcatenateCommand.Settings>
             AnsiConsole.WriteException(new NullReferenceException(Resources.Exceptions_NoFileProvided));
             return -1;
         }
-
+        
         (IEnumerable<string> existingFiles, IEnumerable<string> newFiles)? files = FileArgumentFinder.GetFilesBeforeAndAfterSeparator(settings.Files, ">");
         
         try
         {
+            if (files == null)
+            {
+                AnsiConsole.WriteException(new NullReferenceException(Resources.Exceptions_NoFileProvided));
+                return -1;
+            }
             
+            string[] newContents = FileConcatenator.ConcatenateToStringEnumerable(files.Value.existingFiles, settings.AppendLineNumbers).ToArray();
             
+            foreach (string file in files.Value.newFiles)
+            {
+                File.WriteAllLines(file, newContents);
+                
+                AnsiConsole.WriteLine(Resources.Command_UpdateFile_Success.Replace("{x}", file));
+            }
+
+            return 1;
         }
         catch (UnauthorizedAccessException exception)
         {
