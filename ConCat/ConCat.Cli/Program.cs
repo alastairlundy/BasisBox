@@ -20,6 +20,7 @@ using System.Linq;
 using System.Reflection;
 
 using AlastairLundy.Extensions.System;
+
 using CliUtilsLib;
 using ConCat.Cli.Commands;
 
@@ -29,12 +30,16 @@ CommandApp app = new();
 
 app.Configure(config =>
 {
+    config.AddCommand<ConcatenateCommand>("concatenate");
+    
     config.AddCommand<AppendCommand>("append");
     
     config.AddCommand<DisplayCommand>("display")
         .WithAlias("cat");
 
     config.AddCommand<CopyCommand>("copy");
+
+    config.AddCommand<NewFileCommand>("new");
     
     config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetName().Version!.ToFriendlyVersionString());
 });
@@ -51,7 +56,14 @@ else if (args.Contains(">"))
     }
     else
     {
-        app.SetDefaultCommand<ConcatenateCommand>();
+        if (args[0].StartsWith('>') && args.Count() == 1)
+        {
+            app.SetDefaultCommand<NewFileCommand>();
+        }
+        else
+        {
+            app.SetDefaultCommand<ConcatenateCommand>();
+        }
     }
 }
 else if (!args.Contains(">>") && !args.Contains(">"))
