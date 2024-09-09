@@ -56,7 +56,7 @@ else if (args.Contains(">"))
     }
     else
     {
-        if (args[0].StartsWith('>') && args.Count() == 1)
+        if (args[0].StartsWith('>') && args.Length == 1)
         {
             app.SetDefaultCommand<NewFileCommand>();
         }
