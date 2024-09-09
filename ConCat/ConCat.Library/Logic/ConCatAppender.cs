@@ -16,85 +16,34 @@
  
  */
 
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace ConCat.Library.Logic;
 
 public static class ConCatAppender
 {
-    /// <summary>
-    /// Appends the contents of files.
-    /// </summary>
-    /// <param name="files">The files to be appended.</param>
-    /// <param name="addLineNumbering">Adds line numbers to the appended file contents.</param>
-    /// <returns>the appended file contents as an IEnumerable of strings.</returns>
-    /// <exception cref="UnauthorizedAccessException"></exception>
-    /// <exception cref="FileNotFoundException"></exception>
-    /// <exception cref="Exception"></exception>
-    public static IEnumerable<string> AppendFiles(IEnumerable<string> files, bool addLineNumbering)
+    public static IEnumerable<string> ToStringEnumerable(string fileToBeAddedTo, IEnumerable<string> filesToAppend,
+        bool addLineNumbers)
     {
-        try
-        {
-            FileAppender fileAppender = new FileAppender(addLineNumbering);
+        FileAppender fileAppender = new FileAppender(addLineNumbers);
+
+        fileAppender.AppendFile(fileToBeAddedTo);
+        fileAppender.AppendFiles(filesToAppend);
         
-            foreach (string file in files)
-            {
-                fileAppender.AppendFile(file);
-            }
-                  
-            return fileAppender.ToEnumerable();
-        }
-        catch (UnauthorizedAccessException exception)
-        {
-            throw new UnauthorizedAccessException(exception.Message, exception);
-        }
-        catch (FileNotFoundException exception)
-        {
-            throw new FileNotFoundException(exception.Message, exception.FileName, exception);
-        }
-        catch(Exception exception)
-        {
-            throw new Exception(exception.Message, exception);
-        }
+        return fileAppender.ToEnumerable();
     }
     
     /// <summary>
-    /// Appends the contents of files.
+    /// 
     /// </summary>
-    /// <param name="existingFiles">The files to </param>
-    /// <param name="newFiles"></param>
-    /// <param name="addLineNumbering">Adds line numbers to the appended file contents.</param>
-    /// <returns></returns>
-    /// <exception cref="UnauthorizedAccessException"></exception>
-    /// <exception cref="FileNotFoundException"></exception>
-    /// <exception cref="Exception"></exception>
-    public static IEnumerable<string> AppendFiles(IEnumerable<string> existingFiles, IEnumerable<string> newFiles, bool addLineNumbering)
+    /// <param name="fileToBeAddedTo"></param>
+    /// <param name="filesToAppend"></param>
+    /// <param name="addLineNumbers"></param>
+    /// <param name="filePath"></param>
+    public static void ToNewFile(string fileToBeAddedTo, IEnumerable<string> filesToAppend,
+        bool addLineNumbers, string filePath)
     {
-              try
-              {
-                  FileAppender fileAppender = new FileAppender(addLineNumbering);
-
-                  string[] filesToBeAppended = newFiles as string[] ?? newFiles.ToArray();
-                  
-                  fileAppender.AppendFiles(filesToBeAppended);
-                  fileAppender.AppendFiles(existingFiles);
-                  
-                  return fileAppender.ToEnumerable();
-              }
-              catch (UnauthorizedAccessException exception)
-              {
-                  throw new UnauthorizedAccessException(exception.Message, exception);
-              }
-              catch (FileNotFoundException exception)
-              {
-                  throw new FileNotFoundException(exception.Message, exception.FileName, exception);
-              }
-              catch(Exception exception)
-              {
-                  throw new Exception(exception.Message, exception);
-              }
+        File.WriteAllLines(filePath, ToStringEnumerable(fileToBeAddedTo, filesToAppend, addLineNumbers));
     }
 }
