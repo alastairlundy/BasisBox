@@ -162,11 +162,10 @@ public class FileAppender
     /// Writes the appended strings to a file.
     /// </summary>
     /// <param name="filePath">The path to save the file to.</param>
-    /// <param name="useAdminPrivileges"></param>
     /// <exception cref="UnauthorizedAccessException"></exception>
     /// <exception cref="FileNotFoundException"></exception>
     /// <exception cref="Exception"></exception>
-    public void WriteToFile(string filePath, bool useAdminPrivileges)
+    public void WriteToFile(string filePath)
     {
         if (FileFinder.IsAFile(filePath))
         {
@@ -206,11 +205,10 @@ public class FileAppender
     /// </summary>
     /// <param name="filePath">The path to save the file to.</param>
     /// <param name="fileName">The name of the file to be written.</param>
-    /// <param name="useAdminPrivileges"></param>
     /// <exception cref="UnauthorizedAccessException">Thrown if the system has inadequate permission to .</exception>
     /// <exception cref="FileNotFoundException"></exception>
     /// <exception cref="Exception"></exception>
-    public void WriteToFile(string filePath, string fileName, bool useAdminPrivileges)
+    public void WriteToFile(string filePath, string fileName)
     {
         string tempFilePath;
 
@@ -223,6 +221,6 @@ public class FileAppender
             tempFilePath = fileName;
         }
         
-        WriteToFile(tempFilePath, useAdminPrivileges);
+        WriteToFile(tempFilePath);
     }
 }
