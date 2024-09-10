@@ -1,6 +1,5 @@
 ﻿/*
-
-    BasisBox - ConCat
+    BasisBox - Today
     Copyright (C) 2024 Alastair Lundy
 
     This program is free software: you can redistribute it and/or modify
@@ -16,23 +15,25 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-using System.Collections.Generic;
+using System;
 using System.ComponentModel;
 
 using Spectre.Console.Cli;
 
-namespace ConCat.Cli.Settings;
+namespace Today.Cli.Commands;
 
-public class BasicConCatSettings : CommandSettings
+public class DateFormatCommand : Command<DateFormatCommand.Settings>
 {
-    [CommandArgument(0, "<File(s)>")]
-    public IEnumerable<string>? Files { get; init; }
-
-    [CommandOption("-n")]
-    [DefaultValue(false)]
-    public bool AppendLineNumbers { get; init; }
+    public class Settings : CommandSettings
+    {
         
-    [CommandOption("--verbose|--debug")]
-    [DefaultValue(false)]
-    public bool ShowErrors { get; init; }
+        [CommandOption("--debug|--debugging|--show-errros")]
+        [DefaultValue(false)]
+        public bool ShowErrors { get; init; }
+    }
+
+    public override int Execute(CommandContext context, Settings settings)
+    {
+        throw new NotImplementedException();
+    }
 }

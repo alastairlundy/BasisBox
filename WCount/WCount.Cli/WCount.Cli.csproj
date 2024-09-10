@@ -25,13 +25,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\LICENSE.txt">
-        <Link>LICENSE.txt</Link>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
       <EmbeddedResource Update="Localizations\Resources.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -50,6 +43,12 @@
       <None Update="NOTICE.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\..\LICENSE.txt">
+        <Link>LICENSE.txt</Link>
+      </Content>
     </ItemGroup>
 
 </Project>

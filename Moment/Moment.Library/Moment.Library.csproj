@@ -6,4 +6,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Content Include="..\..\LICENSE.txt">
+        <Link>LICENSE.txt</Link>
+      </Content>
+    </ItemGroup>
+
 </Project>

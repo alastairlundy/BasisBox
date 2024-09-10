@@ -36,4 +36,10 @@
     <ProjectReference Include="..\ConCat.Library\ConCat.Library.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="..\..\LICENSE.txt">
+      <Link>LICENSE.txt</Link>
+    </Content>
+  </ItemGroup>
+
 </Project>
