@@ -12,7 +12,6 @@
 | LoginName | loginname | logname | Prints the name of the current user name. | C# |
 | NLine | nline | nl | Add numbers to lines either from a file or standard input and sent to standard output. | C# |
 | NewDir | newdir | mkdir | Create new directories with or without parent directories. | C# |
-| WCount | wcount | wc | Count the number of lines, words, characters, and/or bytes in specified files. | C# |
 
 
 ### Programs being developed
