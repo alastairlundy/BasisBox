@@ -6,12 +6,7 @@
 ### Stable Programs
 | Project name | Assembly Name | Alternative To | Description | Written  In |
 |-|-|-|-|-|
-| ConCat | concat | cat | Concatenate, append, or print files to the terminal. | C# |
-| Del | del | rm | Delete a file or directory, either recursively or non-recursively. | C# |
-| DelDir | deldir | rmdir | Delete a directory, either recursively or non-recursively. | C# |
 | LoginName | loginname | logname | Prints the name of the current user name. | C# |
-| NewDir | newdir | mkdir | Create new directories with or without parent directories. | C# |
-
 
 ### Programs being developed
 | Program name | Description | Written  In |
