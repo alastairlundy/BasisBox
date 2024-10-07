@@ -33,3 +33,5 @@ LoginName/LoginName.sln.DotSettings.user
 /Del/Del.Library/obj
 /Del/Del.Cli/bin
 /Del/Del.Library/bin
+/.idea
+/Basis.Cli/obj
