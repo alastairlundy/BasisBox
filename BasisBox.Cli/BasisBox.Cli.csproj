@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <RuntimeIdentifiers>win-x64;win-arm64;osx-x64;osx-arm64;linux-x64;linux-arm64;</RuntimeIdentifiers>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>basis</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="CliUtilsLib" Version="1.*" />
+      <PackageReference Include="NLine.Library" Version="2.*" />
+      <PackageReference Include="Spectre.Console.Cli" Version="0.49.1" />
+      <PackageReference Include="WCount.Library" Version="2.*" />
+        
+        <PackageReference Include="AlastairLundy.Extensions.IO" Version="1.*" />
+        <PackageReference Include="AlastairLundy.Extensions.Collections" Version="5.*" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\COPYING.LESSER">
+        <Link>COPYING.LESSER</Link>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Localizations\Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Localizations\Resources.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+</Project>

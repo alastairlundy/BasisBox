@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LoginName.App.Description" xml:space="preserve">
+    <value>Prints the name of the current user name.</value>
+  </data>
+  <data name="Exceptions.InvalidFileOrDirectoryArguments" xml:space="preserve">
+    <value>An invalid file or directory was passed as an argument.</value>
+  </data>
+  <data name="WCount.App.Description" xml:space="preserve">
+    <value>Count the number of lines, words, characters, and/or bytes in specified files.</value>
+  </data>
+  <data name="NLine.App.Description" xml:space="preserve">
+    <value>Add numbers to lines either from a file or standard input and sent to standard output.</value>
+  </data>
+  <data name="Exceptions.NoArgumentsProvided" xml:space="preserve">
+    <value>No files or directories were provided.</value>
+  </data>
+  <data name="ConCat.App.Commands.NewFile.Prompt" xml:space="preserve">
+    <value>Please enter the strings you want this file to contain!</value>
+  </data>
+  <data name="Exceptions.Copying.InvalidExistingArguments" xml:space="preserve">
+    <value>You cannot copy more than one existing file into a file. Please use a file appending parameter instead.</value>
+  </data>
+  <data name="WCount.App.Labels.Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Exceptions.Generic" xml:space="preserve">
+    <value>There was an exception. Here are the details: {x}</value>
+  </data>
+  <data name="Exceptions.DirectoryNotFound" xml:space="preserve">
+    <value>Unable to locate directory {x}. If this directory previously existed it may have been moved or deleted.</value>
+  </data>
+  <data name="ConCat.App.Commands.UpdateFile.Success" xml:space="preserve">
+    <value>The file {x} was sucessfully updated.</value>
+  </data>
+  <data name="File.Saved.Failure" xml:space="preserve">
+    <value>The results could not be saved to the file. Please check the exception details for the reason why.</value>
+  </data>
+  <data name="Exceptions.FileNotFound" xml:space="preserve">
+    <value>The program was unable to find the specified file. If the file exists, consider checking your input for typos or mistakes.</value>
+  </data>
+  <data name="File.Saved.Succes" xml:space="preserve">
+    <value>The results were successfully saved to the file.</value>
+  </data>
+  <data name="ConCat.App.Commands.Copy.Success" xml:space="preserve">
+    <value>The contents of file {x} was successfully copied to file {y}.</value>
+  </data>
+  <data name="Exceptions.BugReport.Request" xml:space="preserve">
+    <value>If this was unintended or unexpected, it would really help us out if you could file a Bug Report.</value>
+  </data>
+  <data name="Basis.App.Version" xml:space="preserve">
+    <value>The currently installed version of BasisBox.</value>
+  </data>
+  <data name="ConCat.App.Commands.NewFile.Success" xml:space="preserve">
+    <value>The file {x} was successfully saved.</value>
+  </data>
+  <data name="ConCat.App.Inputs.Yes" xml:space="preserve">
+    <value>yes</value>
+  </data>
+  <data name="Exceptions.BugReport.File" xml:space="preserve">
+    <value>You can file a Bug Report at {x}</value>
+  </data>
+  <data name="Exceptions.NoFileProvided" xml:space="preserve">
+    <value>No file was provided as an argument to be used.</value>
+  </data>
+  <data name="Exceptions.Permissions.Invalid" xml:space="preserve">
+    <value>Your Operating System DENIED access to the file {x}. You may need to re-run the program with Administrator privileges to perform this operation.</value>
+  </data>
+  <data name="Del.App.Any.Parameters.Force.Description" xml:space="preserve">
+    <value>Force deletion of files or directories</value>
+  </data>
+  <data name="Del.App.Commands.Delete.Single.Description" xml:space="preserve">
+    <value>Delete a file or director either recursively or non-recursively.</value>
+  </data>
+  <data name="Exceptions.InvalidFileOrDirectoryArguments1" xml:space="preserve">
+    <value>An invalid file or directory was passed as an argument.</value>
+  </data>
+  <data name="Item.Deleted" xml:space="preserve">
+    <value>{x} was deleted.</value>
+  </data>
+  <data name="Exceptions.InvalidDeleteConfirmation" xml:space="preserve">
+    <value>An invalid value was provided. Please try again.</value>
+  </data>
+  <data name="Del.App.Commands.Delete.Many.Description" xml:space="preserve">
+    <value>Delete multiple files or directories either recursively or non-recursively.</value>
+  </data>
+  <data name="Del.App.Any.DeleteConfirmation.File" xml:space="preserve">
+    <value>Do you want file {x} to be deleted?</value>
+  </data>
+  <data name="Del.App.Any.DeleteConfirmation.YesOrNo" xml:space="preserve">
+    <value>Enter Y for yes OR N for no.</value>
+  </data>
+  <data name="ConCat.App.Inputs.No" xml:space="preserve">
+    <value>no</value>
+  </data>
+  <data name="DelDir.App.Description" xml:space="preserve">
+    <value>Delete empty folders and/or parent folders, recursively or non-recursively.
+</value>
+  </data>
+  <data name="Exceptions.InvalidSlashCommand" xml:space="preserve">
+    <value>The directory argument passed is not allowed in this program for the safety of your system.</value>
+  </data>
+  <data name="Exceptions.DirectoryNotEmpty" xml:space="preserve">
+    <value>A non-empty directory of {x} was provided. If this was intentional please use the del command or an equivalent to delete a directory with files or folders in it. If this was not intentional please view the contents of the directory and ensure it is empty before deletion. If the directory was empty please file a bug report for this program at https://github.com/alastairlundy/BasisBox/issues/</value>
+  </data>
+  <data name="NewDir.App.Commands.SingleNewDir.Description" xml:space="preserve">
+    <value>Creates a new specified directory with specified parameters.</value>
+  </data>
+  <data name="NewDir.App.Commands.ManyNewDirs.Description" xml:space="preserve">
+    <value>Creates new specified directories with specified parameters.</value>
+  </data>
+</root>
