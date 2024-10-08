@@ -3,7 +3,7 @@
  
 ## Programs
 
-### Stable Programs
+### Stable Commands
 | Project name | BasisBox Command Name | Alternative To | Description | Written  In |
 |-|-|-|-|-|
 | LoginName | loginname | logname | Prints the name of the current user name. | C# |
