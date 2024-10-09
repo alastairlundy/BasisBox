@@ -4,15 +4,15 @@
 ## Programs
 
 ### Stable Commands
-| Project name | BasisBox Command Name | Alternative To | Description | Written  In |
-|-|-|-|-|-|
-| LoginName | loginname | logname | Prints the name of the current user name. | C# |
-| NLine | nline | nl | Add numbers to lines either from a file or standard input and sent to standard output. | C# |
-| WCount | wcount | wc | Count the number of lines, words, characters, and/or bytes in specified files. | C# |
-| ConCat | concat | cat | Concatenate, append, or print files to the terminal. | C# |
-| Del | del | rm | Delete a file or directory, either recursively or non-recursively. | C# |
-| DelDir | deldir | rmdir | Delete a directory, either recursively or non-recursively. | C# |
-| NewDir | newdir | mkdir | Create new directories with or without parent directories. | C# |
+| BasisBox Command Name | Alternative To | Description | Written  In |
+|-|-|-|-|
+ | loginname | logname | Prints the name of the current user name. | C# |
+| nline | nl | Add numbers to lines either from a file or standard input and sent to standard output. | C# |
+|wcount | wc | Count the number of lines, words, characters, and/or bytes in specified files. | C# |
+| concat | cat | Concatenate, append, or print files to the terminal. | C# |
+| del | rm | Delete a file or directory, either recursively or non-recursively. | C# |
+| deldir | rmdir | Delete a directory, either recursively or non-recursively. | C# |
+| newdir | mkdir | Create new directories with or without parent directories. | C# |
 
 
 ### Programs being developed
