@@ -21,7 +21,7 @@ using BasisBox.Cli.Tools.ConCat.Commands;
 using BasisBox.Cli.Tools.Del.Commands;
 using BasisBox.Cli.Tools.DelDir.Commands;
 using BasisBox.Cli.Tools.LoginName.Commands;
-
+using BasisBox.Cli.Tools.NewDir.Commands;
 using BasisBox.Cli.Tools.NLine;
 using BasisBox.Cli.Tools.NLine.Commands;
 
