@@ -87,7 +87,7 @@ public class DeleteManyCommand : Command<DeleteManyCommand.Settings>
             return -1;
         }
 
-        if (settings.FilesOrDirectoriesToBeDeleted.Contains("/"))
+        if (settings.FilesOrDirectoriesToBeDeleted!.Contains("/"))
         {
             AnsiConsole.WriteException(new ArgumentException(Resources.Exceptions_InvalidSlashCommand), exceptionFormats);
             return -1;

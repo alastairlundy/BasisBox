@@ -65,7 +65,7 @@ public class DeleteDirectoryCommand : Command<DeleteDirectoryCommand.Settings>
         {
             if (settings.DirectoryToBeDeleted.Equals("/"))
             {
-                throw new ArgumentException(Resources.Exception_InvalidSlashArgument, settings.DirectoryToBeDeleted);
+                throw new ArgumentException(Resources.Exceptions_InvalidSlashCommand, settings.DirectoryToBeDeleted);
             }
             if (settings.DirectoryToBeDeleted.Equals("*"))
             {
@@ -96,7 +96,7 @@ public class DeleteDirectoryCommand : Command<DeleteDirectoryCommand.Settings>
                 }
                 else
                 {
-                    throw new ArgumentException(Resources.Exception_NonEmptyDirectory.Replace("{x}", settings.DirectoryToBeDeleted));
+                    throw new ArgumentException(Resources.Exceptions_DirectoryNotEmpty.Replace("{x}", settings.DirectoryToBeDeleted));
                 }
             }
             if (Directory.Exists(settings.DirectoryToBeDeleted))
@@ -126,7 +126,7 @@ public class DeleteDirectoryCommand : Command<DeleteDirectoryCommand.Settings>
                 }
                 else
                 {
-                    throw new ArgumentException(Resources.Exception_NonEmptyDirectory.Replace("{x}", settings.DirectoryToBeDeleted));
+                    throw new ArgumentException(Resources.Exceptions_DirectoryNotEmpty.Replace("{x}", settings.DirectoryToBeDeleted));
                 }
             }
             else

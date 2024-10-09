@@ -16,10 +16,9 @@
  */
 
 using System.ComponentModel;
-
 using Spectre.Console.Cli;
 
-namespace NewDir.Cli.Settings;
+namespace BasisBox.Cli.Tools.NewDir.Settings;
 
 public class NewDirCommandSettings : CommandSettings 
 {

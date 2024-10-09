@@ -29,9 +29,6 @@ using BasisBox.Cli.Tools.WCount;
 using BasisBox.Cli.Tools.WCount.Commands;
 
 using CliUtilsLib;
-
-using NewDir.Cli.Commands;
-
 using Spectre.Console.Cli;
 
 CommandApp commandApp = new CommandApp();

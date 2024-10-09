@@ -20,12 +20,16 @@ using System.IO;
 
 using AlastairLundy.Extensions.IO.Directories;
 
-using NewDir.Cli.Settings;
+using BasisBox.Cli.Helpers;
+using BasisBox.Cli.Localizations;
+
+using BasisBox.Cli.Tools.NewDir.Helpers;
+using BasisBox.Cli.Tools.NewDir.Settings;
 
 using Spectre.Console;
 using Spectre.Console.Cli;
 
-namespace NewDir.Cli.Commands;
+namespace BasisBox.Cli.Tools.NewDir.Commands;
 
 public class MultipleNewDirCommand : Command<MultipleNewDirCommandSettings>
 {
@@ -42,9 +46,10 @@ public class MultipleNewDirCommand : Command<MultipleNewDirCommandSettings>
             exceptionFormat = ExceptionFormats.NoStackTrace;
         }
         
-        if (settings.DirectoryNames == null)
+        int fileResult = FileArgumentHelpers.HandleFileArgument(settings.DirectoryNames, exceptionFormat);
+
+        if (fileResult == -1)
         {
-            AnsiConsole.WriteException(new ArgumentNullException(nameof(settings.DirectoryNames), Resources.Exceptions_DirectoryNotSpecified_Plural), exceptionFormat);
             return -1;
         }
 
@@ -54,7 +59,7 @@ public class MultipleNewDirCommand : Command<MultipleNewDirCommandSettings>
             
             UnixFileMode? fileMode = PermissionHelper.GetUnixFileMode(settings.Mode);
 
-            foreach (string directory in settings.DirectoryNames)
+            foreach (string directory in settings.DirectoryNames!)
             {
                 directoryCreator.CreateDirectory(directory,  directory, (UnixFileMode)fileMode!, settings.CreateParentDirectories);
             }

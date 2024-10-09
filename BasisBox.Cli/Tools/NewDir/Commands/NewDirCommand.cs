@@ -17,16 +17,18 @@
 
 using System;
 using System.IO;
-
 using AlastairLundy.Extensions.IO.Directories;
 
-using NewDir.Cli.Localizations;
-using NewDir.Cli.Settings;
+using BasisBox.Cli.Helpers;
+using BasisBox.Cli.Localizations;
+
+using BasisBox.Cli.Tools.NewDir.Helpers;
+using BasisBox.Cli.Tools.NewDir.Settings;
 
 using Spectre.Console;
 using Spectre.Console.Cli;
 
-namespace NewDir.Cli.Commands;
+namespace BasisBox.Cli.Tools.NewDir.Commands;
 
 public class NewDirCommand : Command<NewDirCommandSettings>
 {
@@ -42,20 +44,21 @@ public class NewDirCommand : Command<NewDirCommandSettings>
         {
             exceptionFormat = ExceptionFormats.NoStackTrace;
         }
-        
-        if (settings.DirectoryName == null)
+
+        int fileResult = FileArgumentHelpers.HandleFileArgument(settings.DirectoryName, exceptionFormat);
+
+        if (fileResult == -1)
         {
-            AnsiConsole.WriteException(new ArgumentNullException(Resources.Exceptions_DirectoryNotSpecified), exceptionFormat);
             return -1;
         }
-        
+
         try
         {
             DirectoryCreator directoryCreator = new DirectoryCreator();
             
             UnixFileMode? fileMode = PermissionHelper.GetUnixFileMode(settings.Mode);
 
-            if (settings.DirectoryName.Split(' ').Length > 0)
+            if (settings.DirectoryName!.Split(' ').Length > 0)
             {
                 foreach (string directory in settings.DirectoryName.Split(' '))
                 {

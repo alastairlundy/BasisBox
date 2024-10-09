@@ -224,6 +224,24 @@ namespace BasisBox.Cli.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The directory to be created was not specified. If this was not intentional, ensure that you are passing a valid directory as an argument..
+        /// </summary>
+        internal static string Exceptions_DirectoryNotSpecified {
+            get {
+                return ResourceManager.GetString("Exceptions.DirectoryNotSpecified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One or more of the directories to be created was not specified. If this was not intentional, ensure that you are passing valid directories as an argument..
+        /// </summary>
+        internal static string Exceptions_DirectoryNotSpecified_Plural {
+            get {
+                return ResourceManager.GetString("Exceptions.DirectoryNotSpecified.Plural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The program was unable to find the specified file. If the file exists, consider checking your input for typos or mistakes..
         /// </summary>
         internal static string Exceptions_FileNotFound {
@@ -256,15 +274,6 @@ namespace BasisBox.Cli.Localizations {
         internal static string Exceptions_InvalidFileOrDirectoryArguments {
             get {
                 return ResourceManager.GetString("Exceptions.InvalidFileOrDirectoryArguments", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An invalid file or directory was passed as an argument..
-        /// </summary>
-        internal static string Exceptions_InvalidFileOrDirectoryArguments1 {
-            get {
-                return ResourceManager.GetString("Exceptions.InvalidFileOrDirectoryArguments1", resourceCulture);
             }
         }
         
@@ -368,11 +377,83 @@ namespace BasisBox.Cli.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Count the number of lines, words, characters, and/or bytes in specified files..
+        ///   Looks up a localized string similar to Count the number of bytes in one or more specified files..
+        /// </summary>
+        internal static string Wcount_App_Bytes_Description {
+            get {
+                return ResourceManager.GetString("Wcount.App.Bytes.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Count the number of characters in one or more specified files..
+        /// </summary>
+        internal static string WCount_App_Chars_Description {
+            get {
+                return ResourceManager.GetString("WCount.App.Chars.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Count the number of lines, words, characters, and/or bytes in one or more specified files..
         /// </summary>
         internal static string WCount_App_Description {
             get {
                 return ResourceManager.GetString("WCount.App.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bytes.
+        /// </summary>
+        internal static string WCount_App_Labels_Bytes_Plural {
+            get {
+                return ResourceManager.GetString("WCount.App.Labels.Bytes.Plural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Byte.
+        /// </summary>
+        internal static string Wcount_App_Labels_Bytes_Singular {
+            get {
+                return ResourceManager.GetString("Wcount.App.Labels.Bytes.Singular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Characters.
+        /// </summary>
+        internal static string WCount_App_Labels_Characters_Plural {
+            get {
+                return ResourceManager.GetString("WCount.App.Labels.Characters.Plural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Character.
+        /// </summary>
+        internal static string WCount_App_Labels_Characters_Singular {
+            get {
+                return ResourceManager.GetString("WCount.App.Labels.Characters.Singular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lines.
+        /// </summary>
+        internal static string WCount_App_Labels_Lines_Plural {
+            get {
+                return ResourceManager.GetString("WCount.App.Labels.Lines.Plural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line.
+        /// </summary>
+        internal static string WCount_App_Labels_Lines_Singular {
+            get {
+                return ResourceManager.GetString("WCount.App.Labels.Lines.Singular", resourceCulture);
             }
         }
         
@@ -382,6 +463,42 @@ namespace BasisBox.Cli.Localizations {
         internal static string WCount_App_Labels_Total {
             get {
                 return ResourceManager.GetString("WCount.App.Labels.Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Words.
+        /// </summary>
+        internal static string WCount_App_Labels_Words_Plural {
+            get {
+                return ResourceManager.GetString("WCount.App.Labels.Words.Plural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Word.
+        /// </summary>
+        internal static string WCount_App_Labels_Words_Singular {
+            get {
+                return ResourceManager.GetString("WCount.App.Labels.Words.Singular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Count the number of lines in one or more specified files..
+        /// </summary>
+        internal static string Wcount_App_Lines_Description {
+            get {
+                return ResourceManager.GetString("Wcount.App.Lines.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Count the number of words in one or more specified files..
+        /// </summary>
+        internal static string Wcount_App_Words_Description {
+            get {
+                return ResourceManager.GetString("Wcount.App.Words.Description", resourceCulture);
             }
         }
     }

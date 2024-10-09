@@ -17,12 +17,11 @@
 
 using System;
 using System.IO;
-
 using AlastairLundy.Extensions.IO.Permissions;
 
-using NewDir.Cli.Localizations;
+using BasisBox.Cli.Localizations;
 
-namespace NewDir.Cli;
+namespace BasisBox.Cli.Tools.NewDir.Helpers;
 
 internal static class PermissionHelper
 {
@@ -40,7 +39,7 @@ internal static class PermissionHelper
 
             if (!isValid || fileMode == null)
             {
-                throw new ArgumentException(Resources.Exceptions_InvalidArgument.Replace("{x}", settingsMode), "settings.Mode");
+                throw new ArgumentException(Resources.Exceptions_Copying_InvalidExistingArguments.Replace("{x}", settingsMode), "settings.Mode");
             }
         }
 

@@ -86,7 +86,7 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
             return -1;
         }
 
-        if (settings.FileOrDirectoryToBeDeleted.Equals("/"))
+        if (settings.FileOrDirectoryToBeDeleted!.Equals("/"))
         {
             AnsiConsole.WriteException(new ArgumentException(Resources.Exceptions_InvalidSlashCommand), exceptionFormats);
             return -1;

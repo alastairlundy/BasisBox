@@ -124,7 +124,7 @@
     <value>An invalid file or directory was passed as an argument.</value>
   </data>
   <data name="WCount.App.Description" xml:space="preserve">
-    <value>Count the number of lines, words, characters, and/or bytes in specified files.</value>
+    <value>Count the number of lines, words, characters, and/or bytes in one or more specified files.</value>
   </data>
   <data name="NLine.App.Description" xml:space="preserve">
     <value>Add numbers to lines either from a file or standard input and sent to standard output.</value>
@@ -189,9 +189,6 @@
   <data name="Del.App.Commands.Delete.Single.Description" xml:space="preserve">
     <value>Delete a file or director either recursively or non-recursively.</value>
   </data>
-  <data name="Exceptions.InvalidFileOrDirectoryArguments1" xml:space="preserve">
-    <value>An invalid file or directory was passed as an argument.</value>
-  </data>
   <data name="Item.Deleted" xml:space="preserve">
     <value>{x} was deleted.</value>
   </data>
@@ -225,5 +222,47 @@
   </data>
   <data name="NewDir.App.Commands.ManyNewDirs.Description" xml:space="preserve">
     <value>Creates new specified directories with specified parameters.</value>
+  </data>
+  <data name="Exceptions.DirectoryNotSpecified" xml:space="preserve">
+    <value>The directory to be created was not specified. If this was not intentional, ensure that you are passing a valid directory as an argument.</value>
+  </data>
+  <data name="Exceptions.DirectoryNotSpecified.Plural" xml:space="preserve">
+    <value>One or more of the directories to be created was not specified. If this was not intentional, ensure that you are passing valid directories as an argument.</value>
+  </data>
+  <data name="WCount.App.Labels.Words.Plural" xml:space="preserve">
+    <value>Words</value>
+  </data>
+  <data name="WCount.App.Labels.Words.Singular" xml:space="preserve">
+    <value>Word</value>
+  </data>
+  <data name="WCount.App.Labels.Characters.Plural" xml:space="preserve">
+    <value>Characters</value>
+  </data>
+  <data name="WCount.App.Labels.Characters.Singular" xml:space="preserve">
+    <value>Character</value>
+  </data>
+  <data name="WCount.App.Labels.Bytes.Plural" xml:space="preserve">
+    <value>Bytes</value>
+  </data>
+  <data name="Wcount.App.Labels.Bytes.Singular" xml:space="preserve">
+    <value>Byte</value>
+  </data>
+  <data name="Wcount.App.Words.Description" xml:space="preserve">
+    <value>Count the number of words in one or more specified files.</value>
+  </data>
+  <data name="WCount.App.Chars.Description" xml:space="preserve">
+    <value>Count the number of characters in one or more specified files.</value>
+  </data>
+  <data name="Wcount.App.Lines.Description" xml:space="preserve">
+    <value>Count the number of lines in one or more specified files.</value>
+  </data>
+  <data name="Wcount.App.Bytes.Description" xml:space="preserve">
+    <value>Count the number of bytes in one or more specified files.</value>
+  </data>
+  <data name="WCount.App.Labels.Lines.Plural" xml:space="preserve">
+    <value>Lines</value>
+  </data>
+  <data name="WCount.App.Labels.Lines.Singular" xml:space="preserve">
+    <value>Line</value>
   </data>
 </root>

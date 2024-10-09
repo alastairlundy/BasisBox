@@ -68,7 +68,7 @@ public class WCountCommand : Command<WCountCommand.Settings>
             exceptionFormats = ExceptionFormats.NoStackTrace;
         }
 
-        int fileResult = FileArgumentHelpers.HandleFileArgument(settings.Files, );
+        int fileResult = FileArgumentHelpers.HandleFileArgument(settings.Files, exceptionFormats);
 
         if (fileResult == -1)
         {

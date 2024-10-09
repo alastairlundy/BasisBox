@@ -67,7 +67,7 @@ public class DeleteManyDirectoriesCommand : Command<DeleteManyDirectoriesCommand
             {
                 if (directory.Equals("/"))
                 {
-                    throw new ArgumentException(Resources.Exception_InvalidSlashArgument, directory);
+                    throw new ArgumentException(Resources.Exceptions_InvalidSlashCommand, directory);
                 }
 
                 if (directory.Equals("*"))
@@ -109,7 +109,7 @@ public class DeleteManyDirectoriesCommand : Command<DeleteManyDirectoriesCommand
                     }
                     else
                     {
-                        throw new ArgumentException(Resources.Exception_NonEmptyDirectory.Replace("{x}", directory));
+                        throw new ArgumentException(Resources.Exceptions_DirectoryNotEmpty.Replace("{x}", directory));
                     }
                 }
 
@@ -138,7 +138,7 @@ public class DeleteManyDirectoriesCommand : Command<DeleteManyDirectoriesCommand
                     }
                     else
                     {
-                        throw new ArgumentException(Resources.Exception_NonEmptyDirectory.Replace("{x}", directory));
+                        throw new ArgumentException(Resources.Exceptions_DirectoryNotEmpty.Replace("{x}", directory));
                     }
                 }
                 else
