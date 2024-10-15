@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AlastairLundy.Extensions.IO.Files.Concatenation;
 using BasisBox.Cli.Localizations;
 using BasisBox.Cli.Tools.ConCat.Helpers;
 using BasisBox.Cli.Tools.ConCat.Settings;
@@ -54,7 +55,7 @@ public class ConcatenateCommand : Command<ConcatenateCommand.Settings>
                 return -1;
             }
             
-            string[] newContents = FileConcatenator.ConcatenateToStringEnumerable(files.Value.existingFiles, settings.AppendLineNumbers).ToArray();
+            string[] newContents = FileConcatenator.ConcatenateFilesToStringEnumerable(files.Value.existingFiles, settings.AppendLineNumbers).ToArray();
             
             foreach (string file in files.Value.newFiles)
             {
@@ -67,17 +68,17 @@ public class ConcatenateCommand : Command<ConcatenateCommand.Settings>
         }
         catch (UnauthorizedAccessException exception)
         {
-            return ConsoleHelper.HandleException(exception,
+            return ConCatConsoleHelper.HandleException(exception,
                 Resources.Exceptions_Permissions_Invalid.Replace("{x}", exception.Source), settings.ShowErrors);
         }
         catch (FileNotFoundException exception)
         {
-            return ConsoleHelper.HandleException(exception,
+            return ConCatConsoleHelper.HandleException(exception,
                 Resources.Exceptions_FileNotFound.Replace("{x}", exception.Source), settings.ShowErrors);
         }
         catch (Exception exception)
         {
-            return ConsoleHelper.HandleException(exception,
+            return ConCatConsoleHelper.HandleException(exception,
                 Resources.Exceptions_Generic.Replace("{x}", exception.Source), settings.ShowErrors);
         }
     }

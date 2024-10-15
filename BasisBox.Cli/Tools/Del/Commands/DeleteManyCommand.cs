@@ -35,6 +35,7 @@ using CliUtilsLib;
 
 using Spectre.Console;
 using Spectre.Console.Cli;
+using FileFinder = AlastairLundy.Extensions.IO.Files.FileFinder;
 
 namespace BasisBox.Cli.Tools.Del.Commands;
 
@@ -232,7 +233,9 @@ public class DeleteManyCommand : Command<DeleteManyCommand.Settings>
                 }
                 else if (!Directory.Exists(fileOrDirectory) && !File.Exists(fileOrDirectory))
                 {
-                    if (FileFinder.IsAFile(fileOrDirectory))
+                    FileFinder fileFinder = new FileFinder();
+                    
+                    if (fileFinder.IsAFile(fileOrDirectory))
                     {
                         throw new FileNotFoundException(Resources.Exceptions_FileNotFound.Replace("{x}", fileOrDirectory), fileOrDirectory);
                     }

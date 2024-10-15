@@ -93,17 +93,17 @@ public class NewFileCommand : Command<NewFileCommand.Settings>
         }
         catch (UnauthorizedAccessException exception)
         {
-            return ConsoleHelper.HandleException(exception,
+            return ConCatConsoleHelper.HandleException(exception,
                 Resources.Exceptions_Permissions_Invalid.Replace("{x}", exception.Source), settings.ShowErrors);
         }
         catch (FileNotFoundException exception)
         {
-            return ConsoleHelper.HandleException(exception,
+            return ConCatConsoleHelper.HandleException(exception,
                 Resources.Exceptions_FileNotFound.Replace("{x}", exception.Source), settings.ShowErrors);
         }
         catch (Exception exception)
         {
-            return ConsoleHelper.HandleException(exception,
+            return ConCatConsoleHelper.HandleException(exception,
                 Resources.Exceptions_Generic.Replace("{x}", exception.Source), settings.ShowErrors);
         }
     }

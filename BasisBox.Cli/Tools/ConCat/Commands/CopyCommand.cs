@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AlastairLundy.Extensions.IO.Files.Concatenation;
 using BasisBox.Cli.Localizations;
 using BasisBox.Cli.Tools.ConCat.Helpers;
 using BasisBox.Cli.Tools.ConCat.Settings;
@@ -48,25 +49,25 @@ public class CopyCommand : Command<CopyCommand.Settings>
 
       try
       {
-         ConCatCopying.CopyFile(files!.Value.existingFiles.First(), files!.Value.newFiles.First(), settings.AppendLineNumbers);
-
+         FileConcatenator.ConcatenateFilesToNewFile(files!.Value.newFiles.First(), files!.Value.newFiles.First(), File.ReadAllLines(files!.Value.existingFiles.First()), settings.AppendLineNumbers);
+         
          AnsiConsole.WriteLine(Resources.ConCat_App_Commands_Copy_Success.Replace("{x}", files.Value.existingFiles.First()).Replace("{y}", files.Value.newFiles.First()));
 
          return 1;
       }
       catch (UnauthorizedAccessException exception)
       {
-         return ConsoleHelper.HandleException(exception,
+         return ConCatConsoleHelper.HandleException(exception,
             Resources.Exceptions_Permissions_Invalid.Replace("{x}", exception.Source), settings.ShowErrors);
       }
       catch (FileNotFoundException exception)
       {
-         return ConsoleHelper.HandleException(exception,
+         return ConCatConsoleHelper.HandleException(exception,
             Resources.Exceptions_FileNotFound.Replace("{x}", exception.Source), settings.ShowErrors);
       }
       catch (Exception exception)
       {
-         return ConsoleHelper.HandleException(exception,
+         return ConCatConsoleHelper.HandleException(exception,
             Resources.Exceptions_Generic.Replace("{x}", exception.Source), settings.ShowErrors);
       }
    }

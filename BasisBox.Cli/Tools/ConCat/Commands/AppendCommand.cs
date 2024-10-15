@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AlastairLundy.Extensions.IO.Files.Concatenation;
 using BasisBox.Cli.Localizations;
 using BasisBox.Cli.Tools.ConCat.Helpers;
 using BasisBox.Cli.Tools.ConCat.Settings;
@@ -56,7 +57,7 @@ public class AppendCommand : Command<AppendCommand.Settings>
             
             foreach (string file in files.Value.newFiles)
             {
-                ConCatAppender.ToNewFile(file, files.Value.existingFiles, settings.AppendLineNumbers, file);
+                FileConcatenator.ConcatenateFilesToNewFile(file, file, files.Value.existingFiles, settings.AppendLineNumbers);
                 
                 AnsiConsole.WriteLine(Resources.ConCat_App_Commands_UpdateFile_Success.Replace("{x}", file));
             }
@@ -65,17 +66,17 @@ public class AppendCommand : Command<AppendCommand.Settings>
         }
         catch (UnauthorizedAccessException exception)
         {
-            return ConsoleHelper.HandleException(exception,
+            return ConCatConsoleHelper.HandleException(exception,
                 Resources.Exceptions_Permissions_Invalid.Replace("{x}", exception.Source), settings.ShowErrors);
         }
         catch (FileNotFoundException exception)
         {
-            return ConsoleHelper.HandleException(exception,
+            return ConCatConsoleHelper.HandleException(exception,
                 Resources.Exceptions_FileNotFound.Replace("{x}", exception.Source), settings.ShowErrors);
         }
         catch (Exception exception)
         {
-            return ConsoleHelper.HandleException(exception,
+            return ConCatConsoleHelper.HandleException(exception,
                 Resources.Exceptions_Generic.Replace("{x}", exception.Source), settings.ShowErrors);
         }
     }

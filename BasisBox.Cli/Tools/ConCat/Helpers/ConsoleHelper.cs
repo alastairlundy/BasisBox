@@ -22,7 +22,7 @@ using Spectre.Console;
 
 namespace BasisBox.Cli.Tools.ConCat.Helpers;
 
-internal class ConsoleHelper
+internal class ConCatConsoleHelper
 {
     internal static int HandleException(Exception ex, string message, bool debuggingMode)
     {

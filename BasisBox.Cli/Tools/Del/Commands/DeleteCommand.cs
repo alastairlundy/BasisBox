@@ -35,6 +35,7 @@ using CliUtilsLib;
 
 using Spectre.Console;
 using Spectre.Console.Cli;
+using FileFinder = AlastairLundy.Extensions.IO.Files.FileFinder;
 
 namespace BasisBox.Cli.Tools.Del.Commands;
 
@@ -94,7 +95,8 @@ public class DeleteCommand : Command<DeleteCommand.Settings>
         
         try
         {
-            if (FileFinder.IsAFile(settings.FileOrDirectoryToBeDeleted))
+            FileFinder fileFinder = new FileFinder();
+            if (fileFinder.IsAFile(settings.FileOrDirectoryToBeDeleted))
             {
                 if (File.Exists(settings.FileOrDirectoryToBeDeleted))
                 {
