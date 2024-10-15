@@ -1,5 +1,5 @@
 ﻿/*
-    BasisBox - Moment
+    BasisBox - Today
     Copyright (C) 2024 Alastair Lundy
 
     This program is free software: you can redistribute it and/or modify
@@ -15,19 +15,24 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-using Moment.Cli.Commands;
-
+using System;
+using System.ComponentModel;
 using Spectre.Console.Cli;
 
-CommandApp app = new CommandApp();
+namespace BasisBox.Cli.Tools.Today.Commands;
 
-app.Configure(config =>
+public class DateFormatCommand : Command<DateFormatCommand.Settings>
 {
+    public class Settings : CommandSettings
+    {
+        
+        [CommandOption("--debug|--debugging|--show-errros")]
+        [DefaultValue(false)]
+        public bool ShowErrors { get; init; }
+    }
 
-    config.AddCommand<MomentCommand>("");
-
-});
-
-app.SetDefaultCommand<MomentCommand>();
-
-return app.Run(args);
+    public override int Execute(CommandContext context, Settings settings)
+    {
+        throw new NotImplementedException();
+    }
+}

@@ -23,14 +23,12 @@ using System.Linq;
 
 using AlastairLundy.Extensions.System.EscapeCharacters;
 
-using Parrot.Cli.Localizations;
-
-using Parrot.Library;
+using BasisBox.Cli.Localizations;
 
 using Spectre.Console;
 using Spectre.Console.Cli;
 
-namespace Parrot.Cli.Commands;
+namespace BasisBox.Cli.Tools.Parrot.Commands;
 
 public class EchoCommand : Command<EchoCommand.Settings>
 {
@@ -127,12 +125,12 @@ public class EchoCommand : Command<EchoCommand.Settings>
                     File.WriteAllLines(settings.OutputFile, settings.LinesToPrint!);
                 }
 
-                AnsiConsole.WriteLine($"{Resources.File_Save_Success}: {settings.OutputFile}");
+                AnsiConsole.WriteLine($"{Resources.File_Saved_Failure}: {settings.OutputFile}");
                 return 0;
             }
             catch (Exception ex)
             {
-                AnsiConsole.WriteLine($"{Resources.File_Save_Exception}: {settings.OutputFile}");
+                AnsiConsole.WriteLine($"{Resources.File_Saved_Failure}: {settings.OutputFile}");
                 AnsiConsole.WriteException(ex);
                 return -1;
             }

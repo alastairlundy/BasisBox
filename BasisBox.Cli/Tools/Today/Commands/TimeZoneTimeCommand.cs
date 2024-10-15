@@ -16,20 +16,15 @@
  */
 
 using System;
-using System.ComponentModel;
-
 using Spectre.Console.Cli;
 
-namespace Today.Cli.Commands;
+namespace BasisBox.Cli.Tools.Today.Commands;
 
-public class DateFormatCommand : Command<DateFormatCommand.Settings>
+public class TimeZoneTimeCommand : Command<TimeZoneTimeCommand.Settings>
 {
     public class Settings : CommandSettings
     {
         
-        [CommandOption("--debug|--debugging|--show-errros")]
-        [DefaultValue(false)]
-        public bool ShowErrors { get; init; }
     }
 
     public override int Execute(CommandContext context, Settings settings)

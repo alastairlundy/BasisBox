@@ -17,7 +17,7 @@
 
 using Spectre.Console;
 
-namespace Parrot.Cli;
+namespace BasisBox.Cli.Tools.Parrot.Helpers;
 
 public class ColourFormatParsing
 {

@@ -1,5 +1,5 @@
 ﻿/*
-    BasisBox - Parrot
+    BasisBox - Today
     Copyright (C) 2024 Alastair Lundy
 
     This program is free software: you can redistribute it and/or modify
@@ -15,26 +15,20 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-using System.Reflection;
-
-using AlastairLundy.Extensions.System;
-
-using Parrot.Cli.Commands;
-
+using System;
 using Spectre.Console.Cli;
 
-CommandApp app = new();
+namespace BasisBox.Cli.Tools.Today.Commands;
 
-app.Configure(config =>
+public class SetDateCommand : Command<SetDateCommand.Settings>
 {
-    config.UseAssemblyInformationalVersion();
-    
-    config.AddCommand<EchoCommand>("")
-    .WithAlias("echo");
+    public class Settings : CommandSettings
+    {
+        
+    }
 
-    config.SetApplicationVersion(Assembly.GetExecutingAssembly().GetName().Version.ToFriendlyVersionString());
-});
-
-app.SetDefaultCommand<EchoCommand>();
-
-return app.Run(args);
+    public override int Execute(CommandContext context, Settings settings)
+    {
+        throw new NotImplementedException();
+    }
+}

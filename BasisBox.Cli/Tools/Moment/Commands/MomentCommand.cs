@@ -20,14 +20,12 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 
-using Moment.Cli.Localizations;
-
-using PlatformKit;
+using BasisBox.Cli.Localizations;
 
 using Spectre.Console;
 using Spectre.Console.Cli;
 
-namespace Moment.Cli.Commands;
+namespace BasisBox.Cli.Tools.Moment.Commands;
 
 public class MomentCommand : Command<MomentCommand.Settings>
 {
@@ -59,7 +57,7 @@ public class MomentCommand : Command<MomentCommand.Settings>
 
         if (settings.Command == null)
         {
-            AnsiConsole.WriteException(new ArgumentNullException(nameof(settings.Command), Resources.Exceptions_InvalidArgument));
+            AnsiConsole.WriteException(new ArgumentNullException(nameof(settings.Command), Resources.Exceptions_NoArgumentsProvided));
             return -1;
         }
 

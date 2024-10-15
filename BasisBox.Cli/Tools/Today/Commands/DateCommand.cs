@@ -21,9 +21,7 @@ using System.ComponentModel;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
-using Today.Library.Extensions;
-
-namespace Today.Cli.Commands;
+namespace BasisBox.Cli.Tools.Today.Commands;
 
 public class DateCommand : Command<DateCommand.Settings>
 {

@@ -16,12 +16,11 @@
  */
 
 using System;
-
 using Spectre.Console.Cli;
 
-namespace Today.Cli.Commands;
+namespace BasisBox.Cli.Tools.Today.Commands;
 
-public class SetTimeZoneCommand : Command<SetTimeZoneCommand.Settings>
+public class DisplayTimeZoneCommand : Command<DisplayTimeZoneCommand.Settings>
 {
     public class Settings : CommandSettings
     {
