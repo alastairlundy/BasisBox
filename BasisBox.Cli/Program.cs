@@ -22,10 +22,7 @@ using BasisBox.Cli.Tools.Del.Commands;
 using BasisBox.Cli.Tools.DelDir.Commands;
 using BasisBox.Cli.Tools.LoginName.Commands;
 using BasisBox.Cli.Tools.NewDir.Commands;
-using BasisBox.Cli.Tools.NLine;
 using BasisBox.Cli.Tools.NLine.Commands;
-
-using BasisBox.Cli.Tools.WCount;
 using BasisBox.Cli.Tools.WCount.Commands;
 
 using CliUtilsLib;
@@ -43,8 +40,7 @@ commandApp.Configure(config =>
         .WithDescription(Resources.NLine_App_Description)
         .WithExample("-v 0")
         .WithExample("-w 5");
-
-
+    
     //
     // WCount: 
     //
@@ -66,13 +62,14 @@ commandApp.Configure(config =>
         .WithDescription(Resources.WCount_App_Chars_Description);
     });
 
-
     
-
     config.AddCommand<LoginNameCommand>("loginname")
         .WithAlias("uname")
         .WithDescription(Resources.LoginName_App_Description);
 
+    //
+    // NewDir:
+    //
     config.AddBranch("newdir", conf =>
     {
         conf.AddCommand<NewDirCommand>("")
@@ -94,6 +91,9 @@ commandApp.Configure(config =>
         }
     });
 
+    //
+    // DelDir:
+    //
     config.AddBranch("deldir", conf =>
     {
         conf.AddCommand<DeleteDirectoryCommand>("");
@@ -105,6 +105,9 @@ commandApp.Configure(config =>
         conf.SetDefaultCommand<DeleteDirectoryCommand>();
     });
     
+    //
+    // Del:
+    //
     config.AddBranch("del", conf =>
     {
         conf.AddCommand<DeleteCommand>("")
@@ -124,6 +127,9 @@ commandApp.Configure(config =>
         }
     });
     
+    //
+    // ConCat:  
+    //
     config.AddBranch("concat", conf =>
     {
         conf.AddCommand<ConcatenateCommand>("concatenate");
