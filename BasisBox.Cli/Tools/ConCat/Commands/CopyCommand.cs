@@ -49,7 +49,17 @@ public class CopyCommand : Command<CopyCommand.Settings>
 
       try
       {
-         FileConcatenator.ConcatenateFilesToNewFile(files!.Value.newFiles.First(), files!.Value.newFiles.First(), File.ReadAllLines(files!.Value.existingFiles.First()), settings.AppendLineNumbers);
+         FileAppender fileAppender = new();
+         fileAppender.AppendFiles(files!.Value.existingFiles);
+
+         if (settings.AppendLineNumbers == true)
+         {
+            string[] fileContents = fileAppender.ToEnumerable().ToArray();
+         }
+         else
+         {
+            fileAppender.WriteToFile(files!.Value.newFiles.First());
+         }
          
          AnsiConsole.WriteLine(Resources.ConCat_App_Commands_Copy_Success.Replace("{x}", files.Value.existingFiles.First()).Replace("{y}", files.Value.newFiles.First()));
 
