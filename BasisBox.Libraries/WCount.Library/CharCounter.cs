@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using WCount.Library.Interfaces;
 using WCount.Library.Localizations;
 
@@ -38,6 +39,19 @@ public class CharCounter : ICharCounter
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public Task<ulong> CountCharactersAsync(string s)
+    {
+        ulong totalChars = Convert.ToUInt64(s.ToCharArray().Length);
+        
+        return Task.FromResult(totalChars);
+    }
+
+    /// <summary>
     /// Gets the number of characters in a file.
     /// </summary>
     /// <param name="filePath">The file path of the file to be searched.</param>
@@ -47,16 +61,27 @@ public class CharCounter : ICharCounter
     {
         if (File.Exists(filePath))
         {
-            ulong totalChars = 0;
-            
             string[] lines = File.ReadAllLines(filePath);
+            
+            return CountCharacters(lines);
+        }
 
-            foreach (string line in lines)
-            {
-                totalChars += CountCharacters(line.Split(' '));
-            }
+        throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+    }
 
-            return totalChars;
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="filePath"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public async Task<ulong> CountCharactersInFileAsync(string filePath)
+    {
+        if (File.Exists(filePath))
+        {
+            string[] lines = await File.ReadAllLinesAsync(filePath);
+            
+            return await CountCharactersAsync(lines);
         }
 
         throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
@@ -73,7 +98,25 @@ public class CharCounter : ICharCounter
 
         foreach (string s in enumerable)
         {
-            totalChars += Convert.ToUInt64(s.ToCharArray().Length);
+            totalChars += CountCharacters(s);
+        }
+
+        return totalChars;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="enumerable"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public async Task<ulong> CountCharactersAsync(IEnumerable<string> enumerable)
+    {
+        ulong totalChars = 0;
+
+        foreach (string s in enumerable)
+        {
+            totalChars += await CountCharactersAsync(s);
         }
 
         return totalChars;
