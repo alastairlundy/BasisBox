@@ -37,3 +37,8 @@ LoginName/LoginName.sln.DotSettings.user
 /Basis.Cli/obj
 /BasisBox.Cli/obj
 /.vs
+/BasisBox.Libraries/.idea
+/BasisBox.Libraries/NLine.Library/bin
+/BasisBox.Libraries/NLine.Library/obj
+/BasisBox.Libraries/WCount.Library/bin
+/BasisBox.Libraries/WCount.Library/obj
