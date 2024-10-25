@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WCount.Library.Interfaces;
 
@@ -25,6 +26,7 @@ public interface IByteCounter
     public int CountBytes(string s, Encoding encoding);
 
     public ulong CountBytesInFile(string filePath, Encoding encoding);
+    public Task<ulong> CountBytesInFileAsync(string filePath, Encoding encoding);
 
     public ulong CountBytes(IEnumerable<string> strings, Encoding encoding);
 }

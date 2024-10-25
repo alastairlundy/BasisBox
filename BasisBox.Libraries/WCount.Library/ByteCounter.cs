@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-
+using System.Threading.Tasks;
 using WCount.Library.Interfaces;
 using WCount.Library.Localizations;
 
@@ -82,6 +82,27 @@ public class ByteCounter : IByteCounter
         if (File.Exists(filePath))
         {
             return CountBytes(File.ReadAllLines(filePath), textEncodingType);
+        }
+        else
+        {
+            throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="filePath"></param>
+    /// <param name="encoding"></param>
+    /// <returns></returns>
+    /// <exception cref="FileNotFoundException"></exception>
+    public async Task<ulong> CountBytesInFileAsync(string filePath, Encoding encoding)
+    {
+        if (File.Exists(filePath))
+        {
+            string[] fileContents = await File.ReadAllLinesAsync(filePath);
+            
+            return CountBytes(fileContents, encoding);
         }
         else
         {
