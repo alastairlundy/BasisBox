@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageLicenseFile>COPYING.LESSER.txt</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <Title>WCount.Library</Title>
+        <Authors>AlastairLundy</Authors>
+        <Copyright>Copyright (c) Alastair Lundy 2024</Copyright>
+        <RepositoryUrl>https://github.com/BasisBox/WCount/</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageReleaseNotes>## Changes since 1.1
+
+### Additions
+* Added interfaces for ``WordCounter``, ``ByteCounter``, ``LineCounter``, and ``CharCounter``
+* Added ``WCountResult`` model to make it easier to group result information.
+* Added .NET 6 support
+ 
+### Changes
+* Refactored ``ByteCounter``, ``LineCounter``, ``WordCounter``, and ``CharCounter`` to use the new interfaces
+* Fixed issues with Word Counting 
+* Re-licensed WCount under the LGPLv3 (only) license
+* Changed ``LineCounter`` to provide results as a 32 Bit Signed Integer.
+
+### Removals
+* Removed WCount Extension methods</PackageReleaseNotes>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <Description>Count the number of lines, words, characters, and/or bytes in specified files, strings, or IEnumerables of strings.</Description>
+        <Version>2.0.0</Version>
+        <TargetFrameworks>net8.0;net6.0</TargetFrameworks>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="COPYING.LESSER.txt">
+            <Link>COPYING.LESSER.txt</Link>
+            <PackagePath>COPYING.LESSER.txt</PackagePath>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="README.md">
+            <Link>README.md</Link>
+            <PackagePath>README.md</PackagePath>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="localizations\Resources.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="localizations\Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+</Project>
