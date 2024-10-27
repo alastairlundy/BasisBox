@@ -21,7 +21,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 
-using AlastairLundy.Extensions.System.EscapeCharacters;
+using AlastairLundy.Extensions.System.Strings.EscapeCharacters;
 
 using BasisBox.Cli.Localizations;
 

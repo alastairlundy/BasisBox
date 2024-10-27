@@ -26,7 +26,7 @@ using AlastairLundy.Extensions.Collections.IEnumerables;
 using AlastairLundy.Extensions.IO.Directories;
 using AlastairLundy.Extensions.IO.Directories.Extensions;
 using AlastairLundy.Extensions.IO.Files;
-
+using AlastairLundy.Extensions.IO.Files.Removal;
 using BasisBox.Cli.Helpers;
 using BasisBox.Cli.Localizations;
 using BasisBox.Cli.Tools.Del.Helpers;
