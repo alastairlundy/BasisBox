@@ -24,6 +24,7 @@ using AlastairLundy.Extensions.IO.Files.Concatenation;
 using BasisBox.Cli.Localizations;
 using BasisBox.Cli.Tools.ConCat.Helpers;
 using BasisBox.Cli.Tools.ConCat.Settings;
+using NLine.Library;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
@@ -46,7 +47,13 @@ public class DisplayCommand : Command<DisplayCommand.Settings>
 
         try
         {
-            IEnumerable<string> lines = FileConcatenator.ConcatenateFilesToStringEnumerable(settings.Files, settings.AppendLineNumbers);
+            LineNumberer lineNumberer = new();
+            IEnumerable<string> lines = FileConcatenator.ConcatenateFilesToEnumerable(settings.Files);
+
+            if (settings.AppendLineNumbers)
+            {
+                lines = lineNumberer.AddLineNumbers(lines, ". ");
+            }
             
             foreach (string line in lines)
             {

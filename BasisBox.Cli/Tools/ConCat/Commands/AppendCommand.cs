@@ -25,6 +25,7 @@ using BasisBox.Cli.Localizations;
 using BasisBox.Cli.Tools.ConCat.Helpers;
 using BasisBox.Cli.Tools.ConCat.Settings;
 using CliUtilsLib;
+using NLine.Library;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
@@ -54,10 +55,25 @@ public class AppendCommand : Command<AppendCommand.Settings>
                 AnsiConsole.WriteException(new NullReferenceException(Resources.Exceptions_NoFileProvided));
                 return -1;
             }
+
+            LineNumberer lineNumberer = new();
+            
+            FileAppender fileAppender = new();
+            fileAppender.AppendFiles(files.Value.existingFiles);
             
             foreach (string file in files.Value.newFiles)
             {
-                FileConcatenator.ConcatenateFilesToNewFile(file, file, files.Value.existingFiles, settings.AppendLineNumbers);
+                if (settings.AppendLineNumbers)
+                {
+                   IEnumerable<string> contents = fileAppender.ToEnumerable();
+                   contents = lineNumberer.AddLineNumbers(contents, ". ");
+                   
+                   File.WriteAllLines(file, contents);
+                }
+                else
+                {
+                    fileAppender.WriteToFile(file);
+                }
                 
                 AnsiConsole.WriteLine(Resources.ConCat_App_Commands_UpdateFile_Success.Replace("{x}", file));
             }
