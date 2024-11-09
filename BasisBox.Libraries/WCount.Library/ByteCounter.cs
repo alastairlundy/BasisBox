@@ -38,32 +38,32 @@ namespace WCount.Library
         /// <exception cref="ArgumentException">Thrown if the text encoding is not supported.</exception>
         public int CountBytes(string s, Encoding textEncodingType)
         {
-            byte[] bytes;
+            int byteCount = 0;
             
             if (Equals(textEncodingType, Encoding.Unicode))
             {
-                bytes = Encoding.Unicode.GetBytes(s);
+                byteCount = Encoding.Unicode.GetByteCount(s);
             }
             else if (Equals(textEncodingType, Encoding.UTF32))
             {
-                bytes = Encoding.UTF32.GetBytes(s);
+                byteCount =  Encoding.UTF32.GetByteCount(s);
             }
             else if (Equals(textEncodingType, Encoding.UTF8))
             {
-                bytes = Encoding.UTF8.GetBytes(s);
+                byteCount = Encoding.UTF8.GetByteCount(s);
             }
             else if (Equals(textEncodingType, Encoding.ASCII))
             {
-                bytes = Encoding.ASCII.GetBytes(s);
+                byteCount = Encoding.ASCII.GetByteCount(s);
             }
             else if (Equals(textEncodingType, Encoding.BigEndianUnicode))
             {
-                bytes = Encoding.BigEndianUnicode.GetBytes(s);
+                byteCount = Encoding.BigEndianUnicode.GetByteCount(s);
             }
 #if NET8_0_OR_GREATER
             else if (Equals(textEncodingType, Encoding.Latin1))
             {
-                bytes = Encoding.Latin1.GetBytes(s);
+                byteCount = Encoding.Latin1.GetByteCount(s);
             }
 #endif
             else
@@ -71,7 +71,7 @@ namespace WCount.Library
                 throw new ArgumentException(Resources.Exceptions_EncodingNotSupported);
             }
 
-            return bytes.Length;
+            return byteCount;
         }
 
         /// <summary>
