@@ -44,6 +44,53 @@ namespace WCount.Library
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="s">The string to be searched.</param>
+        /// <param name="textEncodingType"></param>
+        /// <returns>the number of characters in a string.</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public ulong CountCharacters(string s, Encoding textEncodingType)
+        {
+            int totalChars = 0;
+            
+            byte[] bytes = textEncodingType.GetBytes(s.ToCharArray());
+            
+            if (Equals(textEncodingType, Encoding.Unicode))
+            {
+                totalChars = Encoding.Unicode.GetCharCount(bytes);
+            }
+            else if (Equals(textEncodingType, Encoding.UTF32))
+            {
+                totalChars =  Encoding.UTF32.GetCharCount(bytes);
+            }
+            else if (Equals(textEncodingType, Encoding.UTF8))
+            {
+                totalChars = Encoding.UTF8.GetCharCount(bytes);
+            }
+            else if (Equals(textEncodingType, Encoding.ASCII))
+            {
+                totalChars = Encoding.ASCII.GetCharCount(bytes);
+            }
+            else if (Equals(textEncodingType, Encoding.BigEndianUnicode))
+            {
+                totalChars = Encoding.BigEndianUnicode.GetCharCount(bytes);
+            }
+#if NET8_0_OR_GREATER
+            else if (Equals(textEncodingType, Encoding.Latin1))
+            {
+                totalChars = Encoding.Latin1.GetCharCount(bytes);
+            }
+#endif
+            else
+            {
+                throw new ArgumentException(Resources.Exceptions_EncodingNotSupported);
+            }
+
+            return Convert.ToUInt64(totalChars);        
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
@@ -116,11 +163,16 @@ namespace WCount.Library
         public async Task<ulong> CountCharactersAsync(IEnumerable<string> enumerable)
         {
             ulong totalChars = 0;
+            string[] array = enumerable.ToArray();
+            Task[] tasks = new Task[array.Length];
 
-            foreach (string s in enumerable)
+            for (int index = 0; index < array.Length; index++)
             {
-                totalChars += await CountCharactersAsync(s);
+                tasks[index] = new Task<ulong>(() => totalChars += CountCharacters(array[index]));
+                tasks[index].Start();
             }
+            
+            await Task.WhenAll(tasks);
 
             return totalChars;
         }

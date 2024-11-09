@@ -16,6 +16,7 @@
  */
 
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace WCount.Library.Interfaces
@@ -23,6 +24,7 @@ namespace WCount.Library.Interfaces
     public interface ICharCounter
     {
         public ulong CountCharacters(string s);
+        public ulong CountCharacters(string s, Encoding textEncodingType);
         public Task<ulong> CountCharactersAsync(string s);
 
         public ulong CountCharactersInFile(string filePath);
