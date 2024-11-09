@@ -112,8 +112,10 @@ namespace WCount.Library
             
                 return CountCharacters(lines);
             }
-
-            throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+            else
+            {
+                throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+            }
         }
 
         /// <summary>
@@ -129,8 +131,10 @@ namespace WCount.Library
             
                 return await CountCharactersAsync(lines);
             }
-
-            throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+            else
+            {
+                throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+            }
         }
 
         /// <summary>
