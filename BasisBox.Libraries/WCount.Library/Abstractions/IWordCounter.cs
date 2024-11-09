@@ -18,16 +18,17 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace WCount.Library.Interfaces;
-
-public interface IWordCounter
+namespace WCount.Library.Interfaces
 {
-    public Task<ulong> CountWordsAsync(string s);
-    public ulong CountWords(string s);
+    public interface IWordCounter
+    {
+        public Task<ulong> CountWordsAsync(string s);
+        public ulong CountWords(string s);
 
-    public Task<ulong> CountWordsInFileAsync(string filePath);
-    public ulong CountWordsInFile(string filePath);
+        public Task<ulong> CountWordsInFileAsync(string filePath);
+        public ulong CountWordsInFile(string filePath);
 
-    public Task<ulong> CountWordsAsync(IEnumerable<string> enumerable);
-    public ulong CountWords(IEnumerable<string> enumerable);
+        public Task<ulong> CountWordsAsync(IEnumerable<string> enumerable);
+        public ulong CountWords(IEnumerable<string> enumerable);
+    }
 }

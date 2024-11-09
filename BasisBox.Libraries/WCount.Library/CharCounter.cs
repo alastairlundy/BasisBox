@@ -22,103 +22,104 @@ using System.Threading.Tasks;
 using WCount.Library.Interfaces;
 using WCount.Library.Localizations;
 
-namespace WCount.Library;
-
-public class CharCounter : ICharCounter
+namespace WCount.Library
 {
-    /// <summary>
-    /// Get the number of characters in a string.
-    /// </summary>
-    /// <param name="s">The string to be searched.</param>
-    /// <returns>the number of characters in a string.</returns>
-    public ulong CountCharacters(string s)
+    public class CharCounter : ICharCounter
     {
-        ulong totalChars = Convert.ToUInt64(s.ToCharArray().Length);
+        /// <summary>
+        /// Get the number of characters in a string.
+        /// </summary>
+        /// <param name="s">The string to be searched.</param>
+        /// <returns>the number of characters in a string.</returns>
+        public ulong CountCharacters(string s)
+        {
+            ulong totalChars = Convert.ToUInt64(s.ToCharArray().Length);
 
-        return totalChars;
-    }
+            return totalChars;
+        }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="s"></param>
-    /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
-    public Task<ulong> CountCharactersAsync(string s)
-    {
-        ulong totalChars = Convert.ToUInt64(s.ToCharArray().Length);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public Task<ulong> CountCharactersAsync(string s)
+        {
+            ulong totalChars = Convert.ToUInt64(s.ToCharArray().Length);
         
-        return Task.FromResult(totalChars);
-    }
+            return Task.FromResult(totalChars);
+        }
 
-    /// <summary>
-    /// Gets the number of characters in a file.
-    /// </summary>
-    /// <param name="filePath">The file path of the file to be searched.</param>
-    /// <returns>the number of characters in the file specified.</returns>
-    /// <exception cref="FileNotFoundException">Thrown if the file specified could not be found.</exception>
-    public ulong CountCharactersInFile(string filePath)
-    {
-        if (File.Exists(filePath))
+        /// <summary>
+        /// Gets the number of characters in a file.
+        /// </summary>
+        /// <param name="filePath">The file path of the file to be searched.</param>
+        /// <returns>the number of characters in the file specified.</returns>
+        /// <exception cref="FileNotFoundException">Thrown if the file specified could not be found.</exception>
+        public ulong CountCharactersInFile(string filePath)
         {
-            string[] lines = File.ReadAllLines(filePath);
+            if (File.Exists(filePath))
+            {
+                string[] lines = File.ReadAllLines(filePath);
             
-            return CountCharacters(lines);
+                return CountCharacters(lines);
+            }
+
+            throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
         }
 
-        throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="filePath"></param>
-    /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
-    public async Task<ulong> CountCharactersInFileAsync(string filePath)
-    {
-        if (File.Exists(filePath))
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task<ulong> CountCharactersInFileAsync(string filePath)
         {
-            string[] lines = await File.ReadAllLinesAsync(filePath);
+            if (File.Exists(filePath))
+            {
+                string[] lines = await File.ReadAllLinesAsync(filePath);
             
-            return await CountCharactersAsync(lines);
+                return await CountCharactersAsync(lines);
+            }
+
+            throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
         }
 
-        throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
-    }
-
-    /// <summary>
-    /// Gets the number of characters in an IEnumerable of strings.
-    /// </summary>
-    /// <param name="enumerable">The IEnumerable to be searched.</param>
-    /// <returns>the number of characters in the specified IEnumerable.</returns>
-    public ulong CountCharacters(IEnumerable<string> enumerable)
-    {
-        ulong totalChars = 0;
-
-        foreach (string s in enumerable)
+        /// <summary>
+        /// Gets the number of characters in an IEnumerable of strings.
+        /// </summary>
+        /// <param name="enumerable">The IEnumerable to be searched.</param>
+        /// <returns>the number of characters in the specified IEnumerable.</returns>
+        public ulong CountCharacters(IEnumerable<string> enumerable)
         {
-            totalChars += CountCharacters(s);
+            ulong totalChars = 0;
+
+            foreach (string s in enumerable)
+            {
+                totalChars += CountCharacters(s);
+            }
+
+            return totalChars;
         }
 
-        return totalChars;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="enumerable"></param>
-    /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
-    public async Task<ulong> CountCharactersAsync(IEnumerable<string> enumerable)
-    {
-        ulong totalChars = 0;
-
-        foreach (string s in enumerable)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task<ulong> CountCharactersAsync(IEnumerable<string> enumerable)
         {
-            totalChars += await CountCharactersAsync(s);
-        }
+            ulong totalChars = 0;
 
-        return totalChars;
+            foreach (string s in enumerable)
+            {
+                totalChars += await CountCharactersAsync(s);
+            }
+
+            return totalChars;
+        }
     }
 }

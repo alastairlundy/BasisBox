@@ -23,108 +23,111 @@ using System.Threading.Tasks;
 using WCount.Library.Interfaces;
 using WCount.Library.Localizations;
 
-namespace WCount.Library;
-
-public class ByteCounter : IByteCounter
+namespace WCount.Library
 {
-    /// <summary>
-    /// Gets the number of bytes in a string.
-    /// </summary>
-    /// <param name="s">The string to be searched.</param>
-    /// <param name="textEncodingType">The type of encoding to use to decode the bytes.</param>
-    /// <returns>the number of bytes in the string.</returns>
-    /// <exception cref="ArgumentException">Thrown if the text encoding is not supported.</exception>
-    public int CountBytes(string s, Encoding textEncodingType)
+    public class ByteCounter : IByteCounter
     {
-        byte[] bytes;
-        
-        if (Equals(textEncodingType, Encoding.Latin1))
+        /// <summary>
+        /// Gets the number of bytes in a string.
+        /// </summary>
+        /// <param name="s">The string to be searched.</param>
+        /// <param name="textEncodingType">The type of encoding to use to decode the bytes.</param>
+        /// <returns>the number of bytes in the string.</returns>
+        /// <exception cref="ArgumentException">Thrown if the text encoding is not supported.</exception>
+        public int CountBytes(string s, Encoding textEncodingType)
         {
-            bytes = Encoding.Latin1.GetBytes(s);
-        }
-        else if (Equals(textEncodingType, Encoding.Unicode))
-        {
-            bytes = Encoding.Unicode.GetBytes(s);
-        }
-        else if (Equals(textEncodingType, Encoding.UTF32))
-        {
-            bytes = Encoding.UTF32.GetBytes(s);
-        }
-        else if (Equals(textEncodingType, Encoding.UTF8))
-        {
-            bytes = Encoding.UTF8.GetBytes(s);
-        }
-        else if (Equals(textEncodingType, Encoding.ASCII))
-        {
-            bytes = Encoding.ASCII.GetBytes(s);
-        }
-        else if (Equals(textEncodingType, Encoding.BigEndianUnicode))
-        {
-            bytes = Encoding.BigEndianUnicode.GetBytes(s);
-        }
-        else
-        {
-            throw new ArgumentException(Resources.Exceptions_EncodingNotSupported);
-        }
-
-        return bytes.Length;
-    }
-
-    /// <summary>
-    /// Gets the number of bytes in a file.
-    /// </summary>
-    /// <param name="filePath">The file path of the file to be searched.</param>
-    /// <param name="textEncodingType">The type of encoding to use to decode the bytes.</param>
-    /// <returns>the number of bytes in a file.</returns>
-    /// <exception cref="FileNotFoundException">Thrown if the file could not be located.</exception>
-    public ulong CountBytesInFile(string filePath, Encoding textEncodingType)
-    {
-        if (File.Exists(filePath))
-        {
-            return CountBytes(File.ReadAllLines(filePath), textEncodingType);
-        }
-        else
-        {
-            throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="filePath"></param>
-    /// <param name="encoding"></param>
-    /// <returns></returns>
-    /// <exception cref="FileNotFoundException"></exception>
-    public async Task<ulong> CountBytesInFileAsync(string filePath, Encoding encoding)
-    {
-        if (File.Exists(filePath))
-        {
-            string[] fileContents = await File.ReadAllLinesAsync(filePath);
+            byte[] bytes;
             
-            return CountBytes(fileContents, encoding);
+            if (Equals(textEncodingType, Encoding.Unicode))
+            {
+                bytes = Encoding.Unicode.GetBytes(s);
+            }
+            else if (Equals(textEncodingType, Encoding.UTF32))
+            {
+                bytes = Encoding.UTF32.GetBytes(s);
+            }
+            else if (Equals(textEncodingType, Encoding.UTF8))
+            {
+                bytes = Encoding.UTF8.GetBytes(s);
+            }
+            else if (Equals(textEncodingType, Encoding.ASCII))
+            {
+                bytes = Encoding.ASCII.GetBytes(s);
+            }
+            else if (Equals(textEncodingType, Encoding.BigEndianUnicode))
+            {
+                bytes = Encoding.BigEndianUnicode.GetBytes(s);
+            }
+#if NET8_0_OR_GREATER
+            else if (Equals(textEncodingType, Encoding.Latin1))
+            {
+                bytes = Encoding.Latin1.GetBytes(s);
+            }
+#endif
+            else
+            {
+                throw new ArgumentException(Resources.Exceptions_EncodingNotSupported);
+            }
+
+            return bytes.Length;
         }
-        else
+
+        /// <summary>
+        /// Gets the number of bytes in a file.
+        /// </summary>
+        /// <param name="filePath">The file path of the file to be searched.</param>
+        /// <param name="textEncodingType">The type of encoding to use to decode the bytes.</param>
+        /// <returns>the number of bytes in a file.</returns>
+        /// <exception cref="FileNotFoundException">Thrown if the file could not be located.</exception>
+        public ulong CountBytesInFile(string filePath, Encoding textEncodingType)
         {
-            throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+            if (File.Exists(filePath))
+            {
+                return CountBytes(File.ReadAllLines(filePath), textEncodingType);
+            }
+            else
+            {
+                throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+            }
         }
-    }
 
-    /// <summary>
-    /// Gets the number of bytes in an IEnumerable of strings.
-    /// </summary>
-    /// <param name="enumerable">The IEnumerable to be searched.</param>
-    /// <param name="textEncodingType">The type of encoding to use to decode the bytes.</param>
-    /// <returns>the number of bytes in a specified IEnumerable.</returns>
-    public ulong CountBytes(IEnumerable<string> enumerable, Encoding textEncodingType)
-    {
-        ulong totalBytes = 0;
-
-        foreach (string s in enumerable)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        /// <exception cref="FileNotFoundException"></exception>
+        public async Task<ulong> CountBytesInFileAsync(string filePath, Encoding encoding)
         {
-            totalBytes += Convert.ToUInt64(CountBytes(s, textEncodingType));
+            if (File.Exists(filePath))
+            {
+                string[] fileContents = await File.ReadAllLinesAsync(filePath);
+            
+                return CountBytes(fileContents, encoding);
+            }
+            else
+            {
+                throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+            }
         }
 
-        return totalBytes;
+        /// <summary>
+        /// Gets the number of bytes in an IEnumerable of strings.
+        /// </summary>
+        /// <param name="enumerable">The IEnumerable to be searched.</param>
+        /// <param name="textEncodingType">The type of encoding to use to decode the bytes.</param>
+        /// <returns>the number of bytes in a specified IEnumerable.</returns>
+        public ulong CountBytes(IEnumerable<string> enumerable, Encoding textEncodingType)
+        {
+            ulong totalBytes = 0;
+
+            foreach (string s in enumerable)
+            {
+                totalBytes += Convert.ToUInt64(CountBytes(s, textEncodingType));
+            }
+
+            return totalBytes;
+        }
     }
 }

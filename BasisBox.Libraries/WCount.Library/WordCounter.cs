@@ -23,156 +23,157 @@ using System.Threading.Tasks;
 using WCount.Library.Interfaces;
 using WCount.Library.Localizations;
 
-namespace WCount.Library;
-
-public class WordCounter : IWordCounter
+namespace WCount.Library
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="s"></param>
-    /// <returns></returns>
-    public async Task<ulong> CountWordsAsync(string s)
+    public class WordCounter : IWordCounter
     {
-        ulong totalCount = 0;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public async Task<ulong> CountWordsAsync(string s)
+        {
+            ulong totalCount = 0;
         
-        if (s.Contains(Environment.NewLine))
-        {
-            string[] splitStrings = s.Split(Environment.NewLine);
-            int taskCount = splitStrings.Length;
-            
-            Task[] tasks = new Task[taskCount];
-            
-            for (int index = 0; index < taskCount; index++)
+            if (s.Contains(Environment.NewLine))
             {
-                tasks[index] = new Task(()=> totalCount += CountWords(splitStrings[index]));
-                tasks[index].Start();
-            }
-
-            await Task.WhenAll(tasks);
-        }
-        else
-        {
-            Task task = new Task(()=> totalCount = CountWords(s));
-            task.Start();
-
-            await task;
-        }
-
-        return totalCount;
-    }
-
-    /// <summary>
-    /// Gets the number of words in a string.
-    /// </summary>
-    /// <param name="s">The string to be searched.</param>
-    /// <returns>The number of words in the provided string.</returns>
-    public ulong CountWords(string s)
-    {
-        ulong totalCount = 0;
-        
-        string[] words = s.Split(' ');
-
-        if (words.Length > 0)
-        {
-            foreach (string word in words)
-            {
-                if (string.IsNullOrWhiteSpace(word) == false)
+                string[] splitStrings = s.Split(Environment.NewLine);
+                int taskCount = splitStrings.Length;
+            
+                Task[] tasks = new Task[taskCount];
+            
+                for (int index = 0; index < taskCount; index++)
                 {
-                    totalCount += 1;
+                    tasks[index] = new Task(()=> totalCount += CountWords(splitStrings[index]));
+                    tasks[index].Start();
                 }
-            }
-        }
-        else
-        {
-            if (s.Length > 0 && string.IsNullOrWhiteSpace(s) == false)
-            {
-                totalCount = 1;
+
+                await Task.WhenAll(tasks);
             }
             else
             {
-                totalCount = 0;
+                Task task = new Task(()=> totalCount = CountWords(s));
+                task.Start();
+
+                await task;
             }
+
+            return totalCount;
         }
 
-        return totalCount;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="filePath"></param>
-    /// <returns></returns>
-    /// <exception cref="FileNotFoundException"></exception>
-    public async Task<ulong> CountWordsInFileAsync(string filePath)
-    {
-        if (File.Exists(filePath))
+        /// <summary>
+        /// Gets the number of words in a string.
+        /// </summary>
+        /// <param name="s">The string to be searched.</param>
+        /// <returns>The number of words in the provided string.</returns>
+        public ulong CountWords(string s)
         {
-            string text = await File.ReadAllTextAsync(filePath);
+            ulong totalCount = 0;
+        
+            string[] words = s.Split(' ');
 
-            return await CountWordsAsync(text);
-        }
-        else
-        {
-            throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
-        }
-    }
-
-    /// <summary>
-    /// Gets the number of words in a file.
-    /// </summary>
-    /// <param name="filePath">The file path of the file to be searched.</param>
-    /// <returns>The number of words in the file.</returns>
-    /// <exception cref="FileNotFoundException">Thrown if the file could not be found.</exception>
-    public ulong CountWordsInFile(string filePath)
-    {
-        if (File.Exists(filePath))
-        {
-            ulong wordCount = 0;
-            
-            string[] lines = File.ReadAllLines(filePath);
-
-            foreach (string line in lines)
+            if (words.Length > 0)
             {
-                wordCount += CountWords(line);
+                foreach (string word in words)
+                {
+                    if (string.IsNullOrWhiteSpace(word) == false)
+                    {
+                        totalCount += 1;
+                    }
+                }
+            }
+            else
+            {
+                if (s.Length > 0 && string.IsNullOrWhiteSpace(s) == false)
+                {
+                    totalCount = 1;
+                }
+                else
+                {
+                    totalCount = 0;
+                }
             }
 
-            return wordCount;
+            return totalCount;
         }
-        else
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        /// <exception cref="FileNotFoundException"></exception>
+        public async Task<ulong> CountWordsInFileAsync(string filePath)
         {
-            throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
-        }
-    }
+            if (File.Exists(filePath))
+            {
+                string text = await File.ReadAllTextAsync(filePath);
 
-    /// <summary>
-    /// Gets the number of words in an IEnumerable of strings asynchronously.
-    /// </summary>
-    /// <param name="enumerable">The IEnumerable of strings to be searched.</param>
-    /// <returns>the number of words in an IEnumerable of strings.</returns>
-    public async Task<ulong> CountWordsAsync(IEnumerable<string> enumerable)
-    {
-        ulong totalCount = 0;
-        
-        foreach (string s in enumerable)
+                return await CountWordsAsync(text);
+            }
+            else
+            {
+                throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+            }
+        }
+
+        /// <summary>
+        /// Gets the number of words in a file.
+        /// </summary>
+        /// <param name="filePath">The file path of the file to be searched.</param>
+        /// <returns>The number of words in the file.</returns>
+        /// <exception cref="FileNotFoundException">Thrown if the file could not be found.</exception>
+        public ulong CountWordsInFile(string filePath)
         {
-            totalCount += await CountWordsAsync(s);
+            if (File.Exists(filePath))
+            {
+                ulong wordCount = 0;
+            
+                string[] lines = File.ReadAllLines(filePath);
+
+                foreach (string line in lines)
+                {
+                    wordCount += CountWords(line);
+                }
+
+                return wordCount;
+            }
+            else
+            {
+                throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+            }
         }
 
-        return totalCount;
-    }
-
-    /// <summary>
-    /// Gets the number of words in an IEnumerable of strings.
-    /// </summary>
-    /// <param name="enumerable">The IEnumerable of strings to be searched.</param>
-    /// <returns>the number of words in an IEnumerable of strings.</returns>
-    public ulong CountWords(IEnumerable<string> enumerable)
-    {
-        Task<ulong> task = CountWordsAsync(enumerable);
-        task.RunSynchronously();
+        /// <summary>
+        /// Gets the number of words in an IEnumerable of strings asynchronously.
+        /// </summary>
+        /// <param name="enumerable">The IEnumerable of strings to be searched.</param>
+        /// <returns>the number of words in an IEnumerable of strings.</returns>
+        public async Task<ulong> CountWordsAsync(IEnumerable<string> enumerable)
+        {
+            ulong totalCount = 0;
         
-        Task.WaitAll(task);
-        return task.Result;
+            foreach (string s in enumerable)
+            {
+                totalCount += await CountWordsAsync(s);
+            }
+
+            return totalCount;
+        }
+
+        /// <summary>
+        /// Gets the number of words in an IEnumerable of strings.
+        /// </summary>
+        /// <param name="enumerable">The IEnumerable of strings to be searched.</param>
+        /// <returns>the number of words in an IEnumerable of strings.</returns>
+        public ulong CountWords(IEnumerable<string> enumerable)
+        {
+            Task<ulong> task = CountWordsAsync(enumerable);
+            task.RunSynchronously();
+        
+            Task.WaitAll(task);
+            return task.Result;
+        }
     }
 }

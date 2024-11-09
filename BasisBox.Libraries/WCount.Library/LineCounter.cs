@@ -22,83 +22,84 @@ using System.Threading.Tasks;
 using WCount.Library.Interfaces;
 using WCount.Library.Localizations;
 
-namespace WCount.Library;
-
-public class LineCounter : ILineCounter
+namespace WCount.Library
 {
-    /// <summary>
-    /// Gets the number of lines in a file.
-    /// </summary>
-    /// <param name="filePath">The file path of the file to be searched.</param>
-    /// <returns>the number of lines in a file.</returns>
-    /// <exception cref="FileNotFoundException">Thrown if the file could not be located.</exception>
-    public int CountLinesInFile(string filePath)
+    public class LineCounter : ILineCounter
     {
-        if (File.Exists(filePath))
+        /// <summary>
+        /// Gets the number of lines in a file.
+        /// </summary>
+        /// <param name="filePath">The file path of the file to be searched.</param>
+        /// <returns>the number of lines in a file.</returns>
+        /// <exception cref="FileNotFoundException">Thrown if the file could not be located.</exception>
+        public int CountLinesInFile(string filePath)
         {
-            string[] contents = File.ReadAllLines(filePath);
-            return CountLines(contents);
-        }
-        else
-        {
-            throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
-        }
-    }
-
-    /// <summary>
-    /// Gets the number of lines in a file asynchronously.
-    /// </summary>
-    /// <param name="filePath">The file path of the file to be searched.</param>
-    /// <returns>the number of lines in a file.</returns>
-    /// <exception cref="FileNotFoundException">Thrown if the file could not be located.</exception>
-    public async Task<int> CountLinesInFileAsync(string filePath)
-    {
-        if (File.Exists(filePath))
-        {
-            string[] contents = await File.ReadAllLinesAsync(filePath);
-            
-            return CountLines(contents);
-        }
-        else
-        {
-            throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
-        }
-    }
-
-    /// <summary>
-    /// Gets the number of lines in a string.
-    /// </summary>
-    /// <param name="s">The string to be searched.</param>
-    /// <returns>the number of lines in a string.</returns>
-    public int CountLines(string s)
-    {
-        int totalCount = 0;
-        
-        foreach (char c in s)
-        {
-            if (c.Equals('\n') || c.Equals(char.Parse("\r\n")) || c.ToString().Equals(Environment.NewLine))
+            if (File.Exists(filePath))
             {
-                totalCount++;
+                string[] contents = File.ReadAllLines(filePath);
+                return CountLines(contents);
+            }
+            else
+            {
+                throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
             }
         }
 
-        return totalCount;
-    }
-
-    /// <summary>
-    /// Gets the number of lines in an IEnumerable of strings.
-    /// </summary>
-    /// <param name="enumerable">The IEnumerable to be searched.</param>
-    /// <returns>the number of lines in the specified IEnumerable.</returns>
-    public int CountLines(IEnumerable<string> enumerable)
-    {
-        int totalCount = 0;
-        
-        foreach (string s in enumerable)
+        /// <summary>
+        /// Gets the number of lines in a file asynchronously.
+        /// </summary>
+        /// <param name="filePath">The file path of the file to be searched.</param>
+        /// <returns>the number of lines in a file.</returns>
+        /// <exception cref="FileNotFoundException">Thrown if the file could not be located.</exception>
+        public async Task<int> CountLinesInFileAsync(string filePath)
         {
-            totalCount += CountLines(s);
+            if (File.Exists(filePath))
+            {
+                string[] contents = await File.ReadAllLinesAsync(filePath);
+            
+                return CountLines(contents);
+            }
+            else
+            {
+                throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+            }
         }
 
-        return totalCount;
+        /// <summary>
+        /// Gets the number of lines in a string.
+        /// </summary>
+        /// <param name="s">The string to be searched.</param>
+        /// <returns>the number of lines in a string.</returns>
+        public int CountLines(string s)
+        {
+            int totalCount = 0;
+        
+            foreach (char c in s)
+            {
+                if (c.Equals('\n') || c.Equals(char.Parse("\r\n")) || c.ToString().Equals(Environment.NewLine))
+                {
+                    totalCount++;
+                }
+            }
+
+            return totalCount;
+        }
+
+        /// <summary>
+        /// Gets the number of lines in an IEnumerable of strings.
+        /// </summary>
+        /// <param name="enumerable">The IEnumerable to be searched.</param>
+        /// <returns>the number of lines in the specified IEnumerable.</returns>
+        public int CountLines(IEnumerable<string> enumerable)
+        {
+            int totalCount = 0;
+        
+            foreach (string s in enumerable)
+            {
+                totalCount += CountLines(s);
+            }
+
+            return totalCount;
+        }
     }
 }

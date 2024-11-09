@@ -17,8 +17,8 @@
 
 using System;
 
-namespace WCount.Library.Models;
-
+namespace WCount.Library.Models
+{
     public class WCountResult
     {
         public ulong WordCount { get; set; }
@@ -27,3 +27,4 @@ namespace WCount.Library.Models;
 
         public int LineCount { get; set; }
     }
+}

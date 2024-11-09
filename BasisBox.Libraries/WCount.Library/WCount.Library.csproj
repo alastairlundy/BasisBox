@@ -28,8 +28,8 @@
 * Removed WCount Extension methods</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Description>Count the number of lines, words, characters, and/or bytes in specified files, strings, or IEnumerables of strings.</Description>
-        <Version>2.0.0</Version>
-        <TargetFrameworks>net8.0;net6.0</TargetFrameworks>
+        <Version>2.1.0</Version>
+        <TargetFrameworks>net8.0;netstandard2.1</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>

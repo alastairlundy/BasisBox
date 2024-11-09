@@ -18,17 +18,18 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace WCount.Library.Interfaces;
-
-public interface ICharCounter
+namespace WCount.Library.Interfaces
 {
-    public ulong CountCharacters(string s);
-    public Task<ulong> CountCharactersAsync(string s);
+    public interface ICharCounter
+    {
+        public ulong CountCharacters(string s);
+        public Task<ulong> CountCharactersAsync(string s);
 
-    public ulong CountCharactersInFile(string filePath);
-    public Task<ulong> CountCharactersInFileAsync(string filePath);
+        public ulong CountCharactersInFile(string filePath);
+        public Task<ulong> CountCharactersInFileAsync(string filePath);
 
-    public ulong CountCharacters(IEnumerable<string> enumerable);
-    public Task<ulong> CountCharactersAsync(IEnumerable<string> enumerable);
+        public ulong CountCharacters(IEnumerable<string> enumerable);
+        public Task<ulong> CountCharactersAsync(IEnumerable<string> enumerable);
 
+    }
 }

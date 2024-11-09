@@ -18,15 +18,16 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace WCount.Library.Interfaces;
-
-public interface ILineCounter
+namespace WCount.Library.Interfaces
 {
-    public int CountLinesInFile(string filePath);
-    public Task<int> CountLinesInFileAsync(string filePath);
+    public interface ILineCounter
+    {
+        public int CountLinesInFile(string filePath);
+        public Task<int> CountLinesInFileAsync(string filePath);
 
-    public int CountLines(string s);
+        public int CountLines(string s);
 
-    public int CountLines(IEnumerable<string> enumerable);
+        public int CountLines(IEnumerable<string> enumerable);
 
+    }
 }
