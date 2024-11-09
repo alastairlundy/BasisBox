@@ -36,7 +36,7 @@ namespace WCount.Library
         /// <returns>the number of characters in a string.</returns>
         public ulong CountCharacters(string s)
         {
-            return CountCharacters(s, Encoding.Default);
+            return Convert.ToUInt64(CountCharacters(s, Encoding.Default));
         }
 
         /// <summary>
@@ -45,8 +45,7 @@ namespace WCount.Library
         /// <param name="s">The string to be searched.</param>
         /// <param name="textEncodingType"></param>
         /// <returns>the number of characters in a string.</returns>
-        /// <exception cref="ArgumentException"></exception>
-        public ulong CountCharacters(string s, Encoding textEncodingType)
+        public int CountCharacters(string s, Encoding textEncodingType)
         {
             int totalChars;
             
@@ -83,7 +82,7 @@ namespace WCount.Library
                 totalChars = Encoding.Default.GetCharCount(bytes);
             }
 
-            return Convert.ToUInt64(totalChars);        
+            return totalChars;        
         }
 
         /// <summary>

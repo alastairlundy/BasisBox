@@ -24,7 +24,7 @@ namespace WCount.Library.Interfaces
     public interface ICharCounter
     {
         public ulong CountCharacters(string s);
-        public ulong CountCharacters(string s, Encoding textEncodingType);
+        public int CountCharacters(string s, Encoding textEncodingType);
         public ulong CountCharactersInFile(string filePath);
         public Task<ulong> CountCharactersInFileAsync(string filePath);
         public ulong CountCharacters(IEnumerable<string> enumerable);
