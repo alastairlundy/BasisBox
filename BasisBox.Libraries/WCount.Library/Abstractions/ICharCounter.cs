@@ -27,7 +27,6 @@ namespace WCount.Library.Interfaces
         public ulong CountCharacters(string s, Encoding textEncodingType);
         public ulong CountCharactersInFile(string filePath);
         public Task<ulong> CountCharactersInFileAsync(string filePath);
-
         public ulong CountCharacters(IEnumerable<string> enumerable);
         public Task<ulong> CountCharactersAsync(IEnumerable<string> enumerable);
 
