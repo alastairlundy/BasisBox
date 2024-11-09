@@ -87,18 +87,6 @@ namespace WCount.Library
         }
 
         /// <summary>
-        /// Get the number of characters in a string.
-        /// </summary>
-        /// <param name="s">The string to be searched.</param>
-        /// <returns>the number of characters in a string.</returns>
-        public Task<ulong> CountCharactersAsync(string s)
-        {
-            ulong totalChars = Convert.ToUInt64(s.ToCharArray().Length);
-        
-            return Task.FromResult(totalChars);
-        }
-
-        /// <summary>
         /// Gets the number of characters in a file.
         /// </summary>
         /// <param name="filePath">The file path of the file to be searched.</param>
@@ -167,8 +155,9 @@ namespace WCount.Library
 
             for (int index = 0; index < array.Length; index++)
             {
-                tasks[index] = new Task<ulong>(() => totalChars += CountCharacters(array[index]));
-                tasks[index].Start();
+                int taskNumber = index;
+                tasks[taskNumber] = new Task<ulong>(() => totalChars += CountCharacters(array[taskNumber]));
+                tasks[taskNumber].Start();
             }
             
             await Task.WhenAll(tasks);
