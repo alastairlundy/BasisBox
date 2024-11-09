@@ -11,21 +11,7 @@
         <Copyright>Copyright (c) Alastair Lundy 2024</Copyright>
         <RepositoryUrl>https://github.com/BasisBox/WCount/</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>## Changes since 1.1
-
-### Additions
-* Added interfaces for ``WordCounter``, ``ByteCounter``, ``LineCounter``, and ``CharCounter``
-* Added ``WCountResult`` model to make it easier to group result information.
-* Added .NET 6 support
- 
-### Changes
-* Refactored ``ByteCounter``, ``LineCounter``, ``WordCounter``, and ``CharCounter`` to use the new interfaces
-* Fixed issues with Word Counting 
-* Re-licensed WCount under the LGPLv3 (only) license
-* Changed ``LineCounter`` to provide results as a 32 Bit Signed Integer.
-
-### Removals
-* Removed WCount Extension methods</PackageReleaseNotes>
+        <PackageReleaseNotes></PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Description>Count the number of lines, words, characters, and/or bytes in specified files, strings, or IEnumerables of strings.</Description>
         <Version>2.1.0</Version>
