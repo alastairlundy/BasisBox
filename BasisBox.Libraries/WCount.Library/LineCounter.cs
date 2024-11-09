@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-
+using System.Threading.Tasks;
 using WCount.Library.Interfaces;
 using WCount.Library.Localizations;
 
@@ -36,7 +36,28 @@ public class LineCounter : ILineCounter
     {
         if (File.Exists(filePath))
         {
-            return CountLines(File.ReadAllLines(filePath));
+            string[] contents = File.ReadAllLines(filePath);
+            return CountLines(contents);
+        }
+        else
+        {
+            throw new FileNotFoundException(Resources.Exceptions_FileNotFound_Message, filePath);
+        }
+    }
+
+    /// <summary>
+    /// Gets the number of lines in a file asynchronously.
+    /// </summary>
+    /// <param name="filePath">The file path of the file to be searched.</param>
+    /// <returns>the number of lines in a file.</returns>
+    /// <exception cref="FileNotFoundException">Thrown if the file could not be located.</exception>
+    public async Task<int> CountLinesInFileAsync(string filePath)
+    {
+        if (File.Exists(filePath))
+        {
+            string[] contents = await File.ReadAllLinesAsync(filePath);
+            
+            return CountLines(contents);
         }
         else
         {
