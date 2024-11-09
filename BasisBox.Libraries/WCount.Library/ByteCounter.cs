@@ -18,8 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using WCount.Library.Interfaces;
 using WCount.Library.Localizations;
 
@@ -104,7 +106,7 @@ namespace WCount.Library
             {
                 string[] fileContents = await File.ReadAllLinesAsync(filePath);
             
-                return CountBytes(fileContents, encoding);
+                return await CountBytesAsync(fileContents, encoding);
             }
             else
             {
@@ -126,6 +128,34 @@ namespace WCount.Library
             {
                 totalBytes += Convert.ToUInt64(CountBytes(s, textEncodingType));
             }
+
+            return totalBytes;
+        }
+
+        /// <summary>
+        /// Gets the number of bytes in an IEnumerable of strings asynchronously.
+        /// </summary>
+        /// <param name="enumerable">The IEnumerable to be searched.</param>
+        /// <param name="textEncodingType">The type of encoding to use to decode the bytes.</param>
+        /// <returns>the number of bytes in a specified IEnumerable.</returns>
+        public async Task<ulong> CountBytesAsync(IEnumerable<string> enumerable, Encoding textEncodingType)
+        {
+            string[] stringArray = enumerable.ToArray();
+            ulong totalBytes = 0;
+            
+            Task[] tasks = new Task[stringArray.Length];
+
+            for (int index = 0; index < stringArray.Length; index++)
+            {
+                tasks[index] = new Task(() =>
+                {
+                    totalBytes += Convert.ToUInt64(CountBytes(stringArray, textEncodingType));
+                });
+
+                tasks[index].Start();
+            }
+
+            await Task.WhenAll(tasks);
 
             return totalBytes;
         }
