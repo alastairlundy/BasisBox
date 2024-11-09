@@ -87,11 +87,10 @@ namespace WCount.Library
         }
 
         /// <summary>
-        /// 
+        /// Get the number of characters in a string.
         /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
+        /// <param name="s">The string to be searched.</param>
+        /// <returns>the number of characters in a string.</returns>
         public Task<ulong> CountCharactersAsync(string s)
         {
             ulong totalChars = Convert.ToUInt64(s.ToCharArray().Length);
@@ -118,11 +117,10 @@ namespace WCount.Library
         }
 
         /// <summary>
-        /// 
+        /// Gets the number of characters in a file asynchronously.
         /// </summary>
-        /// <param name="filePath"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
+        /// <param name="filePath">The file path of the file to be searched.</param>
+        /// <returns>the number of characters in the file specified.</returns>
         public async Task<ulong> CountCharactersInFileAsync(string filePath)
         {
             if (File.Exists(filePath))
@@ -153,11 +151,10 @@ namespace WCount.Library
         }
 
         /// <summary>
-        /// 
+        /// Gets the number of characters in an IEnumerable of strings asynchronously.
         /// </summary>
-        /// <param name="enumerable"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
+        /// <param name="enumerable">The IEnumerable to be searched.</param>
+        /// <returns>the number of characters in the specified IEnumerable.</returns>
         public async Task<ulong> CountCharactersAsync(IEnumerable<string> enumerable)
         {
             ulong totalChars = 0;
