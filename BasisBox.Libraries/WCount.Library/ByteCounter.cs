@@ -35,10 +35,9 @@ namespace WCount.Library
         /// <param name="s">The string to be searched.</param>
         /// <param name="textEncodingType">The type of encoding to use to decode the bytes.</param>
         /// <returns>the number of bytes in the string.</returns>
-        /// <exception cref="ArgumentException">Thrown if the text encoding is not supported.</exception>
         public int CountBytes(string s, Encoding textEncodingType)
         {
-            int byteCount = 0;
+            int byteCount;
             
             if (Equals(textEncodingType, Encoding.Unicode))
             {
@@ -68,7 +67,7 @@ namespace WCount.Library
 #endif
             else
             {
-                throw new ArgumentException(Resources.Exceptions_EncodingNotSupported);
+                byteCount = Encoding.Default.GetByteCount(s);
             }
 
             return byteCount;
