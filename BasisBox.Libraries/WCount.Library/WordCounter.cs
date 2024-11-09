@@ -50,7 +50,6 @@ public class WordCounter : IWordCounter
             }
 
             await Task.WhenAll(tasks);
-            return totalCount;
         }
         else
         {
@@ -58,8 +57,9 @@ public class WordCounter : IWordCounter
             task.Start();
 
             await task;
-            return totalCount;
         }
+
+        return totalCount;
     }
 
     /// <summary>
