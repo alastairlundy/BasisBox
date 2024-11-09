@@ -11,7 +11,10 @@
         <Copyright>Copyright (c) Alastair Lundy 2024</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/BasisBox</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes></PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 2.0.0 
+* Added new async methods
+* Improved detection of ByteCounter and CharCounter
+* Added .NET Standard 2.1 support</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Description>Count the number of lines, words, characters, and/or bytes in specified files, strings, or IEnumerables of strings.</Description>
         <Version>2.1.0</Version>
