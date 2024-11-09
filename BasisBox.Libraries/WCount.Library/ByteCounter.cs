@@ -93,19 +93,19 @@ namespace WCount.Library
         }
 
         /// <summary>
-        /// 
+        /// Gets the number of bytes in a file asynchronously.
         /// </summary>
-        /// <param name="filePath"></param>
-        /// <param name="encoding"></param>
-        /// <returns></returns>
-        /// <exception cref="FileNotFoundException"></exception>
-        public async Task<ulong> CountBytesInFileAsync(string filePath, Encoding encoding)
+        /// <param name="filePath">The file path of the file to be searched.</param>
+        /// <param name="textEncodingType">The type of encoding to use to decode the bytes.</param>
+        /// <returns>the number of bytes in a file.</returns>
+        /// <exception cref="FileNotFoundException">Thrown if the file could not be located.</exception>
+        public async Task<ulong> CountBytesInFileAsync(string filePath, Encoding textEncodingType)
         {
             if (File.Exists(filePath))
             {
                 string[] fileContents = await File.ReadAllLinesAsync(filePath);
             
-                return await CountBytesAsync(fileContents, encoding);
+                return await CountBytesAsync(fileContents, textEncodingType);
             }
             else
             {
