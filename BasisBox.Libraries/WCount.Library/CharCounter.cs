@@ -36,9 +36,7 @@ namespace WCount.Library
         /// <returns>the number of characters in a string.</returns>
         public ulong CountCharacters(string s)
         {
-            ulong totalChars = Convert.ToUInt64(s.ToCharArray().Length);
-
-            return totalChars;
+            return CountCharacters(s, Encoding.Default);
         }
 
         /// <summary>
