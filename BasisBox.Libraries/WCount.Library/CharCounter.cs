@@ -18,7 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+
 using WCount.Library.Interfaces;
 using WCount.Library.Localizations;
 
