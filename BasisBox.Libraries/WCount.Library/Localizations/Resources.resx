@@ -21,9 +21,6 @@
     <data name="Exceptions.FileNotFound.Message" xml:space="preserve">
         <value>Could not find the specified file. If the file exists, the path may be incorrect or the file may be inaccessible.</value>
     </data>
-    <data name="Exceptions.UTF7NotSupported" xml:space="preserve">
-        <value>WCount does not support UTF7 as it is deprecated and insecure. Please use a differen encoding scheme.</value>
-    </data>
     <data name="Exceptions.EncodingNotSupported" xml:space="preserve">
         <value>The encoding scheme provided is not supported. Please try again with a different encoding scheme.</value>
     </data>

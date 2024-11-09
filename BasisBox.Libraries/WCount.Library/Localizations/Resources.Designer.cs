@@ -76,14 +76,5 @@ namespace WCount.Library.Localizations {
                 return ResourceManager.GetString("Exceptions.FileNotFound.Message", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to WCount does not support UTF7 as it is deprecated and insecure. Please use a differen encoding scheme..
-        /// </summary>
-        internal static string Exceptions_UTF7NotSupported {
-            get {
-                return ResourceManager.GetString("Exceptions.UTF7NotSupported", resourceCulture);
-            }
-        }
     }
 }
