@@ -14,7 +14,8 @@
         <PackageReleaseNotes>### Changes since 2.0.0 
 * Added new async methods
 * Improved detection of ByteCounter and CharCounter
-* Added .NET Standard 2.1 support</PackageReleaseNotes>
+* Added .NET Standard 2.1 TFM and support
+* Removed .NET 6 explicit TFM</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Description>Count the number of lines, words, characters, and/or bytes in specified files, strings, or IEnumerables of strings.</Description>
         <Version>2.1.0</Version>
