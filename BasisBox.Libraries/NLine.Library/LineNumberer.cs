@@ -19,9 +19,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using AlastairLundy.Extensions.System;
-
 using NLine.Library.Abstractions;
+// ReSharper disable RedundantBoolCompare
 
 namespace NLine.Library
 {
@@ -102,7 +101,7 @@ namespace NLine.Library
                     }
                 }
 
-                return checkedLines.IsAllTrue();
+                return checkedLines.All(l => l == true);
             }
 
             return false;
