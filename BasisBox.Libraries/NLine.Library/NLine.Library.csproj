@@ -12,16 +12,23 @@
         <Copyright>Copyright (c) Alastair Lundy 2024</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/BasisBox/</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>## Changes since NLine 2.0.1
-* Replace explicit .NET 6 support with .NET Standard 2.0 and 2.1 support</PackageReleaseNotes>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageReleaseNotes>## Changes since NLine 2.0.2
+* Removed reliance on SystemExtensions dependency</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
         <FileVersion>2.0.0.0</FileVersion>
         <PackageVersion>2.0.2</PackageVersion>
         <TargetFrameworks>net8.0;netstandard2.1;netstandard2.0</TargetFrameworks>
-        
+        <IncludeContentInPack>true</IncludeContentInPack>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
     </PropertyGroup>
 
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
+    </ItemGroup>
+    
     <ItemGroup>
         <Content Include="README.md">
             <Link>README.md</Link>
