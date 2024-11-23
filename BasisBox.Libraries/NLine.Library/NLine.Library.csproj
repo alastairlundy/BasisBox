@@ -15,11 +15,12 @@
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <PackageReleaseNotes>## Changes since NLine 2.0.2
-* Removed reliance on SystemExtensions dependency</PackageReleaseNotes>
+* Removed reliance on SystemExtensions dependency
+* Add initial SourceLink support</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <AssemblyVersion>2.0.0.0</AssemblyVersion>
-        <FileVersion>2.0.0.0</FileVersion>
-        <PackageVersion>2.0.2</PackageVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <FileVersion>2.1.0.0</FileVersion>
+        <PackageVersion>2.1.0</PackageVersion>
         <TargetFrameworks>net8.0;netstandard2.1;netstandard2.0</TargetFrameworks>
         <IncludeContentInPack>true</IncludeContentInPack>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
